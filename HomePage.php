@@ -32,8 +32,8 @@ session_start();
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+   
 
-    
 
 </head>
 
@@ -41,7 +41,8 @@ session_start();
    
 
     <!-- Include header and navebar -->
-  <?php include_once 'header.php';  include_once 'navbar.php' ?>
+  <?php include_once 'header.php'?>
+  <?php   include_once 'navbar.php'  ?>
 
 
     <!-- Featured Start -->

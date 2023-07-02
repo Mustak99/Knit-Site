@@ -79,7 +79,159 @@ session_start();
                                     <a href="Registration/index.php" class="dropdown-item">Customer</a>
                                 </div>
                             </div>
-                          
+                            <?php
+                                if (isset($_SESSION["LoginUserName"])) {
+                                    include 'HomePageLogin.php';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </nav>
+                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                  <?php
+// Create connection
+$conn = new mysqli("localhost","root","","knitsite");
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT UserId,UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Address,Pincode,Gender,CreationDate,status FROM customerregistration";
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+    
+    $row = $result->fetch_all(MYSQLI_ASSOC); 
+    
+}
+
+?>
+<html>
+<style>
+    td,th {
+        border: 1px solid black;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+          }
+    table{
+        margin-left: 10%;
+         }
+</style>
+  
+
+    <h1>CUSTOMER</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>Email Address</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>User Registration Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+               if(!empty($row))
+               foreach($row as $rows)
+               
+              { 
+            ?>
+            <tr>
+                
+                <td><?php echo $rows['UserFirstName']; ?></td>
+                <td><?php echo $rows['MobileNumber']; ?></td>
+                <td><?php echo $rows['EmailAddress']; ?></td>
+                <td><?php echo $rows['Address']; ?></td>
+                <td><?php echo $rows['Gender']; ?></td>
+                <td><?php echo $rows['CreationDate']; ?></td>
+                <td><a href="active.php?cid=<?php echo $rows['UserId']; ?>&status=<?php echo $rows['status']; ?>"><?php if($rows['status']==1)echo"Active"; else echo"Deactive"?></a></td>
+  
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <br><br>
+</html>
+ <?php
+// Create connection
+$conn = new mysqli("localhost","root","","knitsite");
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT SellerId,SellerFirstName,SellerMiddleName,SellerLastName,MobileNumber,EmailAddress,UserName,Password,BusinessLocation,Pincode,BusinessType,CreationDate,status FROM sellerregistration";
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+    
+    $row = $result->fetch_all(MYSQLI_ASSOC); 
+    
+}
+
+?>
+<html>
+<style>
+    td,th {
+        border: 1px solid black;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+          }
+    table{
+        margin-left: 10%;
+         }
+</style>
+  
+
+    <h1>SELLER</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile Number</th>
+                <th>Email Address</th>
+                <th>Address</th>
+                <th>Business Type</th>
+                <th>User Registration Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+               if(!empty($row))
+               foreach($row as $rows)
+               
+              { 
+            ?>
+            <tr>
+                
+                <td><?php echo $rows['SellerFirstName']; ?></td>
+                <td><?php echo $rows['MobileNumber']; ?></td>
+                <td><?php echo $rows['EmailAddress']; ?></td>
+                <td><?php echo $rows['BusinessLocation']; ?></td>
+                <td><?php echo $rows['BusinessType']; ?></td>
+                <td><?php echo $rows['CreationDate']; ?></td>
+                <td><a href="active.php?sid=<?php echo $rows['SellerId']; ?>&status=<?php echo $rows['status']; ?>"><?php if($rows['status']==1)echo"Active"; else echo"Deactive"?></a></td>
+  
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <br><br>
+
+    
+</html>
+  
+<?php   
+    mysqli_close($conn);
+?>  
                     
                     
                 </div>
