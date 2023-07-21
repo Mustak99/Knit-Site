@@ -57,10 +57,23 @@
         </div>
     </div>
     <!-- Topbar End -->
+<<<<<<< HEAD
      <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script>
+=======
+    
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col" >
+        <div class=" dropdown-item" id="search-results"> </div>
+        </div>
+    </div>
+    </div>               
+     <script>
+>>>>>>> 0a7dc59b05c9eb7447678b8b23135a8a88e40d9f
         $(document).ready(function(){
             $("#search").autocomplete({
                 source: "search/suggestions.php",
@@ -83,9 +96,6 @@
                 window.location.href = "abc.php?name="+productName;
             }
         });
+        
     </script>
-</head>
-<body>
- 
-</body>
-</html>
+<!-- asndkasdnkas -->

@@ -1,4 +1,35 @@
-  <!-- Navbar Start -->
+<head>
+    <meta charset="utf-8">
+    <title>Knit Site</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+
+    <!-- Jquery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+
+</head>
+
+ <!-- Navbar Start -->
   <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
@@ -8,7 +39,7 @@
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 123px">
-                        <div class="nav-item dropdown" >
+                        <div class="nav-item dropdown" id="list" >
                             <!-- <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
                             <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
                                 <a href="" class="dropdown-item">Men's Dresses</a>
@@ -19,6 +50,7 @@
                         <a href="" class="nav-item nav-link">Men's Dresses</a>
                         <a href="" class="nav-item nav-link">Women's Dresses</a>
                         <a href="" class="nav-item nav-link">Baby's Dresses</a>
+                        <!-- <div id="list"></div> -->
                         <!-- <a href="" class="nav-item nav-link">Sleepwear</a>
                         <a href="" class="nav-item nav-link">Sportswear</a>
                         <a href="" class="nav-item nav-link">Jumpsuits</a>
@@ -91,3 +123,26 @@
         </div>
     </div>
     <!-- Navbar End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "categories/categoriesList.php", true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      data.forEach(function(item) {
+        var link = document.createElement("a");
+        link.href = "";
+        link.className = "nav-item nav-link";
+        link.textContent = item.name;
+        document.getElementById("list").appendChild(link);
+      });
+    } else if (xhr.readyState === 4) {
+      console.error(xhr.responseText);
+    }
+  };
+  xhr.send();
+});
+
+    </script>

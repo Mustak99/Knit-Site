@@ -21,7 +21,7 @@ try {
 $query = $_POST['query'];
 
 // Perform search query
-$stmt = $pdo->prepare("SELECT * FROM products WHERE name LIKE :query");
+$stmt = $pdo->prepare("SELECT * FROM product WHERE name LIKE :query");
 $stmt->bindValue(':query', '%' . $query . '%');
 $stmt->execute();
 $result = $stmt->fetchAll();
