@@ -1,7 +1,7 @@
 <?php
 // Establish a database connection
 $host = 'localhost';
-$dbname = 'ecommerce_db';
+$dbname = 'knitsite';
 $username = 'root';
 $password = '';
 
@@ -29,11 +29,23 @@ $result = $stmt->fetchAll();
 // Output search results
 if (count($result) > 0) {
     foreach ($result as $row) {
-        echo "<div>";
-        echo "<h3>".$row['name']."</h3>";
-        echo "<p>".$row['description']."</p>";
-        echo "<p>Price: ".$row['price']."</p>";
-        echo "</div>";
+        echo'<div class="container">';
+        echo'<div class="row">';
+        echo'<div class="col-2">';
+                echo '<div class="profile-image-container">';
+                echo '<img src="'.$row['image_path'].'" alt="Shoe Image" class="profile-image">';
+                echo "</div>";
+                echo'</div>';
+                echo'<div class="col">';
+                 
+            echo "<h3>".$row['shoe_name']."</h3>";
+                echo "<p>Description:".$row['description']."</p>";
+                echo "<p>Brand:".$row['brand_name']."</p>";
+                echo "<p>Category:".$row['category']."</p>";
+                echo "<p>Price: ".$row['price']."</p>";
+                echo'</div>';
+        echo'</div>';
+        echo'</div>';
     }
 } else {
     echo "<p>No results found.</p>";

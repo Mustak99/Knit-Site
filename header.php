@@ -57,16 +57,7 @@
         </div>
     </div>
     <!-- Topbar End -->
-    <br><br>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col" >
-        <div class=" dropdown-item" id="search-results"> </div>
-        </div>
-    </div>
-    </div>               
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script>
@@ -88,14 +79,8 @@
             });
 
             function getProductDetails(productName){
-                $.ajax({
-                    url: "search/search.php",
-                    method: "post",
-                    data: {query: productName},
-                    success: function(response){
-                        $("#search-results").html(response);
-                    }
-                });
+               
+                window.location.href = "abc.php?name="+productName;
             }
         });
     </script>

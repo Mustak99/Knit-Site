@@ -1,7 +1,7 @@
 <?php
 // Establish a database connection
 $host = 'localhost';
-$dbname = 'ecommerce_db';
+$dbname = 'knitsite';
 $username = 'root';
 $password = '';
 

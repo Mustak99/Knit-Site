@@ -30,11 +30,7 @@
 
 </head>
 <?php include_once 'header.php' ?>
-<div class="container">
-    <div class="row">
-        <div class="col"></div>
-        <div class="col">
-            <div class=" dropdown-item" id="search-results">
+<div class="shadow p-3 mb-5 bg-white rounded" id="search-results" style="">
 
 <?php
 // Establish a database connection
@@ -43,39 +39,41 @@ $dbname = 'knitsite';
 $username = 'root';
 $password = '';
 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
-];
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+$conn = new mysqli($host, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
 }
 
 // Retrieve search query
 $query = trim($_GET["name"]);
 
 // Perform search query
-$stmt = $pdo->prepare("SELECT * FROM products WHERE name LIKE :query");
-$stmt->bindValue(':query', '%' . $query . '%');
+$stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
+$stmt->bind_param('s', $searchQuery);
+$searchQuery = '%' . $query . '%';
 $stmt->execute();
-$result = $stmt->fetchAll();
+$result = $stmt->get_result();
+$stmt->close();
 
 // Output search results
-if (count($result) > 0) {
-    foreach ($result as $row) {
-        echo "<div>";
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo'<div class="container">';
+        echo'<div class="row">';
+        echo'<div class="col">';
         echo "<h3>".$row['name']."</h3>";
-        echo "<p>".$row['description']."</p>";
+        echo "<p>Description:".$row['description']."</p>";
         echo "<p>Price: ".$row['price']."</p>";
-        echo "</div>";
+        echo'</div>';
+        echo'</div>';
     }
 } else {
     echo "<p>No results found.</p>";
 }
+
+// Close the database connection
+$conn->close();
+
 ?>
 
             </div>
