@@ -1,11 +1,6 @@
-<<<<<<< HEAD
+
 <?php include_once 'head.php'; ?>
  
-=======
-<?php 
-session_start();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +36,7 @@ session_start();
 
 </head>
 
->>>>>>> 0a7dc59b05c9eb7447678b8b23135a8a88e40d9f
+
 <body>
    
 
