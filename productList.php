@@ -77,10 +77,7 @@ if (count($result) > 0) {
     echo "<p>No results found.</p>";
 }
 ?>
-
-<<<<<<< HEAD:search/productList.php
-=======
-                            <a href="login1/login.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["LoginUserName"])) { echo "none";} else { echo "block";}?>">Login</a>
+                           <a href="login1/login.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["LoginUserName"])) { echo "none";} else { echo "block";}?>">Login</a>
                             
                             <div class="nav-item dropdown" style="display: <?php if (isset($_SESSION["LoginUserName"])) { echo "none";} else { echo "block";}?>">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>

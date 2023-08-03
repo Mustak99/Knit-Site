@@ -1,0 +1,60 @@
+CREATE TABLE `admin` (
+  `admin_name` varchar(30) NOT NULL,
+  `admin_email` varchar(30) DEFAULT NULL,
+  `admin_login_id` varchar(10) NOT NULL,
+  `admin_password` char(32) NOT NULL,
+  `admin_address` varchar(50) NOT NULL,
+  PRIMARY KEY (`admin_login_id`)
+);
+
+CREATE TABLE `customerregistration` (
+  `UserId` int(11) NOT NULL,
+  `UserFirstName` varchar(30) NOT NULL,
+  `UserMiddleName` varchar(30) NOT NULL,
+  `UserLastName` varchar(30) NOT NULL,
+  `MobileNumber` char(10) NOT NULL,
+  `EmailAddress` varchar(30) NOT NULL,
+  `UserName` varchar(30) NOT NULL,
+  `Password` char(32) NOT NULL,
+  `ConfirmPassword` char(32) NOT NULL,
+  `Address` varchar(50) NOT NULL,
+  `Pincode` int(6) NOT NULL,
+  `Gender` varchar(1) NOT NULL,
+  `CreationDate` datetime NOT NULL,
+  `status` varchar(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`UserId`)
+);
+
+
+CREATE TABLE `sellerregistration` (
+  `SellerId` int(11) NOT NULL,
+  `SellerFirstName` varchar(30) NOT NULL,
+  `SellerMiddleName` varchar(30) NOT NULL,
+  `SellerLastName` varchar(30) NOT NULL,
+  `MobileNumber` char(10) NOT NULL,
+  `EmailAddress` varchar(30) NOT NULL,
+  `UserName` varchar(30) NOT NULL,
+  `Password` char(32) NOT NULL,
+  `ConfirmPassword` char(32) NOT NULL,
+  `BusinessLocation` varchar(50) NOT NULL,
+  `Pincode` int(6) NOT NULL,
+  `BusinessType` varchar(20) NOT NULL,
+  `CreationDate` datetime NOT NULL,
+  `status` varchar(1) NOT NULL DEFAULT '1',
+  `businessdoc` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`SellerId`)
+);
+
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `seller_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+    FOREIGN KEY (`seller_id`)
+    REFERENCES `sellerregistration` (`SellerId`)
+);
+
