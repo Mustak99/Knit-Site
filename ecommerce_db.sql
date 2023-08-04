@@ -69,4 +69,3 @@ ALTER TABLE `products`
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
-adasf asmfdsanjfas
