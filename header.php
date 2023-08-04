@@ -58,10 +58,6 @@
     </div>
     <!-- Topbar End -->
 
-     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script>
 
     
     <div class="container">
@@ -72,29 +68,29 @@
         </div>
     </div>
     </div>               
-     <script>
+    <script>
+    $(document).ready(function() {
+        var selectedProduct;
 
-        $(document).ready(function(){
-            $("#search").autocomplete({
-                source: "search/suggestions.php",
-                select: function(event, ui){
-                    var selectedProduct = ui.item.value;
-                    getProductDetails(selectedProduct);
-                }
-            });
-
-            $("#search-form").submit(function(event){
-                event.preventDefault();
-                var searchText = $("#search").val();
-                if (searchText !== '') {
-                    getProductDetails(searchText);
-                }
-            });
-
-            function getProductDetails(productName){
-               
-                window.location.href = "abc.php?name="+productName;
+        $("#search").autocomplete({
+            source: "search/suggestions.php",
+            select: function(event, ui) {
+                selectedProduct = ui.item.value;
+                getProductDetails(selectedProduct);
             }
         });
-        
-    </script>
+
+        $("#search-form").submit(function(event) {
+            event.preventDefault();
+            var searchText = $("#search").val();
+            if (searchText !== '') {
+                getProductDetails(selectedProduct || searchText);
+            }
+        });
+
+        function getProductDetails(productName) {
+            window.location.href = "abc.php?name=" + productName;
+        }
+    });
+</script>
+

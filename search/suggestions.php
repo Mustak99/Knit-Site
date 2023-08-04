@@ -21,7 +21,7 @@ try {
 $query = $_GET['term'];
 
 // Perform search query
-$stmt = $pdo->prepare("SELECT name FROM product WHERE name LIKE :query");
+$stmt = $pdo->prepare("SELECT name FROM products WHERE name LIKE :query");
 $stmt->bindValue(':query', '%' . $query . '%');
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_COLUMN);

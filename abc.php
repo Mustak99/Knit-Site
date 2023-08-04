@@ -30,7 +30,7 @@
 
 </head>
 <?php include_once 'header.php' ?>
-<div class="shadow p-3 mb-5 bg-white rounded" id="search-results" style="">
+<div id="search-results" >
 
 <?php
 // Establish a database connection
@@ -58,7 +58,8 @@ $stmt->close();
 // Output search results
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo'<div class="container">';
+        echo '<div class="shadow p-3 mb-5 bg-white rounded">';
+        echo'<div class="container" onclick="getProductdetails('.$row["id"].')">';
         echo'<div class="row">';
         echo'<div class="col">';
         echo "<h3>".$row['name']."</h3>";
@@ -66,7 +67,8 @@ if ($result->num_rows > 0) {
         echo "<p>Price: ".$row['price']."</p>";
         echo'</div>';
         echo'</div>';
-    }
+        echo'</div></div>';   
+     }
 } else {
     echo "<p>No results found.</p>";
 }
@@ -80,3 +82,9 @@ $conn->close();
         </div>
     </div>
 </div>
+
+<script>
+    function getProductdetails(id) {
+        window.location.href = "product.php?id="+id;
+    }
+</script>
