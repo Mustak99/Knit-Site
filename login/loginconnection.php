@@ -49,8 +49,8 @@ if (isset($_POST['submit'])) {
             }
             
 
-            $_SESSION["LoginUserName"] = $row["admin_login_id"];
-            $_SESSION["adminName"] = $row["admin_login_id"];
+            $_SESSION["adminId"] = $row["admin_login_id"];
+            $_SESSION["name"]=$row["admin_name"];
             header("Location: ../HomePage.php");
             
         }  
@@ -65,8 +65,8 @@ if (isset($_POST['submit'])) {
             
 
             $_SESSION["LoginUserName"] = $username;
-            $_SESSION["UserID"] = $row2["UserId"];
-            echo $_SESSION["UserID"];
+            $_SESSION["CustomerUserID"] = $row2["UserId"];
+            $_SESSION["name"]=$row2["UserFirstName"];
             header("Location: ../HomePage.php");
         }
         
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
 
             $_SESSION["LoginUserName"] = $username;
             $_SESSION["SellerUserID"] = $row3["SellerId"];
-            echo $_SESSION["UserID"];
+            $_SESSION["name"]=$row3["SellerFirstName"];
             header("Location: ../HomePage.php");
         }
        

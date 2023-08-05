@@ -18,11 +18,11 @@ session_start();
 
 $con = new mysqli("localhost","root","","knitsite") or die();
 
-if(isset($_SESSION["LoginUserName"])){
-$sql =" SELECT UserId,UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Address,Pincode,Gender,CreationDate,status FROM customerregistration where UserName=? LIMIT 1";
+if(isset($_SESSION["SellerUserID"])){
+$sql =" SELECT UserId,UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Address,Pincode,Gender,CreationDate,status FROM customerregistration where UserId=? LIMIT 1";
 if ($stmt = $con->prepare($sql)) {
-    $stmt->bind_param("s",$uname);
-    $uname = $_SESSION["LoginUserName"];
+    $stmt->bind_param("s",$uid);
+    $uid = $_SESSION["SellerUserID"];
     $stmt->execute();
     $res = $stmt->get_result();
     $cust_array = $res->fetch_assoc();
