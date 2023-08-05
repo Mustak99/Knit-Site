@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
             
 
             $_SESSION["LoginUserName"] = $username;
-            $_SESSION["UserID"] = $row3["SellerId"];
+            $_SESSION["SellerUserID"] = $row3["SellerId"];
             echo $_SESSION["UserID"];
             header("Location: ../HomePage.php");
         }

@@ -43,6 +43,7 @@
                             <a href="HomePage.php" class="nav-item nav-link active">Home</a>
                             <a  href="cart.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "none";} else { echo "block";}?>">Cart</a>
                             <a  href="dashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
+                            <a  href="sellerDashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
                             <a class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
