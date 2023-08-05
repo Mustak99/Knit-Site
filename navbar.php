@@ -10,23 +10,9 @@
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 123px">
                         <div class="nav-item dropdown" id="list" >
-                            <!-- <a href="#" class="nav-link" data-toggle="dropdown">Dresses <i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
-                            </div>
-                        </div> -->
                         <a href="" class="nav-item nav-link">Men's Dresses</a>
                         <a href="" class="nav-item nav-link">Women's Dresses</a>
                         <a href="" class="nav-item nav-link">Baby's Dresses</a>
-                        <!-- <div id="list"></div> -->
-                        <!-- <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a> -->
                     </div>
                 </nav>
             </div>
@@ -43,13 +29,13 @@
                             <a href="HomePage.php" class="nav-item nav-link active">Home</a>
                             <a  href="cart.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "none";} else { echo "block";}?>">Cart</a>
                             <a  href="dashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
-                            <a  href="sellerDashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
+                            <a  href="seller/sellerDashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
                             <a class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                           
-                        <a href="login/login.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["LoginUserName"])||isset($_SESSION["adminName"])) { echo "none";} else { echo "block";}?>">Login</a>
-                            <div class="nav-item dropdown" style="display: <?php if (isset($_SESSION["LoginUserName"])) { echo "none";} else { echo "block";}?>">
+                        <a href="login/login.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["name"])||isset($_SESSION["adminName"])) { echo "none";} else { echo "block";}?>">Login</a>
+                            <div class="nav-item dropdown" style="display: <?php if (isset($_SESSION["name"])) { echo "none";} else { echo "block";}?>">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a href="Registration/seller.php" class="dropdown-item">Seller</a>
@@ -57,7 +43,7 @@
                                 </div>
                             </div>
                             <?php
-                                if (isset($_SESSION["LoginUserName"])) {
+                                if (isset($_SESSION["name"])||isset($_SESSION["CustomerUserID"])) {
                                     include 'HomePageLogin.php';
                                 }
                             ?>
