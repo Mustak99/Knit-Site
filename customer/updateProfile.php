@@ -57,7 +57,7 @@ if ($stmt = $con->prepare($sql)) {
         $Pincode = $cust_array["Pincode"];
         $Gender = $cust_array["Gender"];
     }
-    // }
+}}
 
     ?>
 
