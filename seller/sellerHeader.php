@@ -6,7 +6,7 @@
   <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between  bg-secondary text-white w-100" data-toggle="collapse" href="sellerDashboard.php" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between  bg-secondary text-white w-100"  href="sellerDashboard.php" style="height: 65px; margin-top: -1px; padding: 0 30px;">
                     <h6 class="m-0">DashBoard</h6>
                 </a>
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
