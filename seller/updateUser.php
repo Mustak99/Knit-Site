@@ -1,22 +1,24 @@
 <?php
 session_start();
 
-$con = new mysqli("localhost","root","","knitsite") or die();
+$con = new mysqli("localhost", "root", "", "knitsite") or die();
 
 // Step 2: Prepare the update statement
-$updateStmt = $con->prepare("UPDATE customerregistration SET UserFirstName=?, UserMiddleName=?, UserLastName=?, MobileNumber=?,EmailAddress=?,Address=?,Pincode=?,Gender=? WHERE UserName=?");
+$updateStmt = $con->prepare("UPDATE customerregistration SET UserFirstName=?, UserMiddleName=?, UserLastName=?, MobileNumber=?, UserName=?, Password=?,EmailAddress=?,Address=?,Pincode=?,Gender=? WHERE UserName='harshil_12'");
 
 // Step 3: Bind parameters to the prepared statement
-$UserId=$_SESSION["LoginUserName"];
-$UserFirstName=$_POST["fname"]; 
-$UserMiddleName=$_POST["mname"];
-$UserLastName=$_POST["lname"]; 
-$MobileNumber=$_POST["cno"]; 
-$EmailAddress=$_POST["email"];  
-$Address=$_POST["address"]; 
-$Pincode=$_POST["zip"]; 
-$Gender=$_POST["gender"];     
-$updateStmt->bind_param("sssssssss", $UserFirstName, $UserMiddleName, $UserLastName,$MobileNumber,$EmailAddress,$Address,$Pincode,$Gender,$UserId);
+//$UserId = $_SESSION["LoginUserName"];
+$updateStmt->bind_param("ssssssssss", $UserFirstName, $UserMiddleName, $UserLastName, $MobileNumber, $UserName, $Password, $EmailAddress, $Address, $Pincode, $Gender);
+$UserFirstName = $_POST["firstname"];
+$UserMiddleName = $_POST["middlename"];
+$UserLastName = $_POST["lastname"];
+$MobileNumber = $_POST["mobileno"];
+$UserName = $_POST["username"];
+$Password = $_POST["password"];
+$EmailAddress = $_POST["email"];
+$Address = $_POST["address"];
+$Pincode = $_POST["pincode"];
+$Gender = $_POST["gender"];
 
 // Step 4: Execute the prepared statement
 $updateStmt->execute();
@@ -26,7 +28,7 @@ if ($updateStmt->errno) {
     echo "Error updating record: " . $updateStmt->error;
 } else {
     header('Location: updateProfile.php');
-    setcookie('update', '1', time()+2);
+    setcookie('update', '1', time() + 2);
 
 }
 
