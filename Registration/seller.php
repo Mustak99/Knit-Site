@@ -71,15 +71,15 @@
                                     <label class="label">Business Type</label>
                                     <div class="p-t-10">
                                         <label class="radio-container m-r-45">Men's wear
-                                            <input type="radio" checked="checked" name="btype" value="electronic">
+                                            <input type="radio" checked="checked" name="btype" value="mens">
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">Women's wear
-                                            <input type="radio" name="btype" value="footwear">
+                                            <input type="radio" name="btype" value="womens">
                                             <span class="checkmark"></span>
                                         </label><br>
                                         <label class="radio-container">kid's wear
-                                            <input type="radio" name="btype" value="clothing">
+                                            <input type="radio" name="btype" value="kids">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>

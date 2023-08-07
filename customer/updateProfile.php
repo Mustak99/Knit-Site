@@ -21,7 +21,7 @@ session_start();
 
     <?php
 
-<<<<<<< HEAD:customer/updateProfile.php
+
 if(isset($_SESSION["SellerUserID"])){
 $sql =" SELECT UserId,UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Address,Pincode,Gender,CreationDate,status FROM customerregistration where UserId=? LIMIT 1";
 if ($stmt = $con->prepare($sql)) {
@@ -30,9 +30,7 @@ if ($stmt = $con->prepare($sql)) {
     $stmt->execute();
     $res = $stmt->get_result();
     $cust_array = $res->fetch_assoc();
-=======
-    $con = new mysqli("localhost", "root", "", "knitsite") or die();
->>>>>>> origin/harshil:updateProfile.php
+
 
     // if (isset($_SESSION["LoginUserName"])) {
     $sql = " SELECT UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Password,Address,Pincode,Gender FROM customerregistration where UserName=? LIMIT 1";
