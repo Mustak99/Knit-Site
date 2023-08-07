@@ -65,7 +65,7 @@
       }
     }
   </script>
-  <div class="row">
+  <div class="row" style="padding-left: 150px;">
     <div class="col-md-6">
       <div class="card" style="width:118%;">
         <div class="card-body">
@@ -80,24 +80,22 @@
                 <label for="brand" class="form-label">Brand:</label>
                 <input type="text" id="brand" name="brand" class="form-control" required>
               </div>
-            </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">Description:</label>
-              <textarea id="description" name="description" class="form-control" required></textarea>
-            </div>
-            <div class="mb-3 row">
               <div class="col-md-6">
-                <label for="price" class="form-label">Price:</label>
-                <input type="number" id="price" name="price" step="0.01" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="category" class="form-label">Category:</label>
+              <label for="category" class="form-label">Category:</label>
                 <select id="category" name="category" class="form-select" required>
                   <option value="m">Men's</option>
                   <option value="w">Women's</option>
                   <option value="c">Children</option>
                 </select>
               </div>
+              <div class="col-md-6">
+              <label for="price" class="form-label">Price:</label>
+                <input type="number" id="price" name="price" step="0.01" class="form-control" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description:</label>
+              <textarea id="description" name="description" class="form-control" required></textarea>
             </div>
             <div class="mb-3">
               <label for="image" class="form-label">Image (JPEG, max 2MB):</label>
