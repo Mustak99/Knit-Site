@@ -14,6 +14,47 @@
         crossorigin="anonymous"></script> -->
 
     <title>Edit profile</title>
+
+    <style>
+        .form-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .form-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .radio-label {
+            margin-left: 5px;
+        }
+
+        form {
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body class="bg-white text-dark overflow-x-hidden">
