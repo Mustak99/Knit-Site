@@ -223,4 +223,3 @@
     <script src="../Registration/jsReg/regValidation.js"></script>
 </body>
 </html>
-<!-- persis -->
