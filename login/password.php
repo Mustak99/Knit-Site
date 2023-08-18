@@ -93,7 +93,7 @@ if (isset($_POST["emailIdToSendOtp"])) {
 
         if ($customer_num_rows === 1) {
             // it is customer
-            $otp = 123456;
+            $otp = rand("111111","999999");
             $_SESSION["otpGeneratedForPass"] = md5($otp);
 
             // send mail
@@ -102,24 +102,27 @@ if (isset($_POST["emailIdToSendOtp"])) {
 
             showOTP($email_id);
         } else {
-            echo '<div class="wrap-input100 validate-input" id="usernameErrorMssg" data-validate = "Invalid email id">
-            <input class="input100" type="text" name="emailid" id="forgotPassEmailid" placeholder="Email Id"/>
-        </div>';
+            echo '<div class="wrap-form-control validate-input" id="usernameErrorMssg"
+            data-validate="Invalid email id">
+            <input class="form-control" type="text" name="emailid" id="forgotPassEmailid"
+                placeholder="Email Id" />
+            <p class="text-danger">Email Id not found!</p>
+        </div>
 
-            echo '<p class="text-danger"> No such email id found </p>';
-
-            echo '<div class="container-login100-form-btn">
+        <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
-                <div class="login100-form-bgbtn"></div>
-                <button class="login100-form-btn" type="button" name="forgotPassword" id="forgotPasswordNext" value="submitEmail">
+                <div class="form-group"></div>
+                <button class=" form-control btn btn-primary rounded submit px-3" type="button"
+                    name="forgotPassword" id="forgotPasswordNext" value="submitEmail">
                     Next
-                </button>
+                    </button>
+                </div>
             </div>
         </div>';
         }
     } else {
         // it is seller
-        $otp = 123456;
+        $otp = rand("111111","999999");
         $_SESSION["otpGeneratedForPass"] = md5($otp);
 
         // send mail

@@ -203,11 +203,11 @@ $shirt = totalShirt(connection());
         <!-- ============================================================== -->
         <!-- top selling products  -->
         <!-- ============================================================== -->
-        <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
-                <h5 class="card-header">Sold Products Details</h5>
+                <center> <h4 class="card-header">Sold Products Details</h4> </center>
                 <div class="card-body p-0">
-                    <div class="table-responsive" style="max-height: 425px; overflow-y: scroll;">
+                    <div class="table-responsive" style="max-height: 426px; overflow-y: scroll;">
                         <table class="table">
                             <thead class="bg-light">
                                 <tr class="border-0">
@@ -257,9 +257,9 @@ $shirt = totalShirt(connection());
         <!-- ============================================================== -->
         <!-- revenue locations  -->
         <!-- ============================================================== -->
-        <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
+        <!-- <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card"></div>
-        </div>
+        </div> -->
     </div>
 
     </div>

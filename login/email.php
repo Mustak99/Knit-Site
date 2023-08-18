@@ -1,9 +1,9 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 
-require 'PHPMailer/Exception.php';
-require 'PHPMailer/PHPMailer.php';
-require 'PHPMailer/SMTP.php';
+require '../PHPMailer/Exception.php';
+require '../PHPMailer/PHPMailer.php';
+require '../PHPMailer/SMTP.php';
 
 class VerificationCode
 {
@@ -22,7 +22,7 @@ class VerificationCode
          * contact@johndoe.com
          * 
          */
-        $this->sender = "knitsite7@gmail.com";
+        $this->sender = "knitsiteb7@gmail.com";
         $this->password = "pazxcwqphdjoglqv";
         $this->receiver = $receiver;
         $this->smtpHost = "smtp.gmail.com";
@@ -56,7 +56,6 @@ class VerificationCode
 
     public function getHTMLMessage()
     {
-        $logoUrl = "http://localhost/LMS2/Dashboard/assets/images/text-1673331376987.png";
         $htmlMessage = <<<MSG
         <!DOCTYPE html>
         <html>
@@ -85,9 +84,9 @@ class VerificationCode
             </style>
         </head>
         <body>
-            <h2>Leaner's Spot</h2>
+            <h2>Knite Site</h2>
             <p>
-                Hi,<br> We got request to reset your VLMS password.
+                Hi,<br> We got request to reset your password.
             </p>
             <p>
             Please use this OTP within the next 2 minutes to proceed with the password reset process.
@@ -99,7 +98,7 @@ class VerificationCode
                 This is an automated email. Please do not reply to this message.
             </p>
             <p><br>
-                Best regards,<br>Leaner's Spot
+                Best regards,<br>Knite Site
             </p>
         </body>
         </html>

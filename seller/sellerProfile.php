@@ -96,7 +96,7 @@
 
 
 
-    <form action="updateUser.php" method="post" class="m-5" name="registration-form">
+    <form action="updateUser.php" method="post" class="m-5" name="registration-form" onsubmit="return formUpdateValidForm();">
 
         <div style="text-align: center;">
             <h2 class="mt-3">
@@ -110,6 +110,7 @@
                 <label class="form-label">First Name</label>
                 <input name="firstname" id="firstname" type="text" class="form-control"
                     value="<?php echo @$SellerFirstName ?>" disabled>
+                <span id="errormsg1"></span>
             </div>
             <div class="form-input">
                 <label class="form-label">Middle Name</label>
@@ -218,6 +219,8 @@
             });
         });
     </script>
+
+    <script src="../Registration/jsReg/regValidation.js"></script>
 </body>
 </html>
 <!-- persis -->
