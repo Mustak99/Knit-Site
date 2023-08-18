@@ -242,3 +242,17 @@ function formValidForm() {
     }
 
 }
+
+
+
+function formUpdateValidForm() {
+    var fname = checkFirstName();
+
+    if (fname) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}

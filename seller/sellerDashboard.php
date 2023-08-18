@@ -156,7 +156,7 @@ $shirt = totalShirt(connection());
             <div class="card">
                 <h5 class="card-header">Total Sale</h5>
                 <div class="card-body">
-                     <canvas id="pieChart"></canvas>
+                    <canvas id="pieChart"></canvas>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">

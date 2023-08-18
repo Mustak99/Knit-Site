@@ -105,7 +105,7 @@
 
                                 <div class="container-login100-form-btn">
                                     <div class="wrap-login100-form-btn">
-                                        <div class="form-group""></div>
+                                        <div class="form-group"></div>
                                         <button class=" form-control btn btn-primary rounded submit px-3" type="button"
                                             name="forgotPassword" id="forgotPasswordNext" value="submitEmail">
                                             Next

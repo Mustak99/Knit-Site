@@ -8,11 +8,12 @@ if (isset($_POST["EnterNewPassword"]) && isset($_POST["confirmPassword"])) {
     unset($_SESSION["forgotUserEmailIdPassChange"]);
 
     include_once 'database.php';
+    $connection = connection(connection());
 
     $sql = "UPDATE customerregistration SET password = ? WHERE EmailAddress = ?";
     $sql2 = "UPDATE sellerregistration SET password = ? WHERE EmailAddress = ?";
 
-    if ($stmt = $connnection->prepare($sql)) {
+    if ($stmt = $connection->prepare($sql)) {
         $stmt->bind_param("ss", $pwd, $email);
         $pwd = $new_password;
         $email = $email_id;
@@ -21,7 +22,7 @@ if (isset($_POST["EnterNewPassword"]) && isset($_POST["confirmPassword"])) {
 
     $stmt->close();
 
-    if ($stmt = $connnection->prepare($sql2)) {
+    if ($stmt = $connection->prepare($sql2)) {
         $stmt->bind_param("ss", $pwd, $email);
         $pwd = $new_password;
         $email = $email_id;
@@ -29,7 +30,7 @@ if (isset($_POST["EnterNewPassword"]) && isset($_POST["confirmPassword"])) {
     }
 
     $stmt->close();
-    $connnection->close();
+    $connection->close();
     session_destroy();
 
     header("Location: login.php");
