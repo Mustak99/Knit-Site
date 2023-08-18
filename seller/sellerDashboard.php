@@ -8,7 +8,7 @@ $revenue = totalRevenue(connection());
 $shirt = totalShirt(connection());
 
 ?>
-<!-- abc -->
+
 <!doctype html>
 <html lang="en">
 
