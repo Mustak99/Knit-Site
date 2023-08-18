@@ -1,7 +1,6 @@
 <?php 
     include_once '../head.php';
     include_once '../header.php';
-    $_SESSION["SellerDashboard"]=1;
 ?>
   <!-- Navbar Start -->
   <div class="container-fluid mb-5">
