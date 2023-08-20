@@ -202,7 +202,7 @@ function checkPincode() {
 function checkAddress() {
     var address = document.getElementById("address").value;
     var msg = document.getElementById("errormsg11");
-    var regx = /^[A-Za-z0-9 ,-]{1,50}$/;
+    var regx = /^[A-Za-z0-9 /,-]{1,50}$/;
 
     if (address == "") {
         msg.innerHTML = "Address field is empty";
