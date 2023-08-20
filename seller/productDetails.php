@@ -51,10 +51,10 @@ $idVal = totalProduct(connection());
                         <?php echo @$user['name']; ?>
                     </td>
                     <td>
-                        <?php echo @$user['description']; ?>
+                        <?php echo @$user['brand_name']; ?>
                     </td>
                     <td>
-                        <?php echo @$user['brand_name']; ?>
+                        <?php echo @$user['description']; ?>
                     </td>
                     <td>
                         <?php echo @$user['price']; ?>
