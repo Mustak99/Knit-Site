@@ -37,7 +37,7 @@
         include_once 'db_connect.php';
 
 
-      $sql = "INSERT INTO shoes (shoe_name, description, price, brand_name, category, image_path) VALUES (?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO products (name, description, price, brand_name, category, image_path) VALUES (?, ?, ?, ?, ?, ?)";
 
       // Bind the parameters to the prepared statement
       $stmt = $conn->prepare($sql);
