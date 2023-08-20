@@ -33,7 +33,7 @@ if (count($result) > 0) {
         echo'<div class="row">';
         echo'<div class="col-2">';
                 echo '<div class="profile-image-container">';
-                echo '<img src="'.$row['image_path'].'" alt="Shoe Image" class="profile-image">';
+                echo '<img src="'.$row['image_path'].'" alt="Image" class="profile-image">';
                 echo "</div>";
                 echo'</div>';
                 echo'<div class="col">';
