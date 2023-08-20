@@ -66,49 +66,51 @@
     }
   </script>
   <div class="row" style="padding-left: 150px;">
-    <div class="col-md-6">
-      <div class="card" style="width:118%;">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-4">Upload Product</h2>
-          <form action="uploadProcessing.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-            <div class="mb-3 row">
-              <div class="col-md-6">
-                <label for="name" class="form-label"> Name:</label>
-                <input type="text" id="name" name="name" class="form-control" required>
-              </div>
-              <div class="col-md-6">
-                <label for="brand" class="form-label">Brand:</label>
-                <input type="text" id="brand" name="brand" class="form-control" required>
-              </div>
-              <div class="col-md-6">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Upload Product</h2>
+        <form action="uploadProcessing.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label for="brand" class="form-label">Brand:</label>
+              <input type="text" id="brand" name="brand" class="form-control" required>
+            </div>
+
+            <div class="col-md-6">
               <label for="category" class="form-label">Category:</label>
                 <select id="category" name="category" class="form-select" required>
-                  <option value="Men's">Men's</option>
-                  <option value="Women's">Women's</option>
-                  <option value="Children's">Children</option>
+                  <option value="m">Men's</option>
+                  <option value="w">Women's</option>
+                  <option value="c">Children</option>
                 </select>
               </div>
               <div class="col-md-6">
               <label for="price" class="form-label">Price:</label>
-                <input type="number" id="price" name="price" step="0.01" class="form-control" required>
-              </div>
+              <input type="number" id="price" name="price" step="0.01" class="form-control" required>
             </div>
-            <div class="mb-3">
-              <label for="description" class="form-label">Description:</label>
-              <textarea id="description" name="description" class="form-control" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="image" class="form-label">Image (JPEG, max 2MB):</label>
-              <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="form-control" required>
-            </div>
-            <div class="text-center">
-              <button type="submit" class="btn btn-success">Upload</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" name="description" class="form-control" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image (JPEG, max 2MB):</label>
+            <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="form-control" required>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">Upload</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
+
 
 </body>
 </html>
