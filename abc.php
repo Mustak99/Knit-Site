@@ -58,16 +58,24 @@ $stmt->close();
 // Output search results
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo '<div class="shadow p-3 mb-5 bg-white rounded">';
-        echo'<div class="container" onclick="getProductdetails('.$row["id"].')">';
-        echo'<div class="row">';
-        echo'<div class="col">';
-        echo "<h3>".$row['name']."</h3>";
-        echo "<p>Description:".$row['description']."</p>";
-        echo "<p>Price: ".$row['price']."</p>";
-        echo'</div>';
-        echo'</div>';
-        echo'</div></div>';   
+        echo '<div class="container shadow p-3 mb-5 bg-white rounded">';
+        echo '<div class="row">';
+        // Display the profile image in one column
+        echo '<div class="col-3 ">';
+        echo '<div class="profile-image-container">';
+        echo '<img src="seller/'.$row['image_path'].'" >';
+        echo '</div>';
+        echo '</div>';
+        // Display the product details in another column
+        echo '<div class="col-9 ">';
+        echo '<h3>'.$row['name'].'</h3>';
+        echo '<p>Description: '.$row['description'].'</p>';
+        echo '<p>Brand: '.$row['brand_name'].'</p>';
+        echo '<p>Category: '.$row['category'].'</p>';
+        echo '<p>Price: '.$row['price'].'</p>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
      }
 } else {
     echo "<p>No results found.</p>";

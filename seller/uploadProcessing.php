@@ -1,6 +1,6 @@
 <?php
 
-  $shoeName = $_POST["shoe_name"];
+  $Name = $_POST["name"];
   $description = $_POST["description"];
   $price = $_POST["price"];
   $brand = $_POST["brand"];
@@ -34,14 +34,17 @@
    
     if (move_uploaded_file($fileTmpPath, $targetPath)) {
      
-        include_once 'db_connect.php';
+      $mysqli = new mysqli("localhost","root","","knitsite");
+      if ($mysqli === false) {
+        die("error: Could not connect to database server.!" . $mysqli->connect_errorno);
+    }
 
 
       $sql = "INSERT INTO products (name, description, price, brand_name, category, image_path) VALUES (?, ?, ?, ?, ?, ?)";
 
       // Bind the parameters to the prepared statement
-      $stmt = $conn->prepare($sql);
-      $stmt->bind_param("ssdsss", $shoeName, $description, $price, $brand, $category, $targetPath);
+      $stmt = $mysqli->prepare($sql);
+      $stmt->bind_param("ssdsss", $Name, $description, $price, $brand, $category, $targetPath);
       $stmt->execute();
 
       // Check if the insertion was successful
@@ -53,7 +56,7 @@
 
       // Close the database connection
       $stmt->close();
-      $conn->close();
+      $mysqli->close();
     } else {
       echo "Error moving the uploaded file.";
     }
