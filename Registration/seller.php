@@ -32,7 +32,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title p-b-10">Seller Registration</h2>
-                    <form method="POST" action="sellerLoginProcess.php" onsubmit="return formValidForm()" enctype="multipart/form-data">
+                    <form method="POST" action="sellerRegistrationProcess.php" onsubmit="return formValidForm()" enctype="multipart/form-data">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">

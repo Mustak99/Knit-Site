@@ -33,7 +33,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title p-b-10">Customer Registration</h2>
-                    <form method="POST" action="customerLoginProcess.php" onsubmit="return formValidForm()">
+                    <form method="POST" action="customerRegistrationProcess.php" onsubmit="return formValidForm()">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
