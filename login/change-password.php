@@ -4,7 +4,6 @@ if (isset($_POST["EnterNewPassword"]) && isset($_POST["confirmPassword"])) {
     session_start();
     $email_id = trim($_SESSION["forgotUserEmailIdPassChange"]);
     $new_password = md5(trim($_POST["EnterNewPassword"]));
-
     unset($_SESSION["forgotUserEmailIdPassChange"]);
 
     include_once 'database.php';

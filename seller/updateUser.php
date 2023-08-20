@@ -4,7 +4,7 @@ session_start();
 $con = new mysqli("localhost", "root", "", "knitsite") or die();
 
 // Step 2: Prepare the update statement
-$updateStmt = $con->prepare("UPDATE sellerregistration SET SellerFirstName=?, SellerMiddleName=?, SellerLastName=?, MobileNumber=?, UserName=?, Password=?,EmailAddress=?,BusinessLocation=?,Pincode=?,BusinessType=?, businessdoc=? WHERE UserName=?");
+$updateStmt = $con->prepare("UPDATE sellerregistration SET SellerFirstName=?, SellerMiddleName=?, SellerLastName=?, MobileNumber=?, UserName=?, Password=?,EmailAddress=?,BusinessLocation=?,Pincode=?,BusinessType=? WHERE UserName=?");
 
 // Step 3: Bind parameters to the prepared statement
 $SellerFirstName = $_POST["firstname"];
@@ -17,10 +17,10 @@ $EmailAddress = $_POST["email"];
 $BusinessLocation = $_POST["BusinessLocation"];
 $Pincode = $_POST["pincode"];
 $BusinessType = $_POST["BusinessType"];
-$BusinessDoc = $_POST["businessdoc"];
+// $BusinessDoc = $_POST["businessdoc"];
 
 // Note the correct order of variables in the bind_param function
-$updateStmt->bind_param("ssssssssssss", $SellerFirstName, $SellerMiddleName, $SellerLastName, $MobileNumber, $UserName, $Password, $EmailAddress, $BusinessLocation, $Pincode, $BusinessType, $BusinessDoc, $UserName);
+$updateStmt->bind_param("sssssssssss", $SellerFirstName, $SellerMiddleName, $SellerLastName, $MobileNumber, $UserName, $Password, $EmailAddress, $BusinessLocation, $Pincode, $BusinessType, $UserName);
 
 // Step 4: Execute the prepared statement
 if ($updateStmt->execute()) {

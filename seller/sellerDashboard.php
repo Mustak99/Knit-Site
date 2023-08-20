@@ -48,7 +48,7 @@ $shirt = totalShirt(connection());
         <!-- ============================================================== -->
         <div class="row">
             <!-- metric -->
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div id="productDiv" class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="text-muted">Products</h5>
@@ -57,7 +57,6 @@ $shirt = totalShirt(connection());
                                 <?php echo @$idVal; ?>
                             </h1>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -156,7 +155,7 @@ $shirt = totalShirt(connection());
             <div class="card">
                 <h5 class="card-header">Total Sale</h5>
                 <div class="card-body">
-                    <canvas id="pieChart"></canvas>
+                    <canvas id="total-sale"></canvas>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -205,7 +204,9 @@ $shirt = totalShirt(connection());
         <!-- ============================================================== -->
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
-                <center> <h4 class="card-header">Sold Products Details</h4> </center>
+                <center>
+                    <h4 class="card-header">Sold Products Details</h4>
+                </center>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 426px; overflow-y: scroll;">
                         <table class="table">
@@ -338,25 +339,25 @@ $shirt = totalShirt(connection());
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 js-->
-    <script src="../assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <!-- bootstrap bundle js-->
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <!-- slimscroll js-->
-    <script src="../assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <!-- chartjs js-->
-    <script src="../assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
-    <script src="../assets/vendor/charts/charts-bundle/chartjs.js"></script>
+    <script src="assets/vendor/charts/charts-bundle/Chart.bundle.js"></script>
+    <script src="assets/vendor/charts/charts-bundle/chartjs.js"></script>
 
     <!-- main js-->
-    <script src="../assets/libs/js/main-js.js"></script>
+    <script src="assets/libs/js/main-js.js"></script>
     <!-- jvactormap js-->
-    <script src="../assets/vendor/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="../assets/vendor/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/vendor/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="assets/vendor/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
     <!-- sparkline js-->
-    <script src="../assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <script src="../assets/vendor/charts/sparkline/spark-js.js"></script>
+    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
+    <script src="assets/vendor/charts/sparkline/spark-js.js"></script>
     <!-- dashboard sales js-->
-    <script src="../assets/libs/js/dashboard-sales.js"></script>
+    <script src="assets/libs/js/dashboard-sales.js"></script>
     <script>
         // Chart.js configuration
         var ctx = document.getElementById('pieChart').getContext('2d');
@@ -386,6 +387,115 @@ $shirt = totalShirt(connection());
         });
     </script>
 
+    <script>
+        // Add a click event listener to the div
+        document.getElementById("productDiv").addEventListener("click", function () {
+            // Redirect to productDetails.php
+            window.location.href = "productDetails.php";
+        });
+    </script>
+
+    <script>
+        $(function () {
+            "use strict";
+            // ============================================================== 
+            // Revenue
+            // ============================================================== 
+            var ctx = document.getElementById('revenue').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Current Week',
+                        data: [12, 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6],
+                        backgroundColor: "rgba(89, 105, 255,0.5)",
+                        borderColor: "rgba(89, 105, 255,0.7)",
+                        borderWidth: 2
+
+                    }, {
+                        label: 'Previous Week',
+                        data: ['<?php echo @$shirt ?>', 29, 5, 5, 2, 3, 10, 2, 29, 5, 5, 2],
+                        backgroundColor: "rgba(255, 64, 123,0.5)",
+                        borderColor: "rgba(255, 64, 123,0.7)",
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+
+                        labels: {
+                            fontColor: '#71748d',
+                            fontFamily: 'Circular Std Book',
+                            fontSize: 14,
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                // Include a dollar sign in the ticks
+                                callback: function (value, index, values) {
+                                    return '$' + value;
+                                }
+                            }
+                        }]
+                    },
+
+
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 14,
+                                fontFamily: 'Circular Std Book',
+                                fontColor: '#71748d',
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontSize: 14,
+                                fontFamily: 'Circular Std Book',
+                                fontColor: '#71748d',
+                            }
+                        }]
+                    }
+
+                }
+            });
+
+            // ============================================================== 
+            // Total Sale
+            // ============================================================== 
+            var ctx = document.getElementById("total-sale").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+
+                data: {
+                    labels: ["Direct", " Affilliate", "Sponsored", " E-mail"],
+                    datasets: [{
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)'
+                        ],
+                        data: ['<?php echo @$shirt ?>', 135.18, 48.96, 154.02, 154.02]
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: false
+
+                    }
+                }
+
+            });
+        });
+    </script>
 
 </body>
 

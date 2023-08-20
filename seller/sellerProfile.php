@@ -152,7 +152,7 @@
                 <textarea id="address" name="BusinessLocation" class="form-control"
                     disabled><?php echo @$BusinessLocation ?></textarea>
             </div>
-            <div class="form-input">
+            <!-- <div class="form-input">
                 <label class="form-label">Business Document</label>
                 <input type="file" id="businessDocInput" name="businessdoc" disabled>
                 <?php if ($BusinessDoc): ?>
@@ -160,7 +160,7 @@
                         <?php echo basename($BusinessDoc); ?>
                     </p>
                 <?php endif; ?>
-            </div>
+            </div> -->
             <div class="form-input">
                 <label class="form-label">Business Type</label>
                 <div class="d-flex gap-3">
