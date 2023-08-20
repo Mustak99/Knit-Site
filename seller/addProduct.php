@@ -65,52 +65,48 @@
       }
     }
   </script>
-  <div class="row" style="padding-left: 150px;">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title text-center mb-4">Upload Product</h2>
-        <form action="uploadProcessing.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="name" class="form-label">Name:</label>
-              <input type="text" id="name" name="name" class="form-control" required>
-            </div>
-            <div class="col-md-6">
-              <label for="brand" class="form-label">Brand:</label>
-              <input type="text" id="brand" name="brand" class="form-control" required>
-            </div>
-
-            <div class="col-md-6">
-              <label for="category" class="form-label">Category:</label>
-              <select id="category" name="category" class="form-select" required>
-                <option value="m">Men's</option>
-                <option value="w">Women's</option>
-                <option value="c">Children</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="price" class="form-label">Price:</label>
-              <input type="number" id="price" name="price" step="0.01" class="form-control" required>
-            </div>
+<div class="row" >
+  <div class="col-md-12">
+    <div class="p-4 shadow rounded">
+      <h2 class="text-center mb-4">Upload Product</h2>
+      <form action="uploadProcessing.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
           </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Description:</label>
-            <textarea id="description" name="description" class="form-control" required></textarea>
+          <div class="col-md-3">
+            <label for="brand" class="form-label">Brand:</label>
+            <input type="text" id="brand" name="brand" class="form-control" required>
           </div>
-          <div class="mb-3">
-            <label for="image" class="form-label">Image (JPEG, max 2MB):</label>
-            <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="form-control" required>
+          <div class="col-md-3">
+            <label for="category" class="form-label">Category:</label>
+            <select id="category" name="category"class="form-control"   required>
+              <option value="m">Men's</option>
+              <option value="w">Women's</option>
+              <option value="c">Children</option>
+            </select>
           </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-success">Upload</button>
+          <div class="col-md-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" id="price" name="price" step="0.01" class="form-control" required>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="row mb-3">
+          
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description:</label>
+          <textarea id="description" name="description" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image (JPEG, max 2MB):</label>
+          <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="form-control" required>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-success">Upload</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-
-</body>
-</html>
