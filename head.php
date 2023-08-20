@@ -13,7 +13,7 @@ session_start();
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="<?php if (isset($_SESSION["SellerUserID"])) { echo "../img/favicon.ico";} else { echo "img/favicon.ico";} ?>" rel="icon">
+    <link href="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../img/favicon.ico";} else { echo "img/favicon.ico";} ?>" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -26,7 +26,7 @@ session_start();
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?php if (isset($_SESSION["SellerUserID"])) { echo "../css/style.css";} else { echo "css/style.css";} ?>" rel="stylesheet">
+    <link href="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../css/style.css";} else { echo "css/style.css";} ?>" rel="stylesheet">
 
     <!-- Jquery -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -39,13 +39,13 @@ session_start();
 
 <!-- JavaScript Libraries -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="<?php if (isset($_SESSION["SellerUserID"])) { echo "../lib/easing/easing.min.js";} else { echo "lib/easing/easing.min.js";} ?>"></script>
-<script src="<?php if (isset($_SESSION["SellerUserID"])) { echo "../lib/owlcarousel/owl.carousel.min.js";} else { echo "lib/owlcarousel/owl.carousel.min.js";} ?>"></script>
+<script src="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../lib/easing/easing.min.js";} else { echo "lib/easing/easing.min.js";} ?>"></script>
+<script src="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../lib/owlcarousel/owl.carousel.min.js";} else { echo "lib/owlcarousel/owl.carousel.min.js";} ?>"></script>
 
 <!-- Contact Javascript File -->
-<script src="<?php if (isset($_SESSION["SellerUserID"])) { echo "../mail/jqBootstrapValidation.min.js";} else { echo "mail/jqBootstrapValidation.min.js";} ?>"></script>
-<script src="<?php if (isset($_SESSION["SellerUserID"])) { echo "../mail/contact.js";} else { echo "mail/contact.js";} ?>"></script>
+<script src="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../mail/jqBootstrapValidation.min.js";} else { echo "mail/jqBootstrapValidation.min.js";} ?>"></script>
+<script src="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../mail/contact.js";} else { echo "mail/contact.js";} ?>"></script>
 
 <!-- Template Javascript -->
-<script src="<?php if (isset($_SESSION["SellerUserID"])) { echo "../js/main.js";} else { echo "js/main.js";} ?>"></script>
+<script src="<?php if (isset($_SESSION["SellerUserID"])||isset($_SESSION["CustomerUserID"])) { echo "../js/main.js";} else { echo "js/main.js";} ?>"></script>
 </head>

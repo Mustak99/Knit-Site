@@ -106,7 +106,7 @@
                 emailError.style.display = "block";
             } else {
                 
-            
+                <?php
                 require_once 'connection.php';
 
                 $sql = "SELECT EmailAddress	 FROM customerregistration WHERE EmailAddress = ? LIMIT 1";
@@ -177,6 +177,7 @@
                 }
 
                 $con -> close();
+                ?>
             }
 
 

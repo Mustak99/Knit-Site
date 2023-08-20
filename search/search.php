@@ -1,53 +1,71 @@
-<?php
-// Establish a database connection
-$host = 'localhost';
-$dbname = 'knitsite';
-$username = 'root';
-$password = '';
-
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
-];
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
-}
-
-// Retrieve search query
-$query = $_POST['query'];
-
-// Perform search query
-$stmt = $pdo->prepare("SELECT * FROM product WHERE name LIKE :query");
-$stmt->bindValue(':query', '%' . $query . '%');
-$stmt->execute();
-$result = $stmt->fetchAll();
-
-// Output search results
-if (count($result) > 0) {
-    foreach ($result as $row) {
-        echo'<div class="container">';
-        echo'<div class="row">';
-        echo'<div class="col-2">';
-                echo '<div class="profile-image-container">';
-                echo '<img src="'.$row['image_path'].'" alt="Image" class="profile-image">';
-                echo "</div>";
-                echo'</div>';
-                echo'<div class="col">';
-                 
-            echo "<h3>".$row['shoe_name']."</h3>";
-                echo "<p>Description:".$row['description']."</p>";
-                echo "<p>Brand:".$row['brand_name']."</p>";
-                echo "<p>Category:".$row['category']."</p>";
-                echo "<p>Price: ".$row['price']."</p>";
-                echo'</div>';
-        echo'</div>';
-        echo'</div>';
-    }
-} else {
-    echo "<p>No results found.</p>";
-}
+<?php include_once '../head.php';
+include_once '../header.php';
 ?>
+<div id="search-results">
+
+    <?php
+    // Establish a database connection
+    $host = 'localhost';
+    $dbname = 'knitsite';
+    $username = 'root';
+    $password = '';
+
+    $conn = new mysqli($host, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Database connection failed: " . $conn->connect_error);
+    }
+
+    // Retrieve search query
+    $query = trim($_GET["name"]);
+
+    // Perform search query
+    $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
+    $stmt->bind_param('s', $searchQuery);
+    $searchQuery = '%' . $query . '%';
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    // Output search results
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="container shadow p-3 mb-2 bg-white rounded">';
+            echo '<div class="row">';
+            // Display the profile image in one column
+            echo '<div class="col-3 ">';
+            echo '<div class="profile-image-container">';
+            echo '<img src="../seller/' . $row['image_path'] . '" >';
+            echo '</div>';
+            echo '</div>';
+            // Display the product details in another column
+            echo '<div class="col-6 ">';
+            echo '<h3>' . $row['name'] . '</h3>';
+            echo '<p>Brand: ' . $row['brand_name'] . '</p>';
+            echo '<p>Description: ' . $row['description'] . '</p>';
+            echo '</div>';
+            echo '<div class="col-3 ">';
+            echo '<div class="d-flex flex-row align-items-center mb-1">';
+            echo '<h4 class="mb-1 me-1">₹' . $row['price'] . '</h4>';
+            // echo '<span class="text-danger"><s>Charges on shipping</s></span>';
+            echo '</div>';
+            echo '<h7 class="text-success">Charges on shipping</h7>';
+            echo '<div class="d-flex flex-column mt-4">';
+            echo '<a class="btn rounded btn-outline-info btn-sm" type="button" href="../cart/viewProduct.php">Details</a>';
+            echo '<a class="btn btn-outline-primary rounded btn-sm mt-2" type="button" href="../cart/insertIntoCart.php?product_id=' . $row['id'] . '&price='.$row['price'].'">  ';
+            echo '  Add to wishlist';
+            echo '</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+    } else {
+        echo "<p>No results found.</p>";
+    }
+
+    // Close the database connection
+    $conn->close();
+
+    include_once'../footer.php';
+    ?>
+
