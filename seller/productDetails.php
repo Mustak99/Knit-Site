@@ -44,6 +44,9 @@ $idVal = totalProduct(connection());
         <tbody>
             <?php foreach ($users as $user): ?>
                 <tr>
+                <td>
+                        <img src="<?php  echo @$user['image_path']; ?>" alt="">
+                    </td>
                     <td>
                         <?php echo @$user['name']; ?>
                     </td>
