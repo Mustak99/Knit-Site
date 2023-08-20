@@ -71,7 +71,6 @@ if ($result->num_rows > 0) {
         echo '<h3>'.$row['name'].'</h3>';
         echo '<p>Description: '.$row['description'].'</p>';
         echo '<p>Brand: '.$row['brand_name'].'</p>';
-        echo '<p>Category: '.$row['category'].'</p>';
         echo '<p>Price: '.$row['price'].'</p>';
         echo '</div>';
         echo '</div>';
