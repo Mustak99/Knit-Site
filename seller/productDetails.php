@@ -33,7 +33,7 @@ $idVal = totalProduct(connection());
     <table class="table">
         <thead class="bg-light">
             <tr class="border-0">
-            <th class="border-0">Product Image</th>
+                <th class="border-0">Product Image</th>
                 <th class="border-0">Product Name</th>
                 <th class="border-0">Brand</th>
                 <th class="border-0">Description</th>
@@ -44,11 +44,14 @@ $idVal = totalProduct(connection());
         <tbody>
             <?php foreach ($users as $user): ?>
                 <tr>
-                <td>
-                        <img src="<?php  echo @$user['image_path']; ?>" alt="">
+                    <td>
+                        <img src="<?php echo @$user['image_path']; ?>" alt="">
                     </td>
                     <td>
                         <?php echo @$user['name']; ?>
+                    </td>
+                    <td>
+                        <?php echo @$user['brand_name']; ?>
                     </td>
                     <td>
                         <?php echo @$user['description']; ?>
@@ -57,9 +60,9 @@ $idVal = totalProduct(connection());
                         <?php echo @$user['price']; ?>
                     </td>
                     <td>
-                        <?php echo @$user['category_id']; ?>
+                        <?php echo @$user['category']; ?>
                     </td>
-                    <td>Patricia J. King</td>
+
                     <td>
                         <a class="edit-link" href="">&#x270E;</a>
                         <a class="delete-link" href="">&#x1F5D1;</a>

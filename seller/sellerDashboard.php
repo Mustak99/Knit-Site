@@ -483,7 +483,7 @@ $shirt = totalShirt(connection());
                             'rgba(75, 192, 192, 0.7)',
                             'rgba(153, 102, 255, 0.7)'
                         ],
-                        data: ['<?php echo @$shirt ?>', 135.18, 48.96, 154.02, 154.02]
+                        data: ['<?php echo @$shirt ?>', 7, 6, 4, 5]
                     }]
                 },
                 options: {
