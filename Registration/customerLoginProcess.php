@@ -24,7 +24,7 @@ if ($stmt = $mysqli->prepare($sql)) {
     $dt = date('y-m-d h:i:s');
     $stmt->execute();
 
-    header("location:../login1/login.php");
+    header("location:../login/login.php");
 } else {
     echo "There is a Problem in Preparation of Query.!" . $mysql->error;
 }
