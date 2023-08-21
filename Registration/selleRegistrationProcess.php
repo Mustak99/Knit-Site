@@ -17,7 +17,7 @@ if (isset($_FILES)) {
             exit;
         }
         else {
-            $path = "C:/xampp/htdocs/PhpProject2/Images/";
+            $path = "C:/xampp/htdocs/Knit-Site/Registration/sellerDocument";
             move_uploaded_file($file_tmp, $path.$file_name);
         }
     }
