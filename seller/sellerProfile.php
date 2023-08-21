@@ -132,11 +132,11 @@
                 <input id="email" name="username" type="text" class="form-control" value="<?php echo @$UserName ?>"
                     disabled>
             </div>
-            <div class="form-input">
+            <!-- <div class="form-input">
                 <label class="form-label">Password</label>
                 <input id="password" name="password" type="text" class="form-control" value="<?php echo @$Password ?>"
                     disabled>
-            </div>
+            </div> -->
             <div class="form-input">
                 <label class="form-label">Email Address</label>
                 <input id="email" name="email" type="email" class="form-control" value="<?php echo @$EmailAddress ?>"

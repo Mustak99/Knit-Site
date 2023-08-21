@@ -12,9 +12,8 @@ include_once '../header.php';
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                 id="navbar-vertical">
-                <div class="navbar-nav w-100 overflow-hidden" style="height: 123px">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 160px">
                     <div class="nav-item dropdown">
-
                         <a href="sellerProfile.php" class="nav-item nav-link">profile</a>
                         <a href="productDetails.php" class="nav-item nav-link">Product Details</a>
                         <a href="addProduct.php" class="nav-item nav-link">Add Product</a>
@@ -33,28 +32,25 @@ include_once '../header.php';
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="../HomePage.php" class="nav-item nav-link active">Home</a>
-                        <a href="cart.php" class="nav-item nav-link"
-                            style="display: <?php if (isset($_SESSION["adminName"])) {
-                                echo "none";
-                            } else {
-                                echo "block";
-                            } ?>">Cart</a>
-                        <a href="dashboard.php" class="nav-item nav-link"
-                            style="display: <?php if (isset($_SESSION["adminName"])) {
-                                echo "block";
-                            } else {
-                                echo "none";
-                            } ?>">Dashboard</a>
+                        <a href="cart.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) {
+                            echo "none";
+                        } else {
+                            echo "block";
+                        } ?>">Cart</a>
+                        <a href="dashboard.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) {
+                            echo "block";
+                        } else {
+                            echo "none";
+                        } ?>">Dashboard</a>
                         <a class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
 
-                        <div class="nav-item dropdown"
-                            style="display: <?php if (isset($_SESSION["name"])) {
-                                echo "block";
-                            } else {
-                                echo "none";
-                            } ?>">
+                        <div class="nav-item dropdown" style="display: <?php if (isset($_SESSION["name"])) {
+                            echo "block";
+                        } else {
+                            echo "none";
+                        } ?>">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <?php if (isset($_SESSION["name"])) {
                                     echo $_SESSION["name"] . "  ";
@@ -62,16 +58,15 @@ include_once '../header.php';
                             </a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="../Login/logout.php" class="dropdown-item">Logout</a>
-                                <a href="updateProfile.php" class="dropdown-item"
-                                    style="display: <?php if (isset($_SESSION["adminId"])) {
-                                        if (isset($_SESSION["adminId"])) {
-                                            echo "none";
-                                        } else {
-                                            echo "block";
-                                        }
-                                    } else {
+                                <a href="updateProfile.php" class="dropdown-item" style="display: <?php if (isset($_SESSION["adminId"])) {
+                                    if (isset($_SESSION["adminId"])) {
                                         echo "none";
-                                    } ?>">Profile</a>
+                                    } else {
+                                        echo "block";
+                                    }
+                                } else {
+                                    echo "none";
+                                } ?>">Profile</a>
                             </div>
                         </div>
 

@@ -214,7 +214,7 @@
             }
 
             // Password validation: Allow alphabets, numbers, and underscores only
-            var passwordPattern = /^[A-Za-z0-9_]{8}$/;
+            var passwordPattern = /^[A-Za-z0-9_]{8,12}$/;
             if (!passwordPattern.test(password)) {
                 $("#newPassword").addClass("alert-validate");
                 return;
