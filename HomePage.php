@@ -147,26 +147,27 @@ include_once("commonMethod.php");
 
 
         <!-- Products Start -->
-        <div class="container-fluid pt-5">
-            <div class="text-center mb-4">
+        <div class="container-fluid pt-5 ">
+            <div class="text-center mb-4 ">
                 <h2 class="section-title px-5"><span class="px-2">Trandy Products</span></h2>
             </div>
             <div class="container-fluid pt-5">
-                <div class="row px-xl-5 pb-3">
+                <div class="row px-xl-5 pb-3 ">
                     <?php foreach ($allImg as $allImage): ?>
-                        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                        <div class="col-lg-3 col-md-6 col-sm-12 pb-1" style="display: flex; ">
                             <div class="card product-item border-0 mb-4">
-                                <div class="card-header product-img position-relative bg-transparent border p-0">
+                                <div class=" card-header product-img position-relative bg-transparent border p-0">
                                     <img src="./seller/<?php echo $allImage['image_path']; ?>" class="img-fluid"
                                         alt="Product Image">
                                 </div>
-
-                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                    <h6 class="text-truncate mb-3">Colorful Stylish</h6>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3" style=" display:flex 0;"  >
+                                   <div style="display: flex;position: absolute;bottom:10%;border:solid 1px ;width:100%;justify-content:center;">
+                                <h6 class="text-truncate mb-3">Colorful Stylish</h6>
                                     <div class="d-flex justify-content-center">
-                                        <h6>$123.00</h6>
-                                        <h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                        <h6>123</h6>
+                                        <h6 class="text-muted ml-2"><del>500.00</del></h6>
                                     </div>
+                                </div>
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
                                     <a href="" class="btn btn-sm text-dark p-0"><i
