@@ -1,12 +1,17 @@
 <?php
 
+if (isset($_SESSION["SellerUserID"])) {
+    $sellerId = $_SESSION["SellerUserID"];
+    // echo "Seller ID: " . $sellerId;
+}
+
 include_once("database.php");
 $con = connection();
 
 //fetch total product
-function totalProduct($con)
+function totalProduct($con, $sellerId)
 {
-    $query = "SELECT count(id) as id FROM products";
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -17,9 +22,9 @@ function totalProduct($con)
 
 //fetch total order
 
-function totalOrder($con)
+function totalOrder($con, $sellerId)
 {
-    $query = "SELECT count(id) as id FROM products";
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -30,9 +35,9 @@ function totalOrder($con)
 
 //fetch total revenue
 
-function totalRevenue($con)
+function totalRevenue($con, $sellerId)
 {
-    $query = "SELECT count(id) as id FROM products";
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -43,9 +48,9 @@ function totalRevenue($con)
 
 //fetch total 
 
-function total($con)
+function total($con, $sellerId)
 {
-    $query = "SELECT count(id) as id FROM products";
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -56,9 +61,9 @@ function total($con)
 
 // total shirt
 
-function totalShirt($con)
+function totalShirt($con, $sellerId)
 {
-    $query = "SELECT count(id) as id FROM products";
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -69,16 +74,16 @@ function totalShirt($con)
 
 // sold products
 
-$query = "SELECT * FROM products";
+$query = "SELECT * FROM products where SID=$sellerId";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful
 if (!$result) {
     die("Query failed: " . mysqli_error($con));
 }
-$users = array();
+$products = array();
 
 while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
+    $products[] = $row;
 }
 ?>

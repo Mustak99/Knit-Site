@@ -15,13 +15,13 @@ if (isset($_POST["SendOtpValues"])) {
                 <div class="wrap-input100 validate-input" id="newPassword" data-validate="Invalid Password">
                     <input class="form-control" type="password" name="EnterNewPassword" id="newPass"
                         placeholder="New Password" />
-                </div>
+                </div> <br>
 
                 <div class="wrap-input100 validate-input" id="newPasswordConfirms"
                     data-validate="Password does not match">
                     <input class="form-control" type="password" name="confirmPassword" id="confirmChangePassword"
                         placeholder="Confirm Password" />
-                </div>
+                </div> <br>
 
                 <div class="container-login100-form-btn">
                     <div class="wrap-login100-form-btn">
@@ -67,7 +67,7 @@ if (isset($_POST["SendOtpValues"])) {
                 </div>
             </div>';
 
-            echo '<br><p class="text-danger mt-2">Invalid OTP</p>';
+            echo '<p class="text-danger mt-2">Invalid OTP</p>';
 
             echo '<div class="container-login100-form-btn">
                 <div class="wrap-login100-form-btn">

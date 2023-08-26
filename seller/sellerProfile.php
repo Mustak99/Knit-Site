@@ -92,10 +92,6 @@
     // }
     
     ?>
-
-
-
-
     <form action="updateUser.php" method="post" class="m-5" name="registration-form" onsubmit="return formUpdateValidForm();">
 
         <div style="text-align: center;">

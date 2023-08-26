@@ -23,7 +23,7 @@ class VerificationCode
          * 
          */
         $this->sender = "knitsiteb7@gmail.com";
-        $this->password = "pazxcwqphdjoglqv";
+        $this->password = "cluzaejgwaocjujl";
         $this->receiver = $receiver;
         $this->smtpHost = "smtp.gmail.com";
         $this->smtpPort = 587;

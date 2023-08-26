@@ -1,77 +1,112 @@
-<?php include_once 'sellerHeader.php';
-?>
+<?php include_once 'sellerHeader.php'; ?>
 <?php
 include_once("commonMethod.php");
-$idVal = totalProduct(connection());
+// $idVal = totalProduct(connection());
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title></title>
-    <style>
-        /* Resetting the default link color for <a> tags */
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+    <title>Product Management</title>
 
-        /* Styling for the edit and delete links */
-        a.edit-link {
-            color: purple;
-            /* Purple color */
-        }
 
-        a.delete-link {
-            color: red;
-            /* Red color */
+    <!-- Modify the existing <script> section as follows -->
+    <script>
+        function showConfirmation(productId) {
+            var confirmationBox = document.getElementById("confirmationBox");
+            var overlay = document.getElementById("overlay");
+
+            confirmationBox.style.display = "block";
+            overlay.classList.add("show");
+
+            var confirmButton = document.getElementById("confirmButton");
+            var cancelButton = document.getElementById("cancelButton");
+            var closeButton = document.getElementById("closeButton");
+
+            confirmButton.onclick = function () {
+                window.location.href = "deleteProduct.php?id=" + productId; // Redirect to deleteProduct.php
+            };
+
+            cancelButton.onclick = function () {
+                confirmationBox.style.display = "none";
+                overlay.classList.remove("show");
+            };
+
+            closeButton.onclick = function () {
+                confirmationBox.style.display = "none";
+                overlay.classList.remove("show");
+            };
         }
-    </style>
+    </script>
+
 </head>
 
 <body>
-    <table class="table">
-        <thead class="bg-light">
-            <tr class="border-0">
-                <th class="border-0">Product Image</th>
-                <th class="border-0">Product Name</th>
-                <th class="border-0">Brand</th>
-                <th class="border-0">Description</th>
-                <th class="border-0">Price</th>
-                <th class="border-0">Category</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
+    <div id="overlay" class="overlay"></div>
+    <div class="container">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        <img src="<?php echo @$user['image_path']; ?>" alt="">
-                    </td>
-                    <td>
-                        <?php echo @$user['name']; ?>
-                    </td>
-                    <td>
-                        <?php echo @$user['brand_name']; ?>
-                    </td>
-                    <td>
-                        <?php echo @$user['description']; ?>
-                    </td>
-                    <td>
-                        <?php echo @$user['price']; ?>
-                    </td>
-                    <td>
-                        <?php echo @$user['category']; ?>
-                    </td>
-
-                    <td>
-                        <a class="edit-link" href="">&#x270E;</a>
-                        <a class="delete-link" href="">&#x1F5D1;</a>
-                        <a href="">&#x2705;</a>
-                    </td>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                    <th>Brand</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($products as $product): ?>
+                    <tr>
+                        <td>
+                            <img class="fixed-image" src="<?php echo @$product['image_path']; ?>" alt="">
+                        </td>
+                        <td>
+                            <?php echo @$product['name']; ?>
+                        </td>
+                        <td>
+                            <?php echo @$product['brand_name']; ?>
+                        </td>
+                        <td>
+                            <?php echo @$product['description']; ?>
+                        </td>
+                        <td>
+                            <?php echo @$product['price']; ?>
+                        </td>
+                        <td>
+                            <?php echo @$product['category']; ?>
+                        </td>
+
+                        <td>
+                            <a class="edit-link" href="editProduct.php?id=<?php echo $product['id']; ?>">&#x270E;</a>
+                            <a class=" delete-link" href="#"
+                                onclick="showConfirmation(<?php echo $product['id']; ?>)">&#x1F5D1;</a>
+                            <?php if ($product['status'] == 1): ?>
+                                <a class="status-link"
+                                    href="activeDeactive.php?id=<?php echo $product['id']; ?>&name='deactive'">&#x2705;
+                                </a>
+                            <?php else: ?>
+                                <a class="status-link"
+                                    href="activeDeactive.php?id=<?php echo $product['id']; ?>&name='active'">&#x26D4;
+                                </a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Confirmation box structure -->
+    <div id="confirmationBox" class="confirmation-box">
+        <span id="closeButton" class="close-button">&times;</span>
+        <h4>Confirm Product Deletion</h4>
+        <p>Are you sure you want to delete this product?</p>
+        <button id="confirmButton" class="btn btn-danger">Yes</button>
+        <button id="cancelButton" class="btn btn-secondary">No</button>
+    </div>
 </body>
 
 </html>

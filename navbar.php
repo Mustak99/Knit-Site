@@ -10,9 +10,9 @@
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 123px">
                         <div class="nav-item dropdown" id="list" >
-                        <a href="" class="nav-item nav-link">Men's Dresses</a>
-                        <a href="" class="nav-item nav-link">Women's Dresses</a>
-                        <a href="" class="nav-item nav-link">Baby's Dresses</a>
+                        <a href="mens.php" class="nav-item nav-link">Men's Dresses</a>
+                        <a href="womens.php" class="nav-item nav-link">Women's Dresses</a>
+                        <a href="childrens.php" class="nav-item nav-link">Children's Dresses</a>
                     </div>
                 </nav>
             </div>

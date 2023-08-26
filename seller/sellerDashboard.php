@@ -2,10 +2,10 @@
 ?>
 <?php
 include_once("commonMethod.php");
-$idVal = totalProduct(connection());
-$order = totalOrder(connection());
-$revenue = totalRevenue(connection());
-$shirt = totalShirt(connection());
+$idVal = totalProduct(connection(), $sellerId);
+$order = totalOrder(connection(), $sellerId);
+$revenue = totalRevenue(connection(), $sellerId);
+$shirt = totalShirt(connection(), $sellerId);
 
 ?>
 
@@ -222,25 +222,25 @@ $shirt = totalShirt(connection());
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($users as $user): ?>
+                                <?php foreach ($products as $product): ?>
                                     <tr>
                                         <td>
-                                            <?php echo @$user['id']; ?>
+                                            <?php echo @$product['id']; ?>
                                         </td>
                                         <td>
-                                            <?php echo @$user['name']; ?>
+                                            <?php echo @$product['name']; ?>
                                         </td>
                                         <td>
-                                            <?php echo @$user['description']; ?>
+                                            <?php echo @$product['description']; ?>
                                         </td>
                                         <td>
-                                            <?php echo @$user['price']; ?>
+                                            <?php echo @$product['price']; ?>
                                         </td>
                                         <td>
-                                            <?php echo @$user['created_at']; ?>
+                                            <?php echo @$product['created_at']; ?>
                                         </td>
                                         <td>
-                                            <?php echo @$user['category_id']; ?>
+                                            <?php echo @$product['category_id']; ?>
                                         </td>
                                         <td>Patricia J. King </td>
                                     </tr>

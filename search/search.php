@@ -34,7 +34,7 @@ include_once '../header.php';
             // Display the profile image in one column
             echo '<div class="col-3 ">';
             echo '<div class="profile-image-container">';
-            echo '<img src="../seller/' . $row['image_path'] . '" >';
+            echo '<img  src="../seller/' . $row['image_path'] . '" >';
             echo '</div>';
             echo '</div>';
             // Display the product details in another column

@@ -82,9 +82,9 @@
           <div class="col-md-3">
             <label for="category" class="form-label">Category:</label>
             <select id="category" name="category"class="form-control"   required>
-              <option value="m">Men's</option>
-              <option value="w">Women's</option>
-              <option value="c">Children</option>
+              <option value="Mens">Men's</option>
+              <option value="Womens">Women's</option>
+              <option value="Childrens">Children's</option>
             </select>
           </div>
           <div class="col-md-3">
