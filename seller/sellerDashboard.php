@@ -3,7 +3,7 @@
 <?php
 include_once("commonMethod.php");
 $idVal = totalProduct(connection(), $sellerId);
-$order = totalOrder(connection(), $sellerId);
+$quantity = totalQuantity(connection(), $sellerId);
 $revenue = totalRevenue(connection(), $sellerId);
 $shirt = totalShirt(connection(), $sellerId);
 
@@ -65,10 +65,10 @@ $shirt = totalShirt(connection(), $sellerId);
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-muted">Order</h5>
+                        <h5 class="text-muted">Total Quantity</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1 text-primary">
-                                <?php echo @$order; ?>
+                                <?php echo @$quantity; ?>
                             </h1>
                         </div>
                     </div>
@@ -79,11 +79,9 @@ $shirt = totalShirt(connection(), $sellerId);
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-muted">Revenue</h5>
+                        <h5 class="text-muted">Available Stock</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1 text-primary">
-                                <?php echo @$revenue; ?>
-                            </h1>
+                            <h1 class="mb-1 text-primary">0</h1>
                         </div>
                     </div>
                 </div>
@@ -93,9 +91,9 @@ $shirt = totalShirt(connection(), $sellerId);
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="text-muted">Growth</h5>
+                        <h5 class="text-muted">Outward Stock</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1 text-primary">+28.45% </h1>
+                            <h1 class="mb-1 text-primary">0</h1>
                         </div>
                     </div>
                 </div>
@@ -115,7 +113,7 @@ $shirt = totalShirt(connection(), $sellerId);
                 <div class="card-body">
                     <canvas id="revenue" width="400" height="150"></canvas>
                 </div>
-                <div class="card-body border-top">
+                <!-- <div class="card-body border-top">
                     <div class="row">
                         <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
                             <h4> Today's Earning: $2,800.30</h4>
@@ -141,7 +139,7 @@ $shirt = totalShirt(connection(), $sellerId);
                                     Week</span></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- ============================================================== -->
@@ -409,14 +407,15 @@ $shirt = totalShirt(connection(), $sellerId);
                     labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Current Week',
-                        data: [12, 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6],
+                        data: ['<?php echo @$idVal ?>'],
+                        // , 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6
                         backgroundColor: "rgba(89, 105, 255,0.5)",
                         borderColor: "rgba(89, 105, 255,0.7)",
                         borderWidth: 2
 
                     }, {
                         label: 'Previous Week',
-                        data: ['<?php echo @$shirt ?>', 29, 5, 5, 2, 3, 10, 2, 29, 5, 5, 2],
+                        data: [20],
                         backgroundColor: "rgba(255, 64, 123,0.5)",
                         borderColor: "rgba(255, 64, 123,0.7)",
                         borderWidth: 2
@@ -479,11 +478,11 @@ $shirt = totalShirt(connection(), $sellerId);
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.7)',
                             'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)',
+                            // 'rgba(255, 206, 86, 0.7)',
+                            // 'rgba(75, 192, 192, 0.7)',
                             'rgba(153, 102, 255, 0.7)'
                         ],
-                        data: ['<?php echo @$shirt ?>', 7, 6, 4, 5]
+                        data: ['<?php echo @$shirt ?>', 7, 6]
                     }]
                 },
                 options: {

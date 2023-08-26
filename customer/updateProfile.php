@@ -6,8 +6,8 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" connectiontent="IE=edge">
+    <meta name="viewport" connectiontent="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -20,45 +20,50 @@ session_start();
 <body class="bg-white text-dark overflow-x-hidden">
 
     <?php
+    // include_once("../Seller./database.php");
+    $host = 'localhost';
+    $dbname = 'knitsite';
+    $username = 'root';
+    $password = '';
 
+    $conn = new mysqli($host, $username, $password, $dbname);
 
-if(isset($_SESSION["SellerUserID"])){
-$sql =" SELECT UserId,UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Address,Pincode,Gender,CreationDate,status FROM customerregistration where UserId=? LIMIT 1";
-if ($stmt = $con->prepare($sql)) {
-    $stmt->bind_param("s",$uid);
-    $uid = $_SESSION["SellerUserID"];
-    $stmt->execute();
-    $res = $stmt->get_result();
-    $cust_array = $res->fetch_assoc();
+    // if (isset($_SESSION["SellerUserID"])) {
+    //     $sql = " SELECT UserId,UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Address,Pincode,Gender,CreationDate,status FROM customerregistration where UserId=? LIMIT 1";
+    //     // if ($stmt = $conn->prepare($sql)) {
+    //     //     $stmt->bind_param("s", $uid);
+    //     //     $uid = $_SESSION["SellerUserID"];
+    //     //     $stmt->execute();
+    //     //     $res = $stmt->get_result();
+    //     //     $cust_array = $res->fetch_assoc();
+    
 
+    if (isset($_SESSION["LoginUserName"])) {
+        $sql = " SELECT UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Password,Address,Pincode,Gender FROM customerregistration where UserName=? LIMIT 1";
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("s", $uname);
+            $uname = $_SESSION["LoginUserName"];
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $cust_array = $res->fetch_assoc();
 
-    // if (isset($_SESSION["LoginUserName"])) {
-    $sql = " SELECT UserFirstName,UserMiddleName,UserLastName,MobileNumber,EmailAddress,UserName,Password,Address,Pincode,Gender FROM customerregistration where UserName=? LIMIT 1";
-    if ($stmt = $con->prepare($sql)) {
-        $stmt->bind_param("s", $uname);
-        $uname = $_SESSION["LoginUserName"];
-        $stmt->execute();
-        $res = $stmt->get_result();
-        $cust_array = $res->fetch_assoc();
-
-        //    echo "<pre>";
-        //    print_r($cust_array);
-        //    echo "</pre>";
-
-        $UserId = "";
-        $UserFirstName = $cust_array["UserFirstName"];
-        $UserMiddleName = $cust_array["UserMiddleName"];
-        $UserLastName = $cust_array["UserLastName"];
-        $MobileNumber = $cust_array["MobileNumber"];
-        $EmailAddress = $cust_array["EmailAddress"];
-        $UserName = $cust_array["UserName"];
-        $Password = $cust_array["Password"];
-        $Address = $cust_array["Address"];
-        $Pincode = $cust_array["Pincode"];
-        $Gender = $cust_array["Gender"];
+            //    echo "<pre>";
+            //    print_r($cust_array);
+            //    echo "</pre>";
+    
+            $UserId = "";
+            $UserFirstName = $cust_array["UserFirstName"];
+            $UserMiddleName = $cust_array["UserMiddleName"];
+            $UserLastName = $cust_array["UserLastName"];
+            $MobileNumber = $cust_array["MobileNumber"];
+            $EmailAddress = $cust_array["EmailAddress"];
+            $UserName = $cust_array["UserName"];
+            $Password = $cust_array["Password"];
+            $Address = $cust_array["Address"];
+            $Pincode = $cust_array["Pincode"];
+            $Gender = $cust_array["Gender"];
+        }
     }
-}}
-
     ?>
 
     <center>
@@ -69,23 +74,21 @@ if ($stmt = $con->prepare($sql)) {
     <form action="updateUser.php" method="post" class="m-5" name="registration-form">
         <div class="gap-2 mx-4" style="display:grid;grid-template-columns:repeat(2 , minmax( 250px , 1fr));">
             <div class="form-input"><label class="form-label">First Name </label><input name="firstname" id="firstname"
-                    type="text" class="form-control" value="<?php echo @$UserFirstName ?>" disabled></div>
+                    type="text" class="form-connectiontrol" value="<?php echo @$UserFirstName ?>" disabled></div>
             <div class="form-input"><label class="form-label">Middle Name </label><input id="mname" name="middlename"
-                    type="text" class="form-control" value="<?php echo @$UserMiddleName ?>" disabled></div>
+                    type="text" class="form-connectiontrol" value="<?php echo @$UserMiddleName ?>" disabled></div>
             <div class="form-input"><label class="form-label">Last Name </label><input id="lname" name="lastname"
-                    type="text" class="form-control" value="<?php echo @$UserLastName ?>" disabled></div>
+                    type="text" class="form-connectiontrol" value="<?php echo @$UserLastName ?>" disabled></div>
             <div class="form-input"><label class="form-label">Mobile Number </label><input id="cno" name="mobileno"
-                    type="text" class="form-control" value="<?php echo @$MobileNumber ?>" disabled></div>
+                    type="text" class="form-connectiontrol" value="<?php echo @$MobileNumber ?>" disabled></div>
             <div class="form-input"><label class="form-label">Username </label><input id="email" name="username"
-                    type="text" class="form-control" value="<?php echo @$UserName ?>" disabled></div>
-            <div class="form-input"><label class="form-label">Password </label><input id="" name="password" type="text"
-                    class="form-control" value="<?php echo @$Password ?>" disabled></div>
+                    type="text" class="form-connectiontrol" value="<?php echo @$UserName ?>" disabled></div>
             <div class="form-input"><label class="form-label">Email Address </label><input id="email" name="email"
-                    type="email" class="form-control" value="<?php echo @$EmailAddress ?>" disabled></div>
+                    type="email" class="form-connectiontrol" value="<?php echo @$EmailAddress ?>" disabled></div>
             <div class="form-input"><label class="form-label">pincode </label><input id="zip" name="pincode" type="text"
-                    class="form-control" value="<?php echo @$Pincode ?>" disabled></div>
+                    class="form-connectiontrol" value="<?php echo @$Pincode ?>" disabled></div>
             <div class="form-input"><label class="form-label"> Address</label><textarea id="address" name="address"
-                    type="text" class="form-control" value="" disabled><?php echo @$Address ?></textarea>
+                    type="text" class="form-connectiontrol" value="" disabled><?php echo @$Address ?></textarea>
 
                 <!-- gets attached through js -->
             </div>
@@ -110,13 +113,14 @@ if ($stmt = $con->prepare($sql)) {
 
             </div>
         </div>
-        <div class="d-flex justify-content-center align-items-center flex-column mt-3">
+        <div class="d-flex justify-connectiontent-center align-items-center flex-column mt-3">
 
-            <div class="form-controls pt-2 pb-5">
+            <div class="form-connectiontrols pt-2 pb-5">
                 <a href="HomePage.php" class="btn btn-danger">Back</a>
                 <button type="button" id="updateBtn" class="btn btn-primary">Update</button>
                 <button type="submit" id="saveBtn" class="btn btn-success" style="display: none;">Save</button>
-                <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                <button type="button" id="cancelBtn" class="btn btn-seconnectiondary"
+                    style="display: none;">Cancel</button>
             </div>
         </div>
 
@@ -148,6 +152,7 @@ if ($stmt = $con->prepare($sql)) {
             });
         });
     </script>
+
 </body>
 
 </html>

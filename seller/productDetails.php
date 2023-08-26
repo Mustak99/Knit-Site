@@ -49,10 +49,11 @@ include_once("commonMethod.php");
                 <tr>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Actions</th>
                     <th>Brand</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -77,7 +78,9 @@ include_once("commonMethod.php");
                         <td>
                             <?php echo @$product['category']; ?>
                         </td>
-
+                        <td>
+                            <?php echo @$product['quantity']; ?>
+                        </td>
                         <td>
                             <a class="edit-link" href="editProduct.php?id=<?php echo $product['id']; ?>">&#x270E;</a>
                             <a class=" delete-link" href="#"
