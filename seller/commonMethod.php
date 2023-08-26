@@ -20,16 +20,16 @@ function totalProduct($con, $sellerId)
     }
 }
 
-//fetch total order
+//fetch total quantity
 
-function totalOrder($con, $sellerId)
+function totalQuantity($con, $sellerId)
 {
-    $query = "SELECT count(id) as id FROM products where SID=$sellerId";
+    $query = "SELECT sum(quantity) as quantity FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $id = $row['id'];
-        return $id;
+        $quantity = $row['quantity'];
+        return $quantity;
     }
 }
 
@@ -72,7 +72,7 @@ function totalShirt($con, $sellerId)
     }
 }
 
-// sold products
+// products details
 
 $query = "SELECT * FROM products where SID=$sellerId";
 $result = mysqli_query($con, $query);
@@ -85,5 +85,44 @@ $products = array();
 
 while ($row = mysqli_fetch_assoc($result)) {
     $products[] = $row;
+}
+
+//fetch total mens 
+
+function totalmen($con, $sellerId)
+{
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId AND category='Mens'";
+    $result = mysqli_query($con, $query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $totalmens = $row['id'];
+        return $totalmens;
+    }
+}
+
+//fetch total mens 
+
+function totalwomen($con, $sellerId)
+{
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId AND category='Womens'";
+    $result = mysqli_query($con, $query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $totalwomens = $row['id'];
+        return $totalwomens;
+    }
+}
+
+//fetch total mens 
+
+function totalchildren($con, $sellerId)
+{
+    $query = "SELECT count(id) as id FROM products where SID=$sellerId AND category='Childrens'";
+    $result = mysqli_query($con, $query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $totalchildrens = $row['id'];
+        return $totalchildrens;
+    }
 }
 ?>

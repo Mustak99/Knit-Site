@@ -70,7 +70,7 @@
 
   <?php
   $con = new mysqli("localhost", "root", "", "knitsite") or die();
-  $sql = " SELECT name, brand_name, category, price, description FROM products where id=? LIMIT 1";
+  $sql = " SELECT name, brand_name, category, price, quantity, description FROM products where id=? LIMIT 1";
   if ($stmt = $con->prepare($sql)) {
     $id = $_GET['id'];
     $stmt->bind_param("i", $id);
@@ -87,6 +87,7 @@
     $brand_name = $product_array["brand_name"];
     $category = $product_array["category"];
     $price = $product_array["price"];
+    $quantity = $product_array["quantity"];
     $description = $product_array["description"];
   }
   ?>
@@ -121,6 +122,13 @@
                 <label for="price" class="form-label">Price:</label>
                 <input type="number" id="price" name="price" step="0.01" class="form-control"
                   value="<?php echo @$price ?>">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" class="form-control"
+                  value="<?php echo @$quantity ?>">
               </div>
             </div>
             <div class="row mb-3">
