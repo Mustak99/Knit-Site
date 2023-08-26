@@ -3,20 +3,10 @@ include_once("database.php");
 $con = connection();
 $id = $_GET['id'];
 $name = $_GET['name'];
-mysqli_query($con, "SET FOREIGN_KEY_CHECKS = 0");
-if ($name == 'active') {
-    $query = "UPDATE products SET  status=0 WHERE id = $id";
-    if (mysqli_query($con, $query)) {
-        header("location:productDetails.php");
-    } else {
-        echo "Error while activating a product: " . mysqli_error($conn);
-    }
-} else {
-    $query = "UPDATE products SET  status=1 WHERE id = $id";
-    if (mysqli_query($con, $query)) {
-        header("location:productDetails.php");
-    } else {
-        echo "Error while activating a product: " . mysqli_error($conn);
-    }
-}
+$sql = "UPDATE products SET status = CASE WHEN status = 0 THEN 1 ELSE 0 END WHERE id = ?";
+$stmt = $con->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$stmt->close();
+header("location:productDetails.php")
 ?>

@@ -32,9 +32,9 @@ include_once '../header.php';
             echo '<div class="container shadow p-3 mb-2 bg-white rounded">';
             echo '<div class="row">';
             // Display the profile image in one column
-            echo '<div class="col-3 ">';
+            echo '<div class="col-3 " style="overflow:hidden; height:100%;">';
             echo '<div class="profile-image-container">';
-            echo '<img  src="../seller/' . $row['image_path'] . '" >';
+            echo '<img style="height:200px"  src="../seller/' . $row['image_path'] . '" >';
             echo '</div>';
             echo '</div>';
             // Display the product details in another column

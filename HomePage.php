@@ -161,7 +161,7 @@ include_once("commonMethod.php");
                                         alt="Product Image">
                                 </div>
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3" style=" display:flex 0;"  >
-                                   <div style="display: flex;position: absolute;bottom:10%;border:solid 1px ;width:100%;justify-content:center;">
+                                   <div style="display: flex;position: absolute;bottom:10%;width:100%;justify-content:center;">
                                 <h6 class="text-truncate mb-3">Colorful Stylish</h6>
                                     <div class="d-flex justify-content-center">
                                         <h6>123</h6>
@@ -171,8 +171,7 @@ include_once("commonMethod.php");
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
                                     <a href="" class="btn btn-sm text-dark p-0"><i
-                                            class="fas fa-eye text-primary mr-1"></i>View
-                                        Detail</a>
+                                            class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                                     <a href="" class="btn btn-sm text-dark p-0"><i
                                             class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                                 </div>

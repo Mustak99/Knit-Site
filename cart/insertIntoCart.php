@@ -26,6 +26,6 @@ session_start();
     $conn->close();
 
 } else {
-    echo "Product ID not specified.";
+
 }
  ?>
