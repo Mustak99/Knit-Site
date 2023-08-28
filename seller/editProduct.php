@@ -70,7 +70,7 @@
 
   <?php
   $con = new mysqli("localhost", "root", "", "knitsite") or die();
-  $sql = " SELECT name, brand_name, category, price, quantity, description FROM products where id=? LIMIT 1";
+  $sql = " SELECT name, brand_name, category, price, quantity, size, description FROM products where id=? LIMIT 1";
   if ($stmt = $con->prepare($sql)) {
     $id = $_GET['id'];
     $stmt->bind_param("i", $id);
@@ -88,6 +88,7 @@
     $category = $product_array["category"];
     $price = $product_array["price"];
     $quantity = $product_array["quantity"];
+    $size = $product_array["size"];
     $description = $product_array["description"];
   }
   ?>
@@ -130,6 +131,26 @@
                 <input type="number" id="quantity" name="quantity" class="form-control"
                   value="<?php echo @$quantity ?>">
               </div>
+              <div class="col-md-3">
+                <label for="quantity" class="form-label">Size:</label> <br>
+                <input type="radio" id="size" name="size" class="" value="XS" <?php if ($size === 'XS')
+                  echo 'checked'; ?>
+                  required> XS
+                <input type="radio" id="size" name="size" class="" value="S" <?php if ($size === 'S')
+                  echo 'checked'; ?>
+                  required> S
+                <input type="radio" id="size" name="size" class="" value="M" <?php if ($size === 'M')
+                  echo 'checked'; ?>
+                  required> M
+                <input type="radio" id="size" name="size" class="" value="L" <?php if ($size === 'L')
+                  echo 'checked'; ?>
+                  required> L
+                <input type="radio" id="size" name="size" class="" value="XL" <?php if ($size === 'XL')
+                  echo 'checked'; ?>
+                  required> XL
+                <input type="radio" id="size" name="size" class="" value="XXL" <?php if ($size === 'XXL')
+                  echo 'checked'; ?> required> XXL
+              </div>
             </div>
             <div class="row mb-3">
             </div>
@@ -138,11 +159,11 @@
               <textarea id="description" name="description" class="form-control"><?php echo $description; ?></textarea>
             </div></textarea>
             <div class="text-center">
-          <a href="productDetails.php?id=<?php echo $id; ?>" class="btn btn-secondary">Back</a>
-          <button type="submit" class="btn btn-success">Update</button>
+              <a href="productDetails.php?id=<?php echo $id; ?>" class="btn btn-secondary">Back</a>
+              <button type="submit" class="btn btn-success">Update</button>
+            </div>
         </div>
-          </div>
-      
+
   </form>
   </div>
   </div>

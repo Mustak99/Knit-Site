@@ -102,11 +102,18 @@
             </div>
           </div>
           <div class="row mb-3">
-          </div>
-          <div class="row mb-3">
             <div class="col-md-3">
               <label for="quantity" class="form-label">Quantity:</label>
               <input type="number" id="quantity" name="quantity" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+              <label for="quantity" class="form-label">Size:</label> <br>
+              <input type="radio" id="size" name="size" class="" value="XS" required checked> XS
+              <input type="radio" id="size" name="size" class="" value="S" required> S
+              <input type="radio" id="size" name="size" class="" value="M" required> M
+              <input type="radio" id="size" name="size" class="" value="L" required> L
+              <input type="radio" id="size" name="size" class="" value="XL" required> XL
+              <input type="radio" id="size" name="size" class="" value="XXL" required> XXL
             </div>
           </div>
           <div class="mb-3">

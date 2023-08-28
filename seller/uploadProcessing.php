@@ -7,6 +7,7 @@ $brand = $_POST["brand"];
 $category = $_POST["category"];
 $image = $_FILES["image"];
 $quantity = $_POST["quantity"];
+$size = $_POST["size"];
 $sid = $_SESSION["SellerUserID"];
 
 
@@ -42,11 +43,11 @@ if ($image["error"] === UPLOAD_ERR_OK) {
     }
 
 
-    $sql = "INSERT INTO products (name, description, price, quantity, brand_name, category, image_path, SID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO products (name, description, price, quantity, size, brand_name, category, image_path, SID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Bind the parameters to the prepared statement
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("ssdsssss", $Name, $description, $price, $quantity, $brand, $category, $targetPath, $sid);
+    $stmt->bind_param("ssdssssss", $Name, $description, $price, $quantity, $size, $brand, $category, $targetPath, $sid);
     $stmt->execute();
 
     // Check if the insertion was successful
