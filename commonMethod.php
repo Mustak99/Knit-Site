@@ -84,7 +84,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // men's image
 
-$query = "SELECT image_path FROM products WHERE category='Mens'";
+$query = "SELECT image_path FROM products WHERE category='Mens' AND status=1";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful
@@ -99,7 +99,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // women's image
 
-$query = "SELECT image_path FROM products WHERE category='Womens'";
+$query = "SELECT image_path FROM products WHERE category='Womens' AND status=1";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful
@@ -114,7 +114,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // children's image
 
-$query = "SELECT image_path FROM products WHERE category='Childrens'";
+$query = "SELECT image_path FROM products WHERE category='Childrens' AND status=1";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful

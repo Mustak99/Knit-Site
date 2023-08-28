@@ -81,7 +81,7 @@ $shirt = totalShirt(connection(), $sellerId);
                     <div class="card-body">
                         <h5 class="text-muted">Available Stock</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1 text-primary">0</h1>
+                            <h1 class="mb-1 text-primary"><?php echo @$quantity ?></h1>
                         </div>
                     </div>
                 </div>
@@ -407,8 +407,8 @@ $shirt = totalShirt(connection(), $sellerId);
                     labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                     datasets: [{
                         label: 'Current Week',
-                        data: ['<?php echo @$idVal ?>'],
-                        // , 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6
+                        data: ['<?php echo @$idVal ?>', 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6],
+                        
                         backgroundColor: "rgba(89, 105, 255,0.5)",
                         borderColor: "rgba(89, 105, 255,0.7)",
                         borderWidth: 2

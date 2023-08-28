@@ -100,7 +100,7 @@ function totalmen($con, $sellerId)
     }
 }
 
-//fetch total mens 
+//fetch total women
 
 function totalwomen($con, $sellerId)
 {
@@ -113,7 +113,7 @@ function totalwomen($con, $sellerId)
     }
 }
 
-//fetch total mens 
+//fetch total children 
 
 function totalchildren($con, $sellerId)
 {

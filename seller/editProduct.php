@@ -137,11 +137,12 @@
               <label for="description" class="form-label">Description:</label>
               <textarea id="description" name="description" class="form-control"><?php echo $description; ?></textarea>
             </div></textarea>
-        </div>
-        <div class="text-center">
+            <div class="text-center">
           <a href="productDetails.php?id=<?php echo $id; ?>" class="btn btn-secondary">Back</a>
           <button type="submit" class="btn btn-success">Update</button>
         </div>
+          </div>
+      
   </form>
   </div>
   </div>
