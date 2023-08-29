@@ -6,7 +6,7 @@ $idVal = totalProduct(connection(), $sellerId);
 $quantity = totalQuantity(connection(), $sellerId);
 $revenue = totalRevenue(connection(), $sellerId);
 $shirt = totalShirt(connection(), $sellerId);
-
+$products = fetchProductsWithSizes(connection(), $sellerId);
 ?>
 
 <!doctype html>
@@ -81,7 +81,9 @@ $shirt = totalShirt(connection(), $sellerId);
                     <div class="card-body">
                         <h5 class="text-muted">Available Stock</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1 text-primary"><?php echo @$quantity ?></h1>
+                            <h1 class="mb-1 text-primary">
+                                <?php echo @$quantity ?>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -210,43 +212,48 @@ $shirt = totalShirt(connection(), $sellerId);
                         <table class="table">
                             <thead class="bg-light">
                                 <tr class="border-0">
-                                    <th class="border-0">ID</th>
                                     <th class="border-0">Product Name</th>
                                     <th class="border-0">Description</th>
                                     <th class="border-0">Price</th>
                                     <th class="border-0">Order Date</th>
                                     <th class="border-0">CategoryID</th>
-                                    <th class="border-0">Customer</th>
+                                    <th class="border-0">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($products as $product): ?>
+                                <?php if (!empty($products)): ?>
+                                    <?php foreach ($products as $product): ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo @$product['name']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['description']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['price']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['created_at']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['category_id']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['quantity']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
                                     <tr>
-                                        <td>
-                                            <?php echo @$product['id']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo @$product['name']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo @$product['description']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo @$product['price']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo @$product['created_at']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo @$product['category_id']; ?>
-                                        </td>
-                                        <td>Patricia J. King </td>
+                                        <td colspan="7">No products available.</td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -408,7 +415,7 @@ $shirt = totalShirt(connection(), $sellerId);
                     datasets: [{
                         label: 'Current Week',
                         data: ['<?php echo @$idVal ?>', 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6],
-                        
+
                         backgroundColor: "rgba(89, 105, 255,0.5)",
                         borderColor: "rgba(89, 105, 255,0.7)",
                         borderWidth: 2

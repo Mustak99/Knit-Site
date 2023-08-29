@@ -74,17 +74,37 @@ function totalShirt($con, $sellerId)
 
 // products details
 
-$query = "SELECT * FROM products where SID=$sellerId";
-$result = mysqli_query($con, $query);
+function fetchProductsWithSizes($conn, $sellerId)
+{
+    $products = array();
+    $sql = "SELECT p.id, p.name, p.brand_name, p.description, p.price, p.category, p.quantity, p.image_path, p.status, GROUP_CONCAT(ps.size) AS sizes
+        FROM products p
+        LEFT JOIN product_size ps ON p.id = ps.product_id
+        WHERE p.SID = $sellerId
+        GROUP BY p.id
+        ORDER BY p.id DESC";
 
-// Check if the query was successful
-if (!$result) {
-    die("Query failed: " . mysqli_error($con));
-}
-$products = array();
+    $result = $conn->query($sql);
 
-while ($row = mysqli_fetch_assoc($result)) {
-    $products[] = $row;
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $product = array(
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'brand_name' => $row['brand_name'],
+                'description' => $row['description'],
+                'price' => $row['price'],
+                'category' => $row['category'],
+                'quantity' => $row['quantity'],
+                'status' => $row['status'],
+                'image_path' => $row['image_path'],
+                'sizes' => $row['sizes']
+            );
+            $products[] = $product;
+        }
+    }
+
+    return $products;
 }
 
 //fetch total mens 

@@ -2,6 +2,7 @@
 <?php
 include_once("commonMethod.php");
 // $idVal = totalProduct(connection());
+$products = fetchProductsWithSizes(connection(), $sellerId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,6 +54,7 @@ include_once("commonMethod.php");
                     <th>Description</th>
                     <th>Price</th>
                     <th>Category</th>
+                    <th>Size</th>
                     <th>Quantity</th>
                     <th>Actions</th>
                 </tr>
@@ -77,6 +79,9 @@ include_once("commonMethod.php");
                         </td>
                         <td>
                             <?php echo @$product['category']; ?>
+                        </td>
+                        <td>
+                            <?php echo @$product['sizes']; ?>
                         </td>
                         <td>
                             <?php echo @$product['quantity']; ?>
