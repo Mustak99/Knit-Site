@@ -46,7 +46,7 @@ function totalRevenue($con, $sellerId)
     }
 }
 
-//fetch total 
+//fetch total product
 
 function total($con, $sellerId)
 {
