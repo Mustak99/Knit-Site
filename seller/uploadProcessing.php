@@ -7,6 +7,7 @@ $brand = $_POST["brand"];
 $category = $_POST["category"];
 $image = $_FILES["image"];
 $quantity = $_POST["quantity"];
+$sizes = $_POST["size"];
 $sid = $_SESSION["SellerUserID"];
 
 
@@ -42,6 +43,7 @@ if ($image["error"] === UPLOAD_ERR_OK) {
     }
 
 
+
     $sql = "INSERT INTO products (name, description, price, quantity, brand_name, category, image_path, SID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Bind the parameters to the prepared statement
@@ -51,10 +53,22 @@ if ($image["error"] === UPLOAD_ERR_OK) {
 
     // Check if the insertion was successful
     if ($stmt->affected_rows > 0) {
-      echo '<script>';
-      echo '  alert("Product Added Successfully!");';
-      echo 'window.location.href = "addProduct.php";'; // Redirect after showing the alert
-      echo '</script>';
+      $product_id = $stmt->insert_id; // Get the ID of the inserted product
+
+      // Now insert sizes into the product_size table
+      $sizeInsertSql = "INSERT INTO product_size (product_id, size) VALUES (?, ?)";
+      $sizeStmt = $mysqli->prepare($sizeInsertSql);
+      foreach ($sizes as $size) {
+        $sizeStmt->bind_param("is", $product_id, $size);
+        $sizeStmt->execute();
+      }
+
+      $sizeStmt->close();
+    }
+
+    // Check if the insertion was successful
+    if ($stmt->affected_rows > 0) {
+      header("Location: addProduct.php?success=true");
     } else {
       echo "Error uploading product.";
     }

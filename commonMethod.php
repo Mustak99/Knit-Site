@@ -129,7 +129,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // select latest mens image
 
-$query = "SELECT image_path FROM products WHERE category='Mens' ORDER BY id DESC LIMIT 1";
+$query = "SELECT image_path FROM products WHERE status=1 AND category='Mens' ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful
@@ -144,7 +144,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // select latest womens image
 
-$query = "SELECT image_path FROM products WHERE category='Womens' ORDER BY id DESC LIMIT 1";
+$query = "SELECT image_path FROM products WHERE status=1 AND category='Womens' ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful
@@ -159,7 +159,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // select latest childrens image
 
-$query = "SELECT image_path FROM products WHERE category='Childrens' ORDER BY id DESC LIMIT 1";
+$query = "SELECT image_path FROM products WHERE status=1 AND category='Childrens' ORDER BY id DESC LIMIT 1";
 $result = mysqli_query($con, $query);
 
 // Check if the query was successful

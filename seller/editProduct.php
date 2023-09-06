@@ -70,25 +70,34 @@
 
   <?php
   $con = new mysqli("localhost", "root", "", "knitsite") or die();
-  $sql = " SELECT name, brand_name, category, price, quantity, description FROM products where id=? LIMIT 1";
-  if ($stmt = $con->prepare($sql)) {
-    $id = $_GET['id'];
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    $product_array = $res->fetch_assoc();
+  $id = $_GET['id'];
+  $productSql = "SELECT name, brand_name, category, price, quantity, description FROM products WHERE id = ? LIMIT 1";
+  if ($productStmt = $con->prepare($productSql)) {
+    $productStmt->bind_param("i", $id);
+    $productStmt->execute();
+    $productRes = $productStmt->get_result();
+    $productData = $productRes->fetch_assoc();
 
-    // echo "<pre>";
-    // print_r($product_array);
-    // echo "</pre>";
-  
+    // Fetch sizes from the product_size table
+    $sizeSql = "SELECT size FROM product_size WHERE product_id = ?";
+    if ($sizeStmt = $con->prepare($sizeSql)) {
+      $sizeStmt->bind_param("i", $id);
+      $sizeStmt->execute();
+      $sizeRes = $sizeStmt->get_result();
+      $sizes = array();
+      while ($sizeRow = $sizeRes->fetch_assoc()) {
+        $sizes[] = $sizeRow['size'];
+      }
+      $sizeStmt->close();
+    }
+
     $Id = "";
-    $name = $product_array["name"];
-    $brand_name = $product_array["brand_name"];
-    $category = $product_array["category"];
-    $price = $product_array["price"];
-    $quantity = $product_array["quantity"];
-    $description = $product_array["description"];
+    $name = $productData["name"];
+    $brand_name = $productData["brand_name"];
+    $category = $productData["category"];
+    $price = $productData["price"];
+    $quantity = $productData["quantity"];
+    $description = $productData["description"];
   }
   ?>
   <form action="editProductProcess.php?id=<?php echo $id; ?>" method="POST">
@@ -130,6 +139,17 @@
                 <input type="number" id="quantity" name="quantity" class="form-control"
                   value="<?php echo @$quantity ?>">
               </div>
+              <div class="col-md-3">
+                <label for="quantity" class="form-label">Size:</label> <br>
+                <?php
+                $availableSizes = array("XS", "S", "M", "L", "XL", "XXL");
+                foreach ($availableSizes as $sizeOption) {
+                  $checked = in_array($sizeOption, $sizes) ? 'checked' : '';
+                  echo '<input type="checkbox" id="size" name="size[]" class="" value="' . $sizeOption . '" ' . $checked . '> ' . $sizeOption;
+                }
+                ?>
+              </div>
+
             </div>
             <div class="row mb-3">
             </div>
@@ -138,11 +158,11 @@
               <textarea id="description" name="description" class="form-control"><?php echo $description; ?></textarea>
             </div></textarea>
             <div class="text-center">
-          <a href="productDetails.php?id=<?php echo $id; ?>" class="btn btn-secondary">Back</a>
-          <button type="submit" class="btn btn-success">Update</button>
+              <a href="productDetails.php?id=<?php echo $id; ?>" class="btn btn-secondary">Back</a>
+              <button type="submit" class="btn btn-success">Update</button>
+            </div>
         </div>
-          </div>
-      
+
   </form>
   </div>
   </div>

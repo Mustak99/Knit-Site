@@ -76,7 +76,14 @@
   <div class="row">
     <div class="col-md-12">
       <div class="p-4 shadow rounded">
-        <h2 class="text-center mb-4">Upload Product</h2>
+        <?php
+        if (isset($_GET["success"]) && $_GET["success"] === "true") {
+          echo '<div class="alert alert-success" role="alert">
+                Product added successfully!
+              </div>';
+        }
+        ?>
+        <h2 class="text-center mb-4">Add Product</h2>
         <form action="uploadProcessing.php" method="POST" enctype="multipart/form-data"
           onsubmit="return validateForm()">
           <div class="row mb-3">
@@ -102,11 +109,18 @@
             </div>
           </div>
           <div class="row mb-3">
-          </div>
-          <div class="row mb-3">
             <div class="col-md-3">
               <label for="quantity" class="form-label">Quantity:</label>
               <input type="number" id="quantity" name="quantity" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+              <label for="quantity" class="form-label">Size:</label> <br>
+              <input type="checkbox" id="size" name="size[]" class="" value="XS"> XS
+              <input type="checkbox" id="size" name="size[]" class="" value="S"> S
+              <input type="checkbox" id="size" name="size[]" class="" value="M"> M
+              <input type="checkbox" id="size" name="size[]" class="" value="L"> L
+              <input type="checkbox" id="size" name="size[]" class="" value="XL"> XL
+              <input type="checkbox" id="size" name="size[]" class="" value="XXL"> XXL
             </div>
           </div>
           <div class="mb-3">
@@ -118,7 +132,7 @@
             <input type="file" id="image" name="image" accept=".jpg, .jpeg" class="form-control" required>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-success">Upload</button>
+            <button type="submit" class="btn btn-success">Add Product</button>
           </div>
         </form>
       </div>
