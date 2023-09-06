@@ -17,7 +17,7 @@
     <main class="container my-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="product-image.jpg" alt="Product Image" class="img-fluid">
+                <img src="product-image.jpg" alt="Product Image" class="img-fluid" >
             </div>
             <div class="col-md-6">
                 <h1>Product Title</h1>
@@ -45,17 +45,15 @@
             <div class="col-md-12">
                 <h2>Related Products</h2>
                 <div class="row">
-                    <!-- Amazon-like related products content goes here -->
+
                 </div>
             </div>
         </div>
     </section>
 
     <footer class="bg-dark text-light text-center py-3">
-        <!-- Amazon-like footer content goes here -->
     </footer>
 
-    <!-- Include Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

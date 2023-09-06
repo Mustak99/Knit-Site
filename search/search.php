@@ -1,10 +1,13 @@
-<?php include_once '../head.php';
+<?php
+$search=1;
+ include_once '../head.php';
 include_once '../header.php';
 ?>
+
 <div id="search-results">
 
     <?php
-    // Establish a database connection
+    $search=1;
     $host = 'localhost';
     $dbname = 'knitsite';
     $username = 'root';
@@ -16,7 +19,7 @@ include_once '../header.php';
     }
 
     // Retrieve search query
-    $query = trim($_GET["name"]);
+    @$query = trim($_GET["name"]);
 
     // Perform search query
     $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
@@ -63,7 +66,7 @@ include_once '../header.php';
         echo "<p>No results found.</p>";
     }
 
-    // Close the database connection
+
     $conn->close();
 
     include_once'../footer.php';

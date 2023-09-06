@@ -27,7 +27,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="HomePage.php" class="nav-item nav-link active">Home</a>
-                            <a  href="cart/cart.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "none";} else { echo "block";}?>">Cart</a>
+                            <a  href="cart/cart.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["CustomerUserID"])||isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Cart</a>
                             <a  href="dashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
                             <a  href="seller/sellerDashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
                             <a class="nav-item nav-link">Contact</a>
