@@ -1,5 +1,5 @@
-<?php include_once 'header.php';
-include_once("commonMethod.php");
+<?php include_once '../header.php';
+include_once("../commonMethod.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +23,10 @@ include_once("commonMethod.php");
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <!-- Jquery -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -53,7 +53,7 @@ include_once("commonMethod.php");
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="card product-item border-0 mb-4">
                         <div class="card-header product-img position-relative bg-transparent border p-0">
-                            <img src="./seller/<?php echo $women['image_path']; ?>" class="img-fluid" alt="Product Image">
+                            <img src="../seller/<?php echo $women['image_path']; ?>" class="img-fluid" alt="Product Image">
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
@@ -75,7 +75,7 @@ include_once("commonMethod.php");
         </div>
     </div>
     <!-- Products End -->
-    <?php include_once 'footer.php' ?>
+    <?php include_once '../footer.php' ?>
 
 </body>
 

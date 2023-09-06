@@ -142,7 +142,7 @@
               <div class="col-md-3">
                 <label for="quantity" class="form-label">Size:</label> <br>
                 <?php
-                $availableSizes = array("XS", "S", "M", "L", "XL", "XXL");
+                $availableSizes = array("XS  ", "S  ", "M  ", "L  ", "XL  ", "XXL ");
                 foreach ($availableSizes as $sizeOption) {
                   $checked = in_array($sizeOption, $sizes) ? 'checked' : '';
                   echo '<input type="checkbox" id="size" name="size[]" class="" value="' . $sizeOption . '" ' . $checked . '> ' . $sizeOption;
