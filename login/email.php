@@ -16,12 +16,6 @@ class VerificationCode
 
     public function __construct($receiver, $code)
     {
-        /**
-         * Your email id  
-         * For example : johndoe@gmail.com
-         * contact@johndoe.com
-         * 
-         */
         $this->sender = "knitsiteb7@gmail.com";
         $this->password = "cluzaejgwaocjujl";
         $this->receiver = $receiver;
