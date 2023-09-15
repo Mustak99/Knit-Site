@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2023 at 11:53 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Sep 15, 2023 at 09:17 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,6 +56,17 @@ CREATE TABLE `cart` (
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
+(0, 13, 37, 3, 2000.00, '2023-09-15 07:14:50'),
+(0, 13, 38, 3, 1500.00, '2023-09-15 07:14:53'),
+(0, 13, 39, 3, 2000.00, '2023-09-15 07:14:55'),
+(0, 13, 42, 3, 1000.00, '2023-09-15 07:14:59'),
+(0, 13, 48, 1, 2000.00, '2023-09-15 07:16:00');
 
 -- --------------------------------------------------------
 
@@ -141,23 +152,23 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `category`, `image_path`, `add_date`, `status`, `SID`, `quantity`) VALUES
-(37, 'T Shirt', 'Blue', '2000.00', 'Zara', 'Childrens', 'uploads/64e624fd1f8d6.jpg', '2023-08-23 15:25:49', 1, 19, 100),
-(38, 'Tshirt', 'Printed\r\n', '1500.00', 'Zara', 'Childrens', 'uploads/64e6252620e9d.jpg', '2023-08-23 15:26:30', 1, 19, 10),
-(39, 'Jacket', 'Jeans Jacket', '2000.00', 'American', 'Childrens', 'uploads/64e6255f9c5e1.jpg', '2023-08-23 15:27:27', 1, 19, 20),
-(42, 'T Shirt', 'White', '1000.00', 'Zudio', 'Childrens', 'uploads/64e6276d991af.jpg', '2023-08-23 15:36:13', 1, 19, 30),
-(48, 'T Shirt', 'White', '2000.00', 'Zudio', 'Womens', 'uploads/64e62ad47c95e.jpg', '2023-08-23 15:50:44', 1, 19, 40),
-(60, 'Coat', 'Black', '2000.00', 'Zara', 'Womens', 'uploads/64e639dec5441.jpg', '2023-08-23 16:54:54', 1, 19, 100),
-(61, 'Top', 'Black', '1000.00', 'Zudio', 'Womens', 'uploads/64e63a7a2d94a.jpg', '2023-08-23 16:57:30', 1, 19, 10),
-(62, 'Top', 'Grey', '2000.00', 'Zudio', 'Womens', 'uploads/64e63b2a4e7e9.jpg', '2023-08-23 17:00:26', 1, 19, 50),
-(65, 'Shirt', 'White', '1000.00', 'Zudio', 'Mens', 'uploads/64e63ccb2c958.jpg', '2023-08-23 17:07:23', 1, 19, 100),
-(66, 'Suit', 'Black', '4000.00', 'Raymond', 'Mens', 'uploads/64e63cf2e72a9.jpg', '2023-08-23 17:08:02', 1, 19, 10),
-(67, 'Jacket', 'Leather', '2000.00', 'Zara', 'Mens', 'uploads/64e63d225bbf0.jpg', '2023-08-23 17:08:50', 1, 19, 100),
-(68, 'T Shirt', 'White', '1500.00', 'Zudio', 'Mens', 'uploads/64e63dc71d9b4.jpg', '2023-08-23 17:11:35', 1, 19, 20),
-(82, 'recffvf', 'frtv', '12.00', 'vfr', 'Mens', 'uploads/64ec2cce82575.jpg', '2023-08-28 05:12:46', 1, 19, 0),
-(83, 'rgfvdf', 'cvdfv', '12.00', 'fdv', 'Mens', 'uploads/64ec2d2fcec7f.jpg', '2023-08-28 05:14:23', 1, 19, 12),
-(84, 'shirt', 'blak', '1000.00', 'westside', 'Mens', 'uploads/64ec2df5ab7a3.jpg', '2023-08-28 05:17:41', 1, 19, 10),
-(85, 'Shirt ', 'Black', '1000.00', 'Pantaloons', 'Mens', 'uploads/64ec340ac4641.jpg', '2023-08-28 05:43:38', 1, 19, 100),
-(86, 'Jacket', 'Blue', '1000.00', 'Zudio', 'Mens', 'uploads/64ec36a22472e.jpg', '2023-08-28 05:54:42', 1, 19, 100);
+(37, 'T Shirt', 'Blue', 2000.00, 'Zara', 'Childrens', 'uploads/64e624fd1f8d6.jpg', '2023-08-23 15:25:49', 1, 19, 100),
+(38, 'Tshirt', 'Printed\r\n', 1500.00, 'Zara', 'Childrens', 'uploads/64e6252620e9d.jpg', '2023-08-23 15:26:30', 1, 19, 10),
+(39, 'Jacket', 'Jeans Jacket', 2000.00, 'American', 'Childrens', 'uploads/64e6255f9c5e1.jpg', '2023-08-23 15:27:27', 1, 19, 20),
+(42, 'T Shirt', 'White', 1000.00, 'Zudio', 'Childrens', 'uploads/64e6276d991af.jpg', '2023-08-23 15:36:13', 1, 19, 30),
+(48, 'T Shirt', 'White', 2000.00, 'Zudio', 'Womens', 'uploads/64e62ad47c95e.jpg', '2023-08-23 15:50:44', 1, 19, 40),
+(60, 'Coat', 'Black', 2000.00, 'Zara', 'Womens', 'uploads/64e639dec5441.jpg', '2023-08-23 16:54:54', 1, 19, 100),
+(61, 'Top', 'Black', 1000.00, 'Zudio', 'Womens', 'uploads/64e63a7a2d94a.jpg', '2023-08-23 16:57:30', 1, 19, 10),
+(62, 'Top', 'Grey', 2000.00, 'Zudio', 'Womens', 'uploads/64e63b2a4e7e9.jpg', '2023-08-23 17:00:26', 1, 19, 50),
+(65, 'Shirt', 'White', 1000.00, 'Zudio', 'Mens', 'uploads/64e63ccb2c958.jpg', '2023-08-23 17:07:23', 1, 19, 100),
+(66, 'Suit', 'Black', 4000.00, 'Raymond', 'Mens', 'uploads/64e63cf2e72a9.jpg', '2023-08-23 17:08:02', 1, 19, 10),
+(67, 'Jacket', 'Leather', 2000.00, 'Zara', 'Mens', 'uploads/64e63d225bbf0.jpg', '2023-08-23 17:08:50', 1, 19, 100),
+(68, 'T Shirt', 'White', 1500.00, 'Zudio', 'Mens', 'uploads/64e63dc71d9b4.jpg', '2023-08-23 17:11:35', 1, 19, 20),
+(82, 'recffvf', 'frtv', 12.00, 'vfr', 'Mens', 'uploads/64ec2cce82575.jpg', '2023-08-28 05:12:46', 1, 19, 0),
+(83, 'rgfvdf', 'cvdfv', 12.00, 'fdv', 'Mens', 'uploads/64ec2d2fcec7f.jpg', '2023-08-28 05:14:23', 1, 19, 12),
+(84, 'shirt', 'blak', 1000.00, 'westside', 'Mens', 'uploads/64ec2df5ab7a3.jpg', '2023-08-28 05:17:41', 1, 19, 10),
+(85, 'Shirt ', 'Black', 1000.00, 'Pantaloons', 'Mens', 'uploads/64ec340ac4641.jpg', '2023-08-28 05:43:38', 1, 19, 100),
+(86, 'Jacket', 'Blue', 1000.00, 'Zudio', 'Mens', 'uploads/64ec36a22472e.jpg', '2023-08-28 05:54:42', 1, 19, 100);
 
 --
 -- Triggers `products`
@@ -256,13 +267,6 @@ ALTER TABLE `admin`
   ADD UNIQUE KEY `admin_email` (`admin_email`);
 
 --
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`);
-
---
 -- Indexes for table `customerregistration`
 --
 ALTER TABLE `customerregistration`
@@ -325,22 +329,10 @@ ALTER TABLE `sellerregistration`
 --
 
 --
--- Constraints for table `cart`
---
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`SID`) REFERENCES `sellerregistration` (`SellerId`);
-
---
--- Constraints for table `product_size`
---
-ALTER TABLE `product_size`
-  ADD CONSTRAINT `product_size_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
