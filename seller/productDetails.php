@@ -87,15 +87,16 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                             <?php echo @$product['quantity']; ?>
                         </td>
                         <td>
-                            <a class="edit-link" href="editProduct.php?id=<?php echo $product['id']; ?>">&#x270E;</a>
-                            <a class=" delete-link" href="#"
+                            <a class="edit-link" style="text-decoration:none;"
+                                href="editProduct.php?id=<?php echo $product['id']; ?>">&#x270E;</a>
+                            <a class=" delete-link" style="text-decoration:none;" href="#"
                                 onclick="showConfirmation(<?php echo $product['id']; ?>)">&#x1F5D1;</a>
                             <?php if ($product['status'] == 1): ?>
-                                <a class="status-link"
+                                <a class="status-link" style="text-decoration:none;"
                                     href="activeDeactive.php?id=<?php echo $product['id']; ?>&name='deactive'">&#x2705;
                                 </a>
                             <?php else: ?>
-                                <a class="status-link"
+                                <a class="status-link" style="text-decoration:none;"
                                     href="activeDeactive.php?id=<?php echo $product['id']; ?>&name='active'">&#x26D4;
                                 </a>
                             <?php endif; ?>
