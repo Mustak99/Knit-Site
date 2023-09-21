@@ -12,11 +12,18 @@ include_once '../header.php';
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                 id="navbar-vertical">
-                <div class="navbar-nav w-100 overflow-hidden" style="height: 160px">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 250px">
                     <div class="nav-item dropdown">
                         <a href="sellerProfile.php" class="nav-item nav-link">profile</a>
                         <a href="productDetails.php" class="nav-item nav-link">Product Details</a>
                         <a href="addProduct.php" class="nav-item nav-link">Add Product</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Orders</a>
+                            <div class="dropdown-menu">
+                                <a href="pendingOrder.php" class="nav-item nav-link dropdown-item">Pending Orders</a>
+                                <a href="" class="nav-item nav-link dropdown-item">Complete Orders</a>
+                            </div>
+                        </div>
                     </div>
             </nav>
         </div>

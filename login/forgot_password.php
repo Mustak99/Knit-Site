@@ -61,19 +61,33 @@
             display: flex;
         }
 
-        #loader {
+
+        .loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
             display: none;
             justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            /* Higher z-index to make sure it's on top of other content */
         }
 
-        #loader img {
-            height: 80px;
-            width: 80px;
+        .loader-screen img {
+            height: 50px;
+            width: 50px;
         }
     </style>
 </head>
 
 <body>
+    <div id="loader" class="loader-screen">
+        <img src="../img/loading.gif">
+    </div>
     <section class="ftco-section">
         <div class="container">
             <div class="row justify-content-center">
@@ -204,26 +218,26 @@
 
             // Check if the password fields are not empty
             if (password.trim() === '') {
-                $("#newPassword").addClass("alert-validate");
+                alert("Enter Password");
                 return;
             }
 
             if (confirmPassword.trim() === '') {
-                $("#newPasswordConfirms").addClass("alert-validate");
+                $alert("Enter Confirm Password");
                 return;
             }
 
             // Password validation: Allow alphabets, numbers, and underscores only
             var passwordPattern = /^[A-Za-z0-9_]{8,12}$/;
             if (!passwordPattern.test(password)) {
-                $("#newPassword").addClass("alert-validate");
+                alert("Enter Valid Password");
                 return;
             }
 
 
             // Check if the passwords match
             if (password !== confirmPassword) {
-                $("#newPasswordConfirms").addClass("alert-validate");
+                alert("Password Doesn't Match");
                 return;
             }
 
