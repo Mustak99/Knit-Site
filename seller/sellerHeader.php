@@ -12,19 +12,20 @@ include_once '../header.php';
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                 id="navbar-vertical">
-                <div class="navbar-nav w-100 overflow-hidden" style="height: 250px">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
                     <div class="nav-item dropdown">
                         <a href="sellerProfile.php" class="nav-item nav-link">profile</a>
                         <a href="productDetails.php" class="nav-item nav-link">Product Details</a>
                         <a href="addProduct.php" class="nav-item nav-link">Add Product</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Orders</a>
-                            <div class="dropdown-menu">
-                                <a href="pendingOrder.php" class="nav-item nav-link dropdown-item">Pending Orders</a>
-                                <a href="" class="nav-item nav-link dropdown-item">Complete Orders</a>
+                            <a href="" class="nav-link dropdown-toggle" id="show-orders">Orders</a>
+                            <div class="dropdown-menu mx-3" id="dropdown-1" style="border: 0;">
+                                <a href="pendingOrder.php" class="nav-item nav-link">Pending Orders</a>
+                                <a href="" class="nav-item nav-link">Complete Orders</a>
                             </div>
                         </div>
                     </div>
+                </div>
             </nav>
         </div>
         <div class="col-lg-9">
@@ -82,5 +83,22 @@ include_once '../header.php';
             </nav>
 
             <div>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $("#show-orders").click(function (event) {
+                            event.preventDefault();
+
+                            if ($("#dropdown-1").hasClass("show")) {
+                                $("#dropdown-1").removeClass("show");
+                            }
+                            else {
+                                $("#dropdown-1").addClass("show");
+                            }
+                        });
+
+                    });
+                </script>
 
                 <!-- Navbar End -->

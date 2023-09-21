@@ -503,6 +503,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
         });
     </script>
 
+    
 </body>
 
 </html>
