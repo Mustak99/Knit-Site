@@ -55,7 +55,7 @@ include_once '../header.php';
             echo '<div class="d-flex flex-column mt-4">';
             echo '<a class="btn rounded btn-outline-info btn-sm" type="button" href="../cart/viewProduct.php">Details</a>';
             echo '<a class="btn btn-outline-primary rounded btn-sm mt-2" type="button" href="../cart/insertIntoCart.php?product_id=' . $row['id'] . '&price='.$row['price'].'">  ';
-            echo '  Add to wishlist';
+            echo '  Add to cart';
             echo '</a>';
             echo '</div>';
             echo '</div>';
