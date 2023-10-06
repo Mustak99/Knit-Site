@@ -85,7 +85,7 @@ include_once("commonMethod.php");
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">15 Products</p>
-                    <a href="mens.php" class="cat-img position-relative overflow-hidden mb-3">
+                    <a href="./Category/mens.php" class="cat-img position-relative overflow-hidden mb-3">
                         <img src="./seller/<?php echo $mensRecentImg[0]['image_path']; ?>" alt="Product Image"
                             class="fixedimage">
                     </a>
@@ -96,7 +96,7 @@ include_once("commonMethod.php");
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">15 Products</p>
-                    <a href="womens.php" class="cat-img position-relative overflow-hidden mb-3">
+                    <a href="./Category/womens.php" class="cat-img position-relative overflow-hidden mb-3">
                         <img src="./seller/<?php echo $womensRecentImg[0]['image_path']; ?>" alt="Product Image"
                             class="fixedimage">
                     </a>
@@ -106,7 +106,7 @@ include_once("commonMethod.php");
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">15 Products</p>
-                    <a href="childrens.php" class="cat-img position-relative overflow-hidden mb-3">
+                    <a href="./Category/childrens.php" class="cat-img position-relative overflow-hidden mb-3">
                         <img src="./seller/<?php echo $childrensRecentImg[0]['image_path']; ?>" alt="Product Image"
                             class="fixedimage">
                     </a>

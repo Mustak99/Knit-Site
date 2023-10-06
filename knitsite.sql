@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2023 at 11:03 AM
+-- Generation Time: Oct 06, 2023 at 11:26 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -56,17 +56,6 @@ CREATE TABLE `cart` (
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
-(0, 13, 37, 3, '2000.00', '2023-09-15 01:44:50'),
-(0, 13, 38, 3, '1500.00', '2023-09-15 01:44:53'),
-(0, 13, 39, 3, '2000.00', '2023-09-15 01:44:55'),
-(0, 13, 42, 3, '1000.00', '2023-09-15 01:44:59'),
-(0, 13, 48, 1, '2000.00', '2023-09-15 01:46:00');
 
 -- --------------------------------------------------------
 
@@ -140,6 +129,15 @@ CREATE TABLE `orders` (
   `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`) VALUES
+(1, 15, '2023-10-06 17:14:01', 'Pending'),
+(2, 12, '2023-10-06 18:23:39', 'Pending'),
+(3, 15, '2023-10-06 21:18:21', 'Pending');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +151,15 @@ CREATE TABLE `order_items` (
   `quantity` int(11) NOT NULL,
   `total_price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `total_price`) VALUES
+(1, 1, 98, 1, '2000.00'),
+(2, 2, 98, 1, '2000.00'),
+(3, 3, 97, 5, '10000.00');
 
 -- --------------------------------------------------------
 
@@ -179,23 +186,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `category`, `image_path`, `add_date`, `status`, `SID`, `quantity`) VALUES
-(37, 'T Shirt', 'Blue', '2000.00', 'Zara', 'Childrens', 'uploads/64e624fd1f8d6.jpg', '2023-08-23 15:25:49', 1, 19, 100),
-(38, 'Tshirt', 'Printed\r\n', '1500.00', 'Zara', 'Childrens', 'uploads/64e6252620e9d.jpg', '2023-08-23 15:26:30', 1, 19, 10),
-(39, 'Jacket', 'Jeans Jacket', '2000.00', 'American', 'Childrens', 'uploads/64e6255f9c5e1.jpg', '2023-08-23 15:27:27', 1, 19, 20),
-(42, 'T Shirt', 'White', '1000.00', 'Zudio', 'Childrens', 'uploads/64e6276d991af.jpg', '2023-08-23 15:36:13', 1, 19, 30),
-(48, 'T Shirt', 'White', '2000.00', 'Zudio', 'Womens', 'uploads/64e62ad47c95e.jpg', '2023-08-23 15:50:44', 1, 19, 40),
-(60, 'Coat', 'Black', '2000.00', 'Zara', 'Womens', 'uploads/64e639dec5441.jpg', '2023-08-23 16:54:54', 1, 19, 100),
-(61, 'Top', 'Black', '1000.00', 'Zudio', 'Womens', 'uploads/64e63a7a2d94a.jpg', '2023-08-23 16:57:30', 1, 19, 10),
-(62, 'Top', 'Grey', '2000.00', 'Zudio', 'Womens', 'uploads/64e63b2a4e7e9.jpg', '2023-08-23 17:00:26', 1, 19, 50),
-(65, 'Shirt', 'White', '1000.00', 'Zudio', 'Mens', 'uploads/64e63ccb2c958.jpg', '2023-08-23 17:07:23', 1, 19, 100),
-(66, 'Suit', 'Black', '4000.00', 'Raymond', 'Mens', 'uploads/64e63cf2e72a9.jpg', '2023-08-23 17:08:02', 1, 19, 10),
-(67, 'Jacket', 'Leather', '2000.00', 'Zara', 'Mens', 'uploads/64e63d225bbf0.jpg', '2023-08-23 17:08:50', 1, 19, 100),
-(68, 'T Shirt', 'White', '1500.00', 'Zudio', 'Mens', 'uploads/64e63dc71d9b4.jpg', '2023-08-23 17:11:35', 1, 19, 20),
-(82, 'recffvf', 'frtv', '12.00', 'vfr', 'Mens', 'uploads/64ec2cce82575.jpg', '2023-08-28 05:12:46', 1, 19, 0),
-(83, 'rgfvdf', 'cvdfv', '12.00', 'fdv', 'Mens', 'uploads/64ec2d2fcec7f.jpg', '2023-08-28 05:14:23', 1, 19, 12),
-(84, 'shirt', 'blak', '1000.00', 'westside', 'Mens', 'uploads/64ec2df5ab7a3.jpg', '2023-08-28 05:17:41', 1, 19, 10),
-(85, 'Shirt ', 'Black', '1000.00', 'Pantaloons', 'Mens', 'uploads/64ec340ac4641.jpg', '2023-08-28 05:43:38', 1, 19, 100),
-(86, 'Jacket', 'Blue', '1000.00', 'Zudio', 'Mens', 'uploads/64ec36a22472e.jpg', '2023-08-28 05:54:42', 1, 19, 100);
+(96, 'Shirt', 'White', '2000.00', 'Zara', 'Mens', 'uploads/65203501701ae.jpg', '2023-10-06 16:25:37', 1, 19, 10),
+(97, 'Top', 'Nice', '1500.00', 'Zudio', 'Womens', 'uploads/652035299ddbb.jpg', '2023-10-06 16:26:17', 1, 19, 20),
+(98, 'Jacket', 'Blue', '2000.00', 'Jade Blue', 'Childrens', 'uploads/65203553c63c2.jpg', '2023-10-06 16:26:59', 1, 19, 20);
 
 --
 -- Triggers `products`
@@ -224,28 +217,11 @@ CREATE TABLE `product_size` (
 --
 
 INSERT INTO `product_size` (`id`, `product_id`, `size`) VALUES
-(11, 87, 'XS'),
-(12, 87, 'S'),
-(13, 87, 'M'),
-(14, 87, 'L'),
-(15, 87, 'XL'),
-(16, 87, 'XXL'),
-(20, 88, 'M'),
-(21, 88, 'L'),
-(22, 88, 'XL'),
-(23, 88, 'XXL'),
-(24, 89, 'XS'),
-(25, 89, 'M'),
-(26, 90, 'XS'),
-(27, 90, 'M'),
-(28, 90, 'L'),
-(32, 91, 'XS'),
-(33, 91, 'S'),
-(34, 91, 'M'),
-(35, 91, 'L'),
-(36, 91, 'XL'),
-(37, 91, 'XXL'),
-(41, 92, 'XXL');
+(96, 96, 'XS'),
+(97, 96, 'M'),
+(98, 96, 'L'),
+(103, 98, 'M  '),
+(104, 97, 'L  ');
 
 -- --------------------------------------------------------
 
@@ -352,25 +328,25 @@ ALTER TABLE `customerregistration`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `sellerregistration`
