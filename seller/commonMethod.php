@@ -2,7 +2,6 @@
 
 if (isset($_SESSION["SellerUserID"])) {
     $sellerId = $_SESSION["SellerUserID"];
-    // echo "Seller ID: " . $sellerId;
 }
 
 include_once("database.php");

@@ -28,7 +28,7 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
             <tbody>
                 <?php if (empty($completeOrders) || (is_array($completeOrders) && empty($completeOrders[0]))): ?>
                     <tr>
-                        <td colspan="7">No dispatched orders found.</td>
+                        <td colspan="7">No complete orders found.</td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($completeOrders as $completeOrder): ?>
