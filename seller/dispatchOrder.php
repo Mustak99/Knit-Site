@@ -1,13 +1,14 @@
 <?php include_once 'sellerHeader.php'; ?>
 <?php
 include_once("commonMethod.php");
-$pendingOrders = fetchPendingOrders(connection(), $sellerId);
+// $idVal = totalProduct(connection());
+$completeOrders = fetchCompleteOrders(connection(), $sellerId);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Pending Orders</title>
+    <title>Complete Orders</title>
 
 </head>
 
@@ -27,34 +28,28 @@ $pendingOrders = fetchPendingOrders(connection(), $sellerId);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($pendingOrders as $pendingOrder): ?>
+                <?php foreach ($completeOrders as $completeOrder): ?>
                     <tr>
                         <td>
-                            <?php echo @$pendingOrder['OrderID']; ?>
+                            <?php echo @$completeOrder['OrderID']; ?>
                         </td>
                         <td>
-                            <?php echo @$pendingOrder['CustomerID']; ?>
+                            <?php echo @$completeOrder['CustomerID']; ?>
                         </td>
                         <td>
-                            <?php echo @$pendingOrder['OrderDate']; ?>
+                            <?php echo @$completeOrder['OrderDate']; ?>
                         </td>
                         <td>
-                            <?php echo @$pendingOrder['Status']; ?>
+                            <?php echo @$completeOrder['Status']; ?>
                         </td>
                         <td>
-                            <?php echo @$pendingOrder['ProductName']; ?>
+                            <?php echo @$completeOrder['ProductName']; ?>
                         </td>
                         <td>
-                            <?php echo @$pendingOrder['Quantity']; ?>
+                            <?php echo @$completeOrder['Quantity']; ?>
                         </td>
                         <td>
-                            <?php echo @$pendingOrder['TotalPrice']; ?>
-                        </td>
-                        <td>
-                            <a class="complete-link"
-                                href="sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Dispatch">Dispatch</a>
-                            <a class="reject-link"
-                                href="sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Reject">Reject</a>
+                            <?php echo @$completeOrder['TotalPrice']; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -62,4 +57,5 @@ $pendingOrders = fetchPendingOrders(connection(), $sellerId);
         </table>
     </div>
 </body>
+
 </html>

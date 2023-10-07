@@ -21,7 +21,8 @@ include_once '../header.php';
                             <a href="" class="nav-link dropdown-toggle" id="show-orders">Orders</a>
                             <div class="dropdown-menu mx-3" id="dropdown-1" style="border: 0;">
                                 <a href="pendingOrder.php" class="nav-item nav-link">Pending Orders</a>
-                                <a href="" class="nav-item nav-link">Complete Orders</a>
+                                <a href="dispatchOrder.php" class="nav-item nav-link">Complete Orders</a>
+                                <a href="rejectOrder.php" class="nav-item nav-link">Rejected Orders</a>
                             </div>
                         </div>
                     </div>

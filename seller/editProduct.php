@@ -163,6 +163,12 @@
             </div>
         </div>
 
+        <?php
+        foreach ($sizes as $size) {
+        echo $size . '<br>';
+        }
+        ?>
+
   </form>
   </div>
   </div>
