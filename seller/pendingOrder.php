@@ -2,70 +2,88 @@
 <?php
 include_once("commonMethod.php");
 $pendingOrders = fetchPendingOrders(connection(), $sellerId);
+$orderCount = count($pendingOrders);
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Pending Orders</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            height: 100%;
+        }
+
+        .order {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            width: calc(25% - 20px);
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
 <body>
     <div id="overlay" class="overlay"></div>
     <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Customer ID</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-                <?php if (empty($pendingOrders) || (is_array($pendingOrders) && empty($pendingOrders[0]))): ?>
-                    <tr>
-                        <td colspan="7">No pending orders found.</td>
-                    </tr>
+        <?php if (empty($pendingOrders) || (is_array($pendingOrders) && empty($pendingOrders[0]))): ?>
+            <div>No pending orders found.</div>
+        <?php endif; ?>
+        <?php $count = 0; ?>
+        <?php foreach ($pendingOrders as $pendingOrder): ?>
+            <?php if (is_array($pendingOrder)): ?>
+                <div class="order">
+                    <p>Order ID:
+                        <?php echo @$pendingOrder['OrderID']; ?>
+                    </p>
+                    <p>Customer ID:
+                        <?php echo @$pendingOrder['CustomerID']; ?>
+                    </p>
+                    <p>Order Date:
+                        <?php echo @$pendingOrder['OrderDate']; ?>
+                    </p>
+                    <p>Status:
+                        <?php echo @$pendingOrder['Status']; ?>
+                    </p>
+                    <p>Product Name:
+                        <?php echo @$pendingOrder['ProductName']; ?>
+                    </p>
+                    <p>Quantity:
+                        <?php echo @$pendingOrder['Quantity']; ?>
+                    </p>
+                    <p>Price:
+                        <?php echo @$pendingOrder['TotalPrice']; ?>
+                    </p>
+                    <div class="order-actions">
+                        <a class="complete-link"
+                            href="sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Dispatch">
+                            <img src="./uploads/dispatch.png" alt="Dispatch" width="30" height="30" title="Dispatch">
+                        </a>
+                        <a class="reject-link" href="sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Reject">
+                            <img src="./uploads/reject.png" alt="Reject" width="30" height="30" title="Reject">
+                        </a>
+                    </div>
+                </div>
+                <?php $count++; ?>
+                <?php if ($count % 4 === 0): ?>
+                    <div style="flex-basis: 100%; height: 0;"></div>
                 <?php endif; ?>
-            </thead>
-            <tbody>
-                <?php foreach ($pendingOrders as $pendingOrder): ?>
-                    <?php if (is_array($pendingOrder)): ?>
-                        <tr>
-                            <td>
-                                <?php echo @$pendingOrder['OrderID']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$pendingOrder['CustomerID']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$pendingOrder['OrderDate']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$pendingOrder['Status']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$pendingOrder['ProductName']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$pendingOrder['Quantity']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$pendingOrder['TotalPrice']; ?>
-                            </td>
-                            <td>
-                                <a class="complete-link"
-                                    href="sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Dispatch">Dispatch</a>
-                                <a class="reject-link"
-                                    href="sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Reject">Reject</a>
-                            </td>
-                        </tr>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 </body>
 
