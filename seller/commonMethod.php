@@ -2,7 +2,6 @@
 
 if (isset($_SESSION["SellerUserID"])) {
     $sellerId = $_SESSION["SellerUserID"];
-    // echo "Seller ID: " . $sellerId;
 }
 
 include_once("database.php");
@@ -163,10 +162,11 @@ function fetchPendingOrders($con, $sellerId)
 {
     // Query to retrieve pending orders with product names
     $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, oi.quantity, oi.total_price
-              FROM orders o
-              JOIN order_items oi ON o.order_id = oi.order_id
-              JOIN products p ON oi.product_id = p.id
-              WHERE o.status = 'Pending'";
+    FROM orders o
+    JOIN order_items oi ON o.order_id = oi.order_id
+    JOIN products p ON oi.product_id = p.id
+    WHERE o.status = 'Pending' 
+    AND p.SID = $sellerId;";
 
     $result = $con->query($query);
 
@@ -204,7 +204,8 @@ function fetchCompleteOrders($con, $sellerId)
               FROM orders o
               JOIN order_items oi ON o.order_id = oi.order_id
               JOIN products p ON oi.product_id = p.id
-              WHERE o.status = 'Dispatch'";
+              WHERE o.status = 'Dispatch' 
+              AND p.SID = $sellerId";
 
     $result = $con->query($query);
 
@@ -242,7 +243,8 @@ function fetchRejectOrders($con, $sellerId)
               FROM orders o
               JOIN order_items oi ON o.order_id = oi.order_id
               JOIN products p ON oi.product_id = p.id
-              WHERE o.status = 'Reject'";
+              WHERE o.status = 'Reject' 
+              AND p.SID = $sellerId";
 
     $result = $con->query($query);
 
@@ -275,7 +277,7 @@ function fetchRejectOrders($con, $sellerId)
 
 function fetchCustomerEmailForOrders($con, $sellerId)
 {
-    // Query to retrieve customer email for pending orders with a status of 'Reject'
+    // Query to retrieve customer email for orders
     $query = "SELECT cr.EmailAddress AS customer_email
           FROM orders o
           JOIN customerregistration cr ON o.customer_id = cr.Userid

@@ -1,7 +1,6 @@
 <?php include_once 'sellerHeader.php'; ?>
 <?php
 include_once("commonMethod.php");
-// $idVal = totalProduct(connection());
 $rejectOrders = fetchRejectOrders(connection(), $sellerId);
 ?>
 <!DOCTYPE html>
@@ -9,7 +8,6 @@ $rejectOrders = fetchRejectOrders(connection(), $sellerId);
 
 <head>
     <title>Reject Orders</title>
-
 </head>
 
 <body>
@@ -28,31 +26,37 @@ $rejectOrders = fetchRejectOrders(connection(), $sellerId);
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($rejectOrders as $rejectOrder): ?>
+                <?php if (empty($rejectOrders) || (is_array($rejectOrders) && empty($rejectOrders[0]))): ?>
                     <tr>
-                        <td>
-                            <?php echo @$rejectOrder['OrderID']; ?>
-                        </td>
-                        <td>
-                            <?php echo @$rejectOrder['CustomerID']; ?>
-                        </td>
-                        <td>
-                            <?php echo @$rejectOrder['OrderDate']; ?>
-                        </td>
-                        <td>
-                            <?php echo @$rejectOrder['Status']; ?>
-                        </td>
-                        <td>
-                            <?php echo @$rejectOrder['ProductName']; ?>
-                        </td>
-                        <td>
-                            <?php echo @$rejectOrder['Quantity']; ?>
-                        </td>
-                        <td>
-                            <?php echo @$rejectOrder['TotalPrice']; ?>
-                        </td>
+                        <td colspan="7">No reject orders found.</td>
                     </tr>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <?php foreach ($rejectOrders as $rejectOrder): ?>
+                        <tr>
+                            <td>
+                                <?php echo @$rejectOrder['OrderID']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['CustomerID']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['OrderDate']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['Status']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['ProductName']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['Quantity']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['TotalPrice']; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2023 at 11:26 PM
+-- Generation Time: Oct 26, 2023 at 09:12 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -136,7 +136,14 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`) VALUES
 (1, 15, '2023-10-06 17:14:01', 'Pending'),
 (2, 12, '2023-10-06 18:23:39', 'Pending'),
-(3, 15, '2023-10-06 21:18:21', 'Pending');
+(3, 15, '2023-10-06 21:18:21', 'Pending'),
+(4, 15, '2023-10-07 15:14:27', 'Pending'),
+(5, 15, '2023-10-20 16:53:04', 'Pending'),
+(6, 14, '2023-10-20 16:53:27', 'Pending'),
+(7, 12, '2023-10-20 16:53:44', 'Pending'),
+(8, 10, '2023-10-20 16:53:57', 'Pending'),
+(9, 15, '2023-10-20 16:58:35', 'Pending'),
+(10, 15, '2023-10-20 16:58:47', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -159,7 +166,14 @@ CREATE TABLE `order_items` (
 INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `total_price`) VALUES
 (1, 1, 98, 1, '2000.00'),
 (2, 2, 98, 1, '2000.00'),
-(3, 3, 97, 5, '10000.00');
+(3, 3, 97, 5, '10000.00'),
+(4, 4, 101, 5, '10.00'),
+(5, 5, 96, 1, '10.00'),
+(6, 6, 97, 1, '10.00'),
+(7, 7, 98, 1, '10.00'),
+(8, 8, 101, 1, '10.00'),
+(9, 9, 96, 1, '10.00'),
+(10, 10, 96, 1, '10.00');
 
 -- --------------------------------------------------------
 
@@ -187,8 +201,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `category`, `image_path`, `add_date`, `status`, `SID`, `quantity`) VALUES
 (96, 'Shirt', 'White', '2000.00', 'Zara', 'Mens', 'uploads/65203501701ae.jpg', '2023-10-06 16:25:37', 1, 19, 10),
-(97, 'Top', 'Nice', '1500.00', 'Zudio', 'Womens', 'uploads/652035299ddbb.jpg', '2023-10-06 16:26:17', 1, 19, 20),
-(98, 'Jacket', 'Blue', '2000.00', 'Jade Blue', 'Childrens', 'uploads/65203553c63c2.jpg', '2023-10-06 16:26:59', 1, 19, 20);
+(97, 'Top', 'Nice', '1500.00', 'Zudio', 'Womens', 'uploads/652035299ddbb.jpg', '2023-10-06 16:26:17', 1, 19, 5),
+(98, 'Jacket', 'Blue', '2000.00', 'Jade Blue', 'Childrens', 'uploads/65203553c63c2.jpg', '2023-10-06 16:26:59', 1, 19, 17),
+(101, 'rthb', 'rgbt', '10.00', 'rtg', 'Mens', 'uploads/6521768658e4a.jpg', '2023-10-07 15:17:26', 1, 13, 10),
+(102, 'vdvx', 'dbb', '10.00', 'dbv', 'Mens', 'uploads/653299a3eb421.jpg', '2023-10-20 15:15:47', 1, 19, 10),
+(103, 'ygdvf', 'ngh', '10.00', 'fdb', 'Mens', 'uploads/65329be319817.jpg', '2023-10-20 15:25:23', 1, 19, 10);
 
 --
 -- Triggers `products`
@@ -220,8 +237,13 @@ INSERT INTO `product_size` (`id`, `product_id`, `size`) VALUES
 (96, 96, 'XS'),
 (97, 96, 'M'),
 (98, 96, 'L'),
-(103, 98, 'M  '),
-(104, 97, 'L  ');
+(109, 101, 'M'),
+(129, 102, 'XS'),
+(130, 97, 'XL'),
+(137, 98, 'XXL'),
+(138, 103, 'XS'),
+(139, 103, 'M'),
+(140, 103, 'XL');
 
 -- --------------------------------------------------------
 
@@ -328,25 +350,25 @@ ALTER TABLE `customerregistration`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `sellerregistration`

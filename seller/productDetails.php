@@ -88,9 +88,11 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                         </td>
                         <td>
                             <a class="edit-link" style="text-decoration:none;"
-                                href="editProduct.php?id=<?php echo $product['id']; ?>">&#x270E;</a>
+                                href="editProduct.php?id=<?php echo $product['id']; ?>"><img src="./uploads/edit.png"
+                                    alt="Edit" width="20" height="20"></a>
                             <a class=" delete-link" style="text-decoration:none;" href="#"
-                                onclick="showConfirmation(<?php echo $product['id']; ?>)">&#x1F5D1;</a>
+                                onclick="showConfirmation(<?php echo $product['id']; ?>)"><img src="./uploads/delete.png"
+                                    alt="Delete" width="20" height="20"></a>
                             <?php if ($product['status'] == 1): ?>
                                 <a class="status-link" style="text-decoration:none;"
                                     href="activeDeactive.php?id=<?php echo $product['id']; ?>&name='deactive'">&#x2705;
