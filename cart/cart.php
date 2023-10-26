@@ -142,19 +142,19 @@ $shippingCost = 10;
     <div class="card-body">
         <div class="d-flex justify-content-between mb-3 pt-1">
             <h6 class="font-weight-medium">Subtotal</h6>
-            <h6 class="font-weight-medium" id="subtotal">$0.00</h6>
+            <h6 class="font-weight-medium" id="subtotal">0.00</h6>
         </div>
         <div class="d-flex justify-content-between">
             <h6 class="font-weight-medium">Shipping</h6>
-            <h6 class="font-weight-medium">$<?php echo $shippingCost; ?></h6>
+            <h6 class="font-weight-medium"><?php echo $shippingCost; ?></h6>
         </div>
     </div>
     <div class="card-footer border-secondary bg-transparent">
         <div class="d-flex justify-content-between mt-2">
             <h5 class="font-weight-bold">Total</h5>
-            <h5 class="font-weight-bold" id="total">$0.00</h5>
+            <h5 class="font-weight-bold" id="total">0.00</h5>
         </div>
-        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+        <button  id="rzp-button1" class="btn btn-block btn-primary my-3 py-3 rzp-button1">Proceed To Checkout</button>
     </div>
 </div>
 
@@ -173,9 +173,9 @@ $(document).ready(function () {
         });
 
         // Update the subtotal and total in the cart summary
-        $("#subtotal").text("$" + subtotal.toFixed(2));
+        $("#subtotal").text( subtotal.toFixed(2));
         var total = subtotal + <?php echo $shippingCost; ?>;
-        $("#total").text("$" + total.toFixed(2));
+        $("#total").text( total.toFixed(2));
     }
 
     // Listen for changes in quantity input fields
@@ -189,7 +189,7 @@ $(document).ready(function () {
 
         // Calculate and update the total
         var total = productPrice * newQuantity;
-        totalElement.text("$" + total.toFixed(2)); // Update the total with 2 decimal places
+        totalElement.text(  total.toFixed(2)); // Update the total with 2 decimal places
 
         // Update the cart summary
         updateCartSummary();
@@ -206,7 +206,76 @@ $(document).ready(function () {
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-
 </body>
-
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var options = {
+    "key": "rzp_test_eP6PsyBlENSUnU", // Enter the Key ID generated from the Dashboard
+    "amount": "2010",
+    "currency": "INR",
+    "description": "Acme Corp",
+    "image": "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg",
+    "prefill": {
+      "email": "mustakshaikh217@gmail.com",
+      "contact": "+919574252029", // Corrected the format to a string
+    },
+    config: {
+      display: {
+        blocks: {
+          utib: {
+            name: "Pay using Axis Bank",
+            instruments: [
+              {
+                method: "card",
+                issuers: ["UTIB"]
+              },
+              {
+                method: "netbanking",
+                banks: ["UTIB"]
+              },
+            ]
+          },
+          other: {
+            name: "Other Payment modes",
+            instruments: [
+              {
+                method: "card",
+                issuers: ["ICIC"]
+              },
+              {
+                method: 'netbanking',
+              }
+            ]
+          }
+        },
+        hide: [
+          {
+            method: "upi"
+          }
+        ],
+        sequence: ["block.utib", "block.other"],
+        preferences: {
+          show_default_blocks: false
+        }
+      }
+    },
+    "handler": function (response) {
+      alert(response.razorpay_payment_id);
+    },
+    "modal": {
+      "ondismiss": function () {
+        if (confirm("Are you sure you want to close the form?")) {
+          console.log("Checkout form closed by the user");
+        } else {
+          console.log("Complete the Payment");
+        }
+      }
+    }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('rzp-button1').onclick = function (e) {
+    rzp1.open();
+    e.preventDefault();
+  }
+</script>
 </html>
