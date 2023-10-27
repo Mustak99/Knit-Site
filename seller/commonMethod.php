@@ -160,8 +160,7 @@ function totalchildren($con, $sellerId)
 
 function fetchPendingOrders($con, $sellerId)
 {
-    // Query to retrieve pending orders with product names
-    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, oi.quantity, oi.total_price
+    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, p.image_path, oi.quantity, oi.total_price
     FROM orders o
     JOIN order_items oi ON o.order_id = oi.order_id
     JOIN products p ON oi.product_id = p.id
@@ -185,7 +184,8 @@ function fetchPendingOrders($con, $sellerId)
                 "Status" => $row["status"],
                 "ProductName" => $row["name"],
                 "Quantity" => $row["quantity"],
-                "TotalPrice" => $row["total_price"]
+                "TotalPrice" => $row["total_price"],
+                "Image" => $row["image_path"]
             );
         }
     }
@@ -194,6 +194,7 @@ function fetchPendingOrders($con, $sellerId)
 
     return $pendingOrders;
 }
+
 
 // fetch complete order
 
