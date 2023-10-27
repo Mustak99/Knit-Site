@@ -13,7 +13,7 @@ function totalProduct($con, $sellerId)
     $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+        $row = $result->fetch_assoc(); 
         $id = $row['id'];
         return $id;
     }
