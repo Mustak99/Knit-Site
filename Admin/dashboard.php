@@ -314,6 +314,5 @@ $decrevenue = decrevenue(connection());
     });
 </script>
 
-<!-- adad -->
 
 </html>
