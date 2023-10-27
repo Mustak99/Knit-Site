@@ -1,74 +1,62 @@
 <?php
-$search=1;
- include_once '../head.php';
+$search = 1;
+include_once '../head.php';
 include_once '../header.php';
 ?>
 
 <div id="search-results">
+    <div class="row">
+        <?php
+        $search = 1;
+        $host = 'localhost';
+        $dbname = 'knitsite';
+        $username = 'root';
+        $password = '';
 
-    <?php
-    $search=1;
-    $host = 'localhost';
-    $dbname = 'knitsite';
-    $username = 'root';
-    $password = '';
-
-    $conn = new mysqli($host, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Database connection failed: " . $conn->connect_error);
-    }
-
-    // Retrieve search query
-    @$query = trim($_GET["name"]);
-
-    // Perform search query
-    $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
-    $stmt->bind_param('s', $searchQuery);
-    $searchQuery = '%' . $query . '%';
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
-
-    // Output search results
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="container shadow p-3 mb-2 bg-white rounded">';
-            echo '<div class="row">';
-            // Display the profile image in one column
-            echo '<div class="col-3 " style="overflow:hidden; height:100%;">';
-            echo '<div class="profile-image-container">';
-            echo '<img style="height:200px"  src="../seller/' . $row['image_path'] . '" >';
-            echo '</div>';
-            echo '</div>';
-            // Display the product details in another column
-            echo '<div class="col-6 ">';
-            echo '<h3>' . $row['name'] . '</h3>';
-            echo '<p>Brand: ' . $row['brand_name'] . '</p>';
-            echo '<p>Description: ' . $row['description'] . '</p>';
-            echo '</div>';
-            echo '<div class="col-3 ">';
-            echo '<div class="d-flex flex-row align-items-center mb-1">';
-            echo '<h4 class="mb-1 me-1">₹' . $row['price'] . '</h4>';
-            // echo '<span class="text-danger"><s>Charges on shipping</s></span>';
-            echo '</div>';
-            echo '<h7 class="text-success">Charges on shipping</h7>';
-            echo '<div class="d-flex flex-column mt-4">';
-            echo '<a class="btn rounded btn-outline-info btn-sm" type="button" href="../cart/viewProduct.php">Details</a>';
-            echo '<a class="btn btn-outline-primary rounded btn-sm mt-2" type="button" href="../cart/insertIntoCart.php?product_id=' . $row['id'] . '&price='.$row['price'].'">  ';
-            echo '  Add to cart';
-            echo '</a>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
+        $conn = new mysqli($host, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Database connection failed: " . $conn->connect_error);
         }
-    } else {
-        echo "<p>No results found.</p>";
-    }
 
+        // Retrieve search query
+        @$query = trim($_GET["name"]);
 
-    $conn->close();
+        // Perform search query
+        $stmt = $conn->prepare("SELECT * FROM products WHERE name LIKE ?");
+        $stmt->bind_param('s', $searchQuery);
+        $searchQuery = '%' . $query . '%';
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
 
-    include_once'../footer.php';
-    ?>
+        // Output search results
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-md-3">';
+                echo '<div class="card mb-4">';
+                echo '<img src="../seller/' . $row['image_path'] . '" class="card-img-top" style="height: 400px;" alt="' . $row['name'] . '">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title" align="center">' . $row['name'] . '</h5>';
+                echo '<h4 class="card-price" align="center">₹' . $row['price'] . '</h4>';
+                echo '</div>';
+                echo '<div class="card-footer">';
+                echo '<div class="d-flex justify-content-between bg-light border">';
+                echo '<a href="../cart/viewProduct.php" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>';
+                echo '<a href="../cart/insertIntoCart.php?product_id=' . $row['id'] . '&price=' . $row['price'] . '" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                
+            }
+        } else {
+            echo "<p>No results found.</p>";
+        }
 
+        $conn->close();
+        ?>
+
+    </div>
+</div>
+
+<?php include_once '../footer.php'; ?>
