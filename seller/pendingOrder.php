@@ -22,7 +22,8 @@ $orderCount = count($pendingOrders);
                         <div class="col-md-4 mb-3">
                             <div class="card">
                                 <img src="<?php echo $pendingOrder['Image']; ?>" class="card-img-top" alt="Product Image"
-                                    height="300">
+                                    height="300" class="border">
+
                                 <div class="card-body">
                                     <div class="card-heading">
                                         <h5 class="card-title">Order ID:
@@ -48,23 +49,21 @@ $orderCount = count($pendingOrders);
                                         <?php echo @$pendingOrder['TotalPrice']; ?>
                                     </p>
                                     <div class="card-actions">
-                                        <img class="btn" src="dispatch_image.png" alt="Dispatch"
+                                        <img src="./uploads/dispatch.png" alt="Dispatch" width="40" height="40"
                                             onclick="location.href='sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Dispatch';"
-                                            width="100" height="100">
-                                        <img class="btn" src="./uploads/reject.png" alt="Reject" width="50" height="50"
-                                            onclick="location.href='sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Reject';">
+                                            style="cursor: pointer;">
+                                        <img src="./uploads/reject.png" alt="Reject" width="40" height="40" align="right"
+                                            onclick="location.href='sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Reject';"
+                                            style="cursor: pointer;">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
     </div>
-
-    <!-- Include Bootstrap JS (optional, for interactive components) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
