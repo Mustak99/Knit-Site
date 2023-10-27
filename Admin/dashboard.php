@@ -181,6 +181,7 @@ $sellers = fetchCustomers(connection());
                                 <h4 class="card-title">Traffic Sources</h4>
                                 <canvas id="pie-chart"></canvas>
                                 <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+
                             </div>
                         </div>
                     </div>
@@ -362,9 +363,6 @@ $sellers = fetchCustomers(connection());
 </script>
 
 <script>
-    // Get the canvas element for the pie chart
-    var pieCtx = document.getElementById('pie-chart').getContext('2d');
-
     // Data for the pie chart (two fields: Seller and Customer)
     var pieData = {
         labels: ['Seller', 'Customer'],
@@ -376,6 +374,9 @@ $sellers = fetchCustomers(connection());
             ]
         }]
     };
+
+    // Get the canvas element for the pie chart
+    var pieCtx = document.getElementById('pie-chart').getContext('2d');
 
     // Create the pie chart
     var pieChart = new Chart(pieCtx, {
