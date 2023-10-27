@@ -114,7 +114,7 @@ $decrevenue = decrevenue(connection());
                     </div>
                 </div>
                 <a href="user_profile.php" class="nav-item nav-link"><i class="far fa-edit"></i>Edit Profile</a>
-                <a href="logout.php" class="nav-item nav-link"><i class="fa fa-power-off"></i>Logout</a>
+                <a href="../login/logout.php" class="nav-item nav-link"><i class="fa fa-power-off"></i>Logout</a>
 
             </div>
         </nav>
