@@ -2,11 +2,18 @@
 ?>
 <?php
 include_once("commonMethod.php");
-$idVal = totalProduct(connection(), $sellerId);
+$totalproduct = totalProduct(connection(), $sellerId);
 $quantity = totalQuantity(connection(), $sellerId);
 $revenue = totalRevenue(connection(), $sellerId);
 $shirt = totalShirt(connection(), $sellerId);
 $products = fetchProductsWithSizes(connection(), $sellerId);
+$currentweek = fetchCurrentWeekRevenue(connection(), $sellerId);
+$previousweek = fetchPreviousWeekRevenue(connection(), $sellerId);
+$pendingordercount = fetchPendingOrdersCount(connection(), $sellerId);
+$completeordercount = fetchDispatchedOrdersCount(connection(), $sellerId);
+$rejectordercount = fetchRejectedOrdersCount(connection(), $sellerId);
+$outwardstock = fetchOutwardstock(connection(), $sellerId);
+$completeOrders = fetchCompleteOrders(connection(), $sellerId);
 ?>
 
 <!doctype html>
@@ -24,6 +31,9 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
     <link rel="stylesheet" href="assets/vendor/vector-map/jqvmap.css">
     <link rel="stylesheet" href="assets/vendor/jvectormap/jquery-jvectormap-2.0.2.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <title>Seller Dashboard</title>
 </head>
 
@@ -54,7 +64,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                         <h5 class="text-muted">Products</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1 text-primary">
-                                <?php echo @$idVal; ?>
+                                <?php echo @$totalproduct; ?>
                             </h1>
                         </div>
                     </div>
@@ -95,7 +105,9 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                     <div class="card-body">
                         <h5 class="text-muted">Outward Stock</h5>
                         <div class="metric-value d-inline-block">
-                            <h1 class="mb-1 text-primary">0</h1>
+                            <h1 class="mb-1 text-primary">
+                                <?php echo $outwardstock; ?>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -113,37 +125,11 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
             <div class="card">
                 <h5 class="card-header">Revenue</h5>
                 <div class="card-body">
-                    <canvas id="revenue" width="400" height="150"></canvas>
+                    <canvas id="revenueChart" width="400" height="150"></canvas>
                 </div>
-                <!-- <div class="card-body border-top">
-                    <div class="row">
-                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12 p-3">
-                            <h4> Today's Earning: $2,800.30</h4>
-                            <p>Suspendisse potenti. Done csit amet rutrum.
-                            </p>
-                        </div>
-                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 p-3">
-                            <h2 class="font-weight-normal mb-3"><span>$50,325</span> </h2>
-                            <div class="mb-0 mt-3 legend-item">
-                                <span class="fa-xs text-primary mr-1 legend-title "><i
-                                        class="fa fa-fw fa-square-full"></i></span>
-                                <span class="legend-text">Current Week</span>
-                            </div>
-                        </div>
-                        <div class="offset-xl-1 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 p-3">
-                            <h2 class="font-weight-normal mb-3">
-
-                                <span>$59,567</span>
-                            </h2>
-                            <div class="text-muted mb-0 mt-3 legend-item"> <span
-                                    class="fa-xs text-secondary mr-1 legend-title"><i
-                                        class="fa fa-fw fa-square-full"></i></span><span class="legend-text">Previous
-                                    Week</span></div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
+
         <!-- ============================================================== -->
         <!-- end reveune  -->
         <!-- ============================================================== -->
@@ -155,36 +141,8 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
             <div class="card">
                 <h5 class="card-header">Total Sale</h5>
                 <div class="card-body">
-                    <canvas id="total-sale"></canvas>
-                </div>
-                <div class="card-body">
-                    <ul class="list-group">
-                        <?php
-                        $selling_details = [
-                            'Product A' => @$shirt,
-                            'Product B' => 50,
-                            'Product C' => 20,
-                            'Product D' => 10,
-                            'Product E' => 25
-                        ];
-                        $labels = array_keys($selling_details);
-                        $values = array_values($selling_details);
-                        $colors = [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            'rgba(255, 206, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)',
-                            'rgba(153, 102, 255, 0.7)'
-                        ];
-                        ?>
+                    <canvas id="total-sale-pie" width="300" height="255"></canvas>
 
-                        <?php foreach ($labels as $index => $label): ?>
-                            <li class="list-group-item" style=" <?php echo $colors[$index % count($colors)]; ?>;">
-                                <?php echo '<span class="fa-xs text-brand mr-1 legend-title"><i class="fa fa-fw fa-square-full"></i></span> <span class="legend-text"></span>';
-                                echo $label; ?>: <?php echo $values[$index]; ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -212,42 +170,42 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                         <table class="table">
                             <thead class="bg-light">
                                 <tr class="border-0">
+                                    <th class="border-0">Customer Name</th>
                                     <th class="border-0">Product Name</th>
-                                    <th class="border-0">Description</th>
                                     <th class="border-0">Price</th>
                                     <th class="border-0">Order Date</th>
-                                    <th class="border-0">CategoryID</th>
+                                    <th class="border-0">Category</th>
                                     <th class="border-0">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($products)): ?>
-                                    <?php foreach ($products as $product): ?>
+                                <?php if (empty($completeOrders) || (is_array($completeOrders) && empty($completeOrders[0]))): ?>
+                                    <tr>
+                                        <td colspan="7">No complete orders found.</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach ($completeOrders as $completeOrder): ?>
                                         <tr>
                                             <td>
-                                                <?php echo @$product['name']; ?>
+                                                <?php echo @$completeOrder['CustomerName']; ?>
                                             </td>
                                             <td>
-                                                <?php echo @$product['description']; ?>
+                                                <?php echo @$completeOrder['ProductName']; ?>
                                             </td>
                                             <td>
-                                                <?php echo @$product['price']; ?>
+                                                <?php echo @$completeOrder['TotalPrice']; ?>
                                             </td>
                                             <td>
-                                                <?php echo @$product['created_at']; ?>
+                                                <?php echo @$completeOrder['OrderDate']; ?>
                                             </td>
                                             <td>
-                                                <?php echo @$product['category_id']; ?>
+                                                <?php echo @$completeOrder['Category']; ?>
                                             </td>
                                             <td>
-                                                <?php echo @$product['quantity']; ?>
+                                                <?php echo @$completeOrder['Quantity']; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="7">No products available.</td>
-                                    </tr>
                                 <?php endif; ?>
                             </tbody>
                         </table>
@@ -256,6 +214,9 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
 
             </div>
         </div>
+
+        <?php print_r($currentweek); ?> <br>
+        <?php print_r($previousweek); ?>
 
         <!-- ============================================================== -->
         <!-- end top selling products  -->
@@ -317,20 +278,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
     <!-- ============================================================== -->
     <!-- footer -->
     <!-- ============================================================== -->
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
 
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- ============================================================== -->
     <!-- end footer -->
     <!-- ============================================================== -->
@@ -363,34 +311,6 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
     <script src="assets/vendor/charts/sparkline/spark-js.js"></script>
     <!-- dashboard sales js-->
     <script src="assets/libs/js/dashboard-sales.js"></script>
-    <script>
-        // Chart.js configuration
-        var ctx = document.getElementById('pieChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: <?php echo json_encode($labels); ?>,
-                datasets: [{
-                    data: <?php echo json_encode($values); ?>,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                }
-            }
-        });
-    </script>
 
     <script>
         // Add a click event listener to the div
@@ -401,39 +321,53 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
     </script>
 
     <script>
-        $(function () {
-            "use strict";
-            // ============================================================== 
-            // Revenue
-            // ============================================================== 
-            var ctx = document.getElementById('revenue').getContext('2d');
+        $(document).ready(function () {
+            // Get the revenue data for the current week using PHP
+            <?php
+            $currentWeekData = fetchCurrentWeekRevenue($con, $sellerId);
+            ?>
+
+            // Get the revenue data for the previous week using PHP
+            <?php
+            $previousWeekData = fetchPreviousWeekRevenue($con, $sellerId);
+            ?>
+
+            // Labels for the days of the week (e.g., Sun, Mon, Tue, etc.)
+            var labels = <?php echo json_encode(array_keys($currentWeekData)); ?>;
+
+            // Revenue data for the current week
+            var currentWeekRevenue = <?php echo json_encode(array_values($currentWeekData)); ?>;
+
+            // Revenue data for the previous week
+            var previousWeekRevenue = <?php echo json_encode(array_values($previousWeekData)); ?>;
+
+            var ctx = document.getElementById('revenueChart').getContext('2d');
+
             var myChart = new Chart(ctx, {
                 type: 'line',
-
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Current Week',
-                        data: ['<?php echo @$idVal ?>', 19, 3, 17, 6, 3, 7, 12, 19, 3, 17, 6],
-
-                        backgroundColor: "rgba(89, 105, 255,0.5)",
-                        borderColor: "rgba(89, 105, 255,0.7)",
-                        borderWidth: 2
-
-                    }, {
-                        label: 'Previous Week',
-                        data: [20],
-                        backgroundColor: "rgba(255, 64, 123,0.5)",
-                        borderColor: "rgba(255, 64, 123,0.7)",
-                        borderWidth: 2
-                    }]
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Current Week Revenue',
+                            data: currentWeekRevenue,
+                            backgroundColor: "rgba(89, 105, 255, 0.5)",
+                            borderColor: "rgba(89, 105, 255, 0.7)",
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Previous Week Revenue',
+                            data: previousWeekRevenue,
+                            backgroundColor: "rgba(255, 64, 123, 0.5)",
+                            borderColor: "rgba(255, 64, 123, 0.7)",
+                            borderWidth: 2
+                        }
+                    ]
                 },
                 options: {
-
                     legend: {
                         display: true,
                         position: 'bottom',
-
                         labels: {
                             fontColor: '#71748d',
                             fontFamily: 'Circular Std Book',
@@ -448,11 +382,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                                     return '$' + value;
                                 }
                             }
-                        }]
-                    },
-
-
-                    scales: {
+                        }],
                         xAxes: [{
                             ticks: {
                                 fontSize: 14,
@@ -468,42 +398,52 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                             }
                         }]
                     }
-
                 }
-            });
-
-            // ============================================================== 
-            // Total Sale
-            // ============================================================== 
-            var ctx = document.getElementById("total-sale").getContext('2d');
-            var myChart = new Chart(ctx, {
-                type: 'doughnut',
-
-                data: {
-                    labels: ["Direct", " Affilliate", "Sponsored", " E-mail"],
-                    datasets: [{
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.7)',
-                            'rgba(54, 162, 235, 0.7)',
-                            // 'rgba(255, 206, 86, 0.7)',
-                            // 'rgba(75, 192, 192, 0.7)',
-                            'rgba(153, 102, 255, 0.7)'
-                        ],
-                        data: ['<?php echo @$shirt ?>', 7, 6]
-                    }]
-                },
-                options: {
-                    legend: {
-                        display: false
-
-                    }
-                }
-
             });
         });
     </script>
 
-    
+    <script>
+        $(document).ready(function () {
+            // Get your data for the pie chart (e.g., total sales for different categories)
+            var pieChartData = {
+                labels: ["Pending Order", "Complete Order", "Reject Order"],
+                datasets: [
+                    {
+                        data: [<?php echo @$pendingordercount; ?>, <?php echo @$completeordercount; ?>, <?php echo @$rejectordercount; ?>], // Replace with your actual data
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            // 'rgba(75, 192, 192, 0.7)',
+                            // 'rgba(153, 102, 255, 0.7)'
+                        ]
+                    }
+                ]
+            };
+
+            var ctx = document.getElementById('total-sale-pie').getContext('2d');
+
+            var pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: pieChartData,
+                options: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            fontColor: '#71748d',
+                            fontFamily: 'Circular Std Book',
+                            fontSize: 14,
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
 </body>
 
 </html>
