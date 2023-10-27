@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
 
         $_SESSION["adminId"] = $row["admin_login_id"];
         $_SESSION["name"] = $row["admin_name"];
-        header("Location: ../HomePage.php");
+        header("Location: ../Admin/dashboard.php");
 
     } elseif ($count2 == 1) {
         if (isset($_POST["remember"])) {
