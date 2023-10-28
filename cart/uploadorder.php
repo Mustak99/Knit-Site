@@ -33,7 +33,7 @@ if ($conn->query($insert_order_sql) === TRUE) {
             $product_id = $cart_row["product_id"];
             $quantity = $cart_row["quantity"];
             $price = $cart_row["price"];
-            $total_price = $price * $quantity;
+            $total_price = $price * $quantity+10;
 
             $insert_order_item_sql = "INSERT INTO order_items (order_id, product_id, quantity, total_price)
                 VALUES ($order_id, $product_id, $quantity, $total_price)";
