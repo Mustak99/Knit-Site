@@ -1,9 +1,9 @@
 <?php 
 include 'includes/sidebar.php';
-include 'includes/db.php';
+include 'includes/db.php'; 
 ?>
             <!-- Recent Sales Start -->
-            <div class="container-fluid pt-4 px-4">
+            <div class="container-fluid pt-4 px-4" style="width: 70% !important;">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h6 class="mb-0">View Products</h6>
