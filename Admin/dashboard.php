@@ -1,7 +1,7 @@
 <?php
 include_once("commonMethod.php");
-$customer = totalcustomer(connection());
-$seller = totalseller(connection());
+$totalcustomer = totalcustomer(connection());
+$totalseller = totalseller(connection());
 $revenue = totalrevenue(connection());
 $janrevenue = janrevenue(connection());
 $febrevenue = febrevenue(connection());
@@ -15,6 +15,8 @@ $seprevenue = seprevenue(connection());
 $octrevenue = octrevenue(connection());
 $novrevenue = novrevenue(connection());
 $decrevenue = decrevenue(connection());
+$fetchcustomers = fetchCustomers(connection());
+$fetchsellers = fetchSellers(connection());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -138,7 +140,7 @@ $decrevenue = decrevenue(connection());
                             <div class="card-body">
                                 <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                                 <h4 class="font-weight-normal mb-3">Customers</h4>
-                                <h2 class="mb-5"><?php echo @$customer ?></h2>
+                                <h2 class="mb-5"><?php echo @$totalcustomer ?></h2>
                             </div>
                         </div>
                     </div>
@@ -147,7 +149,7 @@ $decrevenue = decrevenue(connection());
                             <div class="card-body">
                                 <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                                 <h4 class="font-weight-normal mb-3">Sellers</h4>
-                                <h2 class="mb-5"><?php echo @$seller ?></h2>
+                                <h2 class="mb-5"><?php echo @$totalseller ?></h2>
                             </div>
                         </div>
                     </div>
@@ -176,9 +178,10 @@ $decrevenue = decrevenue(connection());
                     <div class="col-md-5 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Traffic Sources</h4>
+                                <h4 class="card-title">Cureent Active Users</h4>
                                 <canvas id="pie-chart"></canvas>
                                 <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+
                             </div>
                         </div>
                     </div>
@@ -187,63 +190,124 @@ $decrevenue = decrevenue(connection());
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Recent Tickets</h4>
+                                <h4 class="card-title">Customers</h4>
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th> Assignee </th>
-                                                <th> Subject </th>
-                                                <th> Status </th>
-                                                <th> Last Update </th>
-                                                <th> Tracking ID </th>
+                                        <thead class="bg-light">
+                                            <tr class="border-0">
+
+                                                <th class="border-0">First Name</th>
+                                                <th class="border-0">Middle Name</th>
+                                                <th class="border-0">Last Name</th>
+                                                <th class="border-0">Mobile Number</th>
+                                                <th class="border-0">Email Address</th>
+                                                <th class="border-0">User Name</th>
+                                                <th class="border-0">Address</th>
+                                                <th class="border-0">Pincode</th>
+                                                <th class="border-0">Gender</th>
+                                                <th class="border-0">Creation Date</th>
+                                                <th class="border-0">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
-                                                </td>
-                                                <td> Fund is not recieved </td>
-                                                <td>
-                                                    <label class="badge badge-gradient-success">DONE</label>
-                                                </td>
-                                                <td> Dec 5, 2017 </td>
-                                                <td> WD-12345 </td>
+                                            <?php if (!empty($fetchcustomers)) : ?>
+                                                <?php foreach ($fetchcustomers as $customer) : ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo @$customer['UserFirstName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['UserMiddleName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['UserLastName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['MobileNumber']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['EmailAddress']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['UserName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['Address']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['Pincode']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['Gender']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['CreationDate']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo @$customer['status']; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else : ?>
+                                                <tr>
+                                                    <td colspan="12">No customers available.</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Sellers</h4>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-light">
+                                            <tr class="border-0">
+                                                <th class="border-0">First Name</th>
+                                                <th class="border-0">Middle Name</th>
+                                                <th class="border-0">Last Name</th>
+                                                <th class="border-0">Mobile Number</th>
+                                                <th class="border-0">Email Address</th>
+                                                <th class="border-0">User Name</th>
+                                                <th class="border-0">Business Location</th>
+                                                <th class="border-0">Pincode</th>
+                                                <th class="border-0">Business Type</th>
+                                                <th class="border-0">Creation Date</th>
+                                                <th class="border-0">Status</th>
+                                                <th class="border-0">Business Document</th>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/faces/face2.jpg" class="me-2" alt="image"> Stella Johnson
-                                                </td>
-                                                <td> High loading time </td>
-                                                <td>
-                                                    <label class="badge badge-gradient-warning">PROGRESS</label>
-                                                </td>
-                                                <td> Dec 12, 2017 </td>
-                                                <td> WD-12346 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/faces/face3.jpg" class="me-2" alt="image"> Marina Michel
-                                                </td>
-                                                <td> Website down for one week </td>
-                                                <td>
-                                                    <label class="badge badge-gradient-info">ON HOLD</label>
-                                                </td>
-                                                <td> Dec 16, 2017 </td>
-                                                <td> WD-12347 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/faces/face4.jpg" class="me-2" alt="image"> John Doe
-                                                </td>
-                                                <td> Loosing control on server </td>
-                                                <td>
-                                                    <label class="badge badge-gradient-danger">REJECTED</label>
-                                                </td>
-                                                <td> Dec 3, 2017 </td>
-                                                <td> WD-12348 </td>
-                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($fetchsellers)) : ?>
+                                                <?php foreach ($fetchsellers as $seller) : ?>
+                                                    <tr>
+                                                        <td><?php echo @$seller['SellerFirstName']; ?></td>
+                                                        <td><?php echo @$seller['SellerMiddleName']; ?></td>
+                                                        <td><?php echo @$seller['SellerLastName']; ?></td>
+                                                        <td><?php echo @$seller['MobileNumber']; ?></td>
+                                                        <td><?php echo @$seller['EmailAddress']; ?></td>
+                                                        <td><?php echo @$seller['UserName']; ?></td>
+                                                        <td><?php echo @$seller['BusinessLocation']; ?></td>
+                                                        <td><?php echo @$seller['Pincode']; ?></td>
+                                                        <td><?php echo @$seller['BusinessType']; ?></td>
+                                                        <td><?php echo @$seller['CreationDate']; ?></td>
+                                                        <td><?php echo @$seller['status']; ?></td>
+                                                        <td><?php echo @$seller['businessdoc']; ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else : ?>
+                                                <tr>
+                                                    <td colspan="13">No sellers available.</td>
+                                                </tr>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -251,6 +315,8 @@ $decrevenue = decrevenue(connection());
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -292,20 +358,20 @@ $decrevenue = decrevenue(connection());
 </script>
 
 <script>
-    // Get the canvas element for the pie chart
-    var pieCtx = document.getElementById('pie-chart').getContext('2d');
-
     // Data for the pie chart (two fields: Seller and Customer)
     var pieData = {
         labels: ['Seller', 'Customer'],
         datasets: [{
-            data: [<?php echo @$seller ?>, <?php echo @$customer ?>],
+            data: [<?php echo @$totalseller ?>, <?php echo @$totalcustomer ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.6)', // Color for Seller
                 'rgba(54, 162, 235, 0.6)' // Color for Customer
             ]
         }]
     };
+
+    // Get the canvas element for the pie chart
+    var pieCtx = document.getElementById('pie-chart').getContext('2d');
 
     // Create the pie chart
     var pieChart = new Chart(pieCtx, {

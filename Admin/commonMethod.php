@@ -25,7 +25,7 @@ function totalSeller($con)
         $id = $row['id'];
         return $id;
     }
-}
+} 
 
 //fetch total revenue
 function totalrevenue($con)
@@ -220,3 +220,80 @@ function decrevenue($con)
     }
 }
 
+
+function fetchCustomers($con)
+{
+    $customers = array();
+
+    // Define the SQL query with the corrected table name and use placeholders for prepared statements
+    $sql = "SELECT UserId, UserFirstName, UserMiddleName, UserLastName, MobileNumber, EmailAddress, UserName, Password, Address, Pincode, Gender, CreationDate, status
+            FROM customerregistration";
+
+    // Use a prepared statement to execute the query
+    $stmt = $con->prepare($sql);
+    if ($stmt) {
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $customer = array(
+                'UserFirstName' => $row["UserFirstName"],
+                'UserMiddleName' => $row["UserMiddleName"],
+                'UserLastName' => $row["UserLastName"],
+                'MobileNumber' => $row["MobileNumber"],
+                'EmailAddress' => $row["EmailAddress"],
+                'UserName' => $row["UserName"],
+                'Password' => $row["Password"],
+                'Address' => $row["Address"],
+                'Pincode' => $row["Pincode"],
+                'Gender' => $row["Gender"],
+                'CreationDate' => $row["CreationDate"],
+                'status' => $row["status"],
+            );
+            $customers[] = $customer;
+        }
+
+        $stmt->close();
+    }
+
+    return $customers;
+}
+
+function fetchSellers($con)
+{
+    $sellers = array();
+
+    $sql = "SELECT SellerId, SellerFirstName, SellerMiddleName, SellerLastName, MobileNumber, EmailAddress, UserName, Password, BusinessLocation, Pincode, BusinessType, CreationDate, status, businessdoc
+            FROM sellerregistration";
+
+    $stmt = $con->prepare($sql);
+    if ($stmt) {
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $seller = array(
+                'SellerFirstName' => $row["SellerFirstName"],
+                'SellerMiddleName' => $row["SellerMiddleName"],
+                'SellerLastName' => $row["SellerLastName"],
+                'MobileNumber' => $row["MobileNumber"],
+                'EmailAddress' => $row["EmailAddress"],
+                'UserName' => $row["UserName"],
+                'Password' => $row["Password"],
+                'BusinessLocation' => $row["BusinessLocation"],
+                'Pincode' => $row["Pincode"],
+                'BusinessType' => $row["BusinessType"],
+                'CreationDate' => $row["CreationDate"],
+                'status' => $row["status"],
+                'businessdoc' => $row["businessdoc"],
+            );
+            $sellers[] = $seller;
+        }
+
+        $stmt->close();
+
+        return $sellers;
+    }
+}
+
+?>

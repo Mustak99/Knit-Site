@@ -13,7 +13,7 @@ function totalProduct($con, $sellerId)
     $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+        $row = $result->fetch_assoc(); 
         $id = $row['id'];
         return $id;
     }
@@ -200,11 +200,12 @@ function fetchPendingOrders($con, $sellerId)
 
 function fetchCompleteOrders($con, $sellerId)
 {
-    // Query to retrieve pending orders with product names
-    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, oi.quantity, oi.total_price
+    // Query to retrieve complete orders with customer names and product categories
+    $query = "SELECT o.order_id, cr.UserFirstName AS customer_name, o.order_date, o.status, p.name AS product_name, p.category, oi.quantity, oi.total_price
               FROM orders o
               JOIN order_items oi ON o.order_id = oi.order_id
               JOIN products p ON oi.product_id = p.id
+              JOIN customerregistration cr ON o.customer_id = cr.UserID
               WHERE o.status = 'Dispatch' 
               AND p.SID = $sellerId";
 
@@ -220,10 +221,11 @@ function fetchCompleteOrders($con, $sellerId)
         while ($row = $result->fetch_assoc()) {
             $completeOrders[] = array(
                 "OrderID" => $row["order_id"],
-                "CustomerID" => $row["customer_id"],
+                "CustomerName" => $row["customer_name"],
                 "OrderDate" => $row["order_date"],
                 "Status" => $row["status"],
-                "ProductName" => $row["name"],
+                "ProductName" => $row["product_name"],
+                "Category" => $row["category"],
                 "Quantity" => $row["quantity"],
                 "TotalPrice" => $row["total_price"]
             );
@@ -234,6 +236,7 @@ function fetchCompleteOrders($con, $sellerId)
 
     return $completeOrders;
 }
+
 
 // fetch reject order
 
@@ -331,5 +334,185 @@ function fetchOrderStatus($con, $sellerId)
 
     return $orderStatus;
 }
+
+// fetch current week revenue
+function fetchCurrentWeekRevenue($con, $sellerId)
+{
+    // Calculate the start and end dates of the current week
+    $currentDate = date('Y-m-d');
+    $startOfWeek = strtotime('last sunday', strtotime($currentDate));
+
+    $revenueData = array();
+
+    for ($day = 0; $day < 7; $day++) {
+        $date = date('Y-m-d', strtotime("+$day days", $startOfWeek));
+
+        // SQL query to fetch revenue for a specific day
+        $query = "
+            SELECT
+                SUM(oi.total_price) AS revenue
+            FROM
+                orders o
+            JOIN
+                order_items oi ON o.order_id = oi.order_id
+            JOIN
+                products p ON oi.product_id = p.id
+            WHERE
+                p.SID = $sellerId
+                AND DATE(o.order_date) = '$date'
+        ";
+
+        $result = mysqli_query($con, $query);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $revenueData[date('l', strtotime($date))] = $row['revenue'];
+        }
+    }
+
+    return $revenueData;
+}
+
+
+
+// fetch previous week revenue
+
+function fetchPreviousWeekRevenue($con, $sellerId)
+{
+    // Calculate the start and end dates of the previous week
+    $currentDate = date('Y-m-d');
+    $startOfWeek = strtotime('last sunday', strtotime($currentDate . ' -1 week'));
+
+    $revenueData = array();
+
+    for ($day = 0; $day < 7; $day++) {
+        $date = date('Y-m-d', strtotime("+$day days", $startOfWeek));
+
+        // SQL query to fetch revenue for a specific day
+        $query = "
+            SELECT
+                SUM(oi.total_price) AS revenue
+            FROM
+                orders o
+            JOIN
+                order_items oi ON o.order_id = oi.order_id
+            JOIN
+                products p ON oi.product_id = p.id
+            WHERE
+                p.SID = $sellerId
+                AND DATE(o.order_date) = '$date'
+        ";
+
+        $result = mysqli_query($con, $query);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $revenueData[date('l', strtotime($date))] = $row['revenue'];
+        }
+    }
+
+    return $revenueData;
+}
+
+
+// fetch pending order count
+
+function fetchPendingOrdersCount($con, $sellerId)
+{
+    $query = "SELECT COUNT(*) as pending_order_count
+              FROM orders o
+              JOIN order_items oi ON o.order_id = oi.order_id
+              JOIN products p ON oi.product_id = p.id
+              WHERE o.status = 'Pending' 
+              AND p.SID = $sellerId;";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $row = $result->fetch_assoc();
+    $pendingOrderCount = $row["pending_order_count"];
+
+    $con->close();
+
+    return $pendingOrderCount;
+}
+
+
+// fetch pending order count
+function fetchDispatchedOrdersCount($con, $sellerId)
+{
+    $query = "SELECT COUNT(*) as dispatched_order_count
+              FROM orders o
+              JOIN order_items oi ON o.order_id = oi.order_id
+              JOIN products p ON oi.product_id = p.id
+              WHERE o.status = 'Dispatch' 
+              AND p.SID = $sellerId;";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $row = $result->fetch_assoc();
+    $dispatchedOrderCount = $row["dispatched_order_count"];
+
+    $con->close();
+
+    return $dispatchedOrderCount;
+}
+
+
+// fetch pending order count
+
+function fetchRejectedOrdersCount($con, $sellerId)
+{
+    $query = "SELECT COUNT(*) as rejected_order_count
+              FROM orders o
+              JOIN order_items oi ON o.order_id = oi.order_id
+              JOIN products p ON oi.product_id = p.id
+              WHERE o.status = 'Reject' 
+              AND p.SID = $sellerId;";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $row = $result->fetch_assoc();
+    $rejectedOrderCount = $row["rejected_order_count"];
+
+    $con->close();
+
+    return $rejectedOrderCount;
+}
+
+
+// fetch outward stock count
+
+function fetchOutwardstock($con)
+{
+    $query = "SELECT SUM(oi.quantity) as total_dispatched_quantity
+              FROM orders o
+              JOIN order_items oi ON o.order_id = oi.order_id
+              WHERE o.status = 'Dispatch';";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $row = $result->fetch_assoc();
+    $fetchOutwardstock = $row["total_dispatched_quantity"];
+
+    return $fetchOutwardstock;
+}
+
+
 
 ?>

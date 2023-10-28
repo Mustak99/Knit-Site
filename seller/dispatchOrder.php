@@ -17,12 +17,12 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
             <thead>
                 <tr>
                     <th>Order ID</th>
-                    <th>Customer ID</th>
-                    <th>Order Date</th>
-                    <th>Status</th>
+                    <th>Customer Name</th>
                     <th>Product Name</th>
-                    <th>Quantity</th>
                     <th>Price</th>
+                    <th>Order Date</th>
+                    <th>Catehory</th>
+                    <th>Quantity</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,26 +33,26 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
                 <?php else: ?>
                     <?php foreach ($completeOrders as $completeOrder): ?>
                         <tr>
-                            <td>
+                        <td>
                                 <?php echo @$completeOrder['OrderID']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['CustomerID']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$completeOrder['OrderDate']; ?>
-                            </td>
-                            <td>
-                                <?php echo @$completeOrder['Status']; ?>
+                                <?php echo @$completeOrder['CustomerName']; ?>
                             </td>
                             <td>
                                 <?php echo @$completeOrder['ProductName']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['Quantity']; ?>
+                                <?php echo @$completeOrder['TotalPrice']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['TotalPrice']; ?>
+                                <?php echo @$completeOrder['OrderDate']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$completeOrder['Category']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$completeOrder['Quantity']; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
