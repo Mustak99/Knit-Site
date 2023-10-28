@@ -5,7 +5,14 @@ if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
     $user_id = $_SESSION["CustomerUserID"];
     $price = $_GET['price'];
-    $quantity = 1;
+    $quantity=1;
+    if(isset($_GET['quantity'])){
+    $quantity = trim($_GET['quantity']);
+    }
+    else{
+        $quantity=1;
+    }
+     
 
     $conn = new mysqli("localhost", "root", "", "knitsite");
     if ($conn->connect_error) {
@@ -43,4 +50,3 @@ if (isset($_GET['product_id'])) {
 } else {
     echo "Product ID not specified.";
 }
-?>

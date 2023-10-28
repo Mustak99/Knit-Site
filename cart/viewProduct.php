@@ -1,38 +1,38 @@
 <?php
-$cart=1;
+$cart = 1;
 include_once '../head.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <body>
-<?php include_once '../header.php';
+    <?php include_once '../header.php';
 
-?>
-<?php
-// Create a connection to the database
-$conn = new mysqli("localhost", "root", "", "knitsite");
+    ?>
+    <?php
+    // Create a connection to the database
+    $conn = new mysqli("localhost", "root", "", "knitsite");
 
-// Check the connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+    // Check the connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
-// Retrieve the product ID from the URL
-$product_id = $_GET['product_id'];
+    // Retrieve the product ID from the URL
+    $product_id = $_GET['product_id'];
 
-// Prepare and execute a SQL query to fetch product details
-$sql = "SELECT p.*, ps.size FROM products p
+    // Prepare and execute a SQL query to fetch product details
+    $sql = "SELECT p.*, ps.size FROM products p
         LEFT JOIN product_size ps ON p.id = ps.product_id
         WHERE p.id = $product_id";
-$result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
 
-if (mysqli_num_rows($result) > 0) {
-    // Fetch the product details
-    $product = mysqli_fetch_assoc($result);
-?>
+    if (mysqli_num_rows($result) > 0) {
+        // Fetch the product details
+        $product = mysqli_fetch_assoc($result);
+    ?>
         <div class="container">
-            <div class="col border p-3 main-section bg-white" >
-                <div class="row m-0 " >
+            <div class="col border p-3 main-section bg-white">
+                <div class="row m-0 ">
                     <div class="col-lg-4 left-side-product-box pb-3">
                         <img src="../seller/<?php echo $product['image_path']; ?>" class="img-fluid border p-3">
                     </div>
@@ -43,7 +43,7 @@ if (mysqli_num_rows($result) > 0) {
                                     <h3><?php echo $product['name']; ?></h3>
                                 </div>
                                 <div class="col-lg-12">
-                                    <p class="m-0 p-0 price-pro">$<?php echo number_format($product['price'], 2); ?></p>
+                                    <p class="m-0 p-0 price-pro">₹<?php echo number_format($product['price'], 2); ?></p>
                                     <hr class="p-0 m-0">
                                 </div>
                                 <div class="col-lg-12 pt-2">
@@ -67,11 +67,17 @@ if (mysqli_num_rows($result) > 0) {
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="row">
-                                        <div class="col-4`"><h6>Quantity :</h6></div>
-                                    <div class="col-4">
-                                    <input type="number" class="text-center w-100" value="1">
+                                        <div class="col-4">
+                                            <h6>Quantity :</h6>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="number" class="text-center w-100" value="1" id="quantityInput" onkeyup="changeLink();">
+                                        </div>
+                                        <div class="col">
+                                            <a href="../cart/insertIntoCart.php?product_id=<?php echo $product['id'] ?>&price=<?php echo $product['price'] ?>&quantity=1" id="addToCartLink" class="btn btn-danger w-100">Add To Cart</a>
+                                        </div>
                                     </div>
-                                    </div>
+
                                 </div>
                                 <div class="col-lg-12 mt-3">
                                     <div class="row">
@@ -79,7 +85,7 @@ if (mysqli_num_rows($result) > 0) {
 
                                         </div>
                                         <div class="col-lg-6">
-                                           <a href="../cart/insertIntoCart.php?product_id=<?php echo $product['id'] ?>&price=<?php echo $product['price'] ?>" class="btn btn-danger w-100">Add To Cart</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +95,7 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-center pt-3">
-                    <h2 class="section-title px-5"><span class="px-2">More Products</span></h2>
+                        <h2 class="section-title px-5"><span class="px-2">More Products</span></h2>
                     </div>
                 </div>
                 <div class="row mt-3 p-0 text-center pro-box-section">
@@ -113,12 +119,20 @@ if (mysqli_num_rows($result) > 0) {
         </div>
 
 
-<?php
-include_once '../footer.php';
-} else {
-    echo "Product not found.";
-}
+    <?php
+        include_once '../footer.php';
+    } else {
+        echo "Product not found.";
+    }
 
-// Close the database connection
-mysqli_close($conn);
-?>
+    // Close the database connection
+    mysqli_close($conn);
+    ?>
+    <script>
+
+    function changeLink() {
+        var quantity = document.getElementById('quantityInput').value;
+
+        addToCartLink.href = `../cart/insertIntoCart.php?product_id=<?php echo $product['id'] ?>&price=<?php echo $product['price'] ?>&quantity=${quantity}`;
+    }
+</script>

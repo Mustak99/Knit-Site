@@ -60,7 +60,7 @@ if ($result) {
               <p class="text-muted">Deliverd By: <span class="text-body">' . $expected_delivery_date . '</span></p>
             </div>
             <div>
-              <img class="align-self-center img-fluid" src="../seller/' . $image_path . '" width="250">
+              <img class="align-self-center img-fluid" src="../seller/' . $image_path . '" width="250" style="height:200px">
             </div>
           </div>
         </div>
