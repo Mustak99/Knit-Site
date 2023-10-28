@@ -1,7 +1,6 @@
 <?php include_once 'sellerHeader.php'; ?>
 <?php
 include_once("commonMethod.php");
-// $idVal = totalProduct(connection());
 $products = fetchProductsWithSizes(connection(), $sellerId);
 ?>
 <!DOCTYPE html>
