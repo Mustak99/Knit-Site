@@ -1,12 +1,12 @@
 
 
 <?php
+include 'includes/db.php';
+if(isset($_GET['delete_sellers'])){
 
-if(isset($_GET['seller_delete'])){
+$delete_id = $_GET['delete_sellers'];
 
-$delete_id = $_GET['seller_delete'];
-
-$delete_seller = "delete from sellers where seller_id='$delete_id'";
+$delete_seller = "delete from sellerregistration where SellerId='$delete_id'";
 
 $run_delete = mysqli_query($con,$delete_seller);
 
