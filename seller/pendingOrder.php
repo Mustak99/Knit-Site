@@ -26,21 +26,24 @@ $orderCount = count($pendingOrders);
 
                                 <div class="card-body">
                                     <div class="card-heading">
-                                        <h5 class="card-title">Order ID:
-                                            <?php echo @$pendingOrder['OrderID']; ?>
+                                        <h5 class="card-title">Customer:
+                                            <?php echo @$pendingOrder['CustomerName']; ?>
                                         </h5>
                                     </div>
-                                    <p class="card-text">Customer ID:
+                                    <!-- <p class="card-text">Customer ID:
                                         <?php echo @$pendingOrder['CustomerID']; ?>
-                                    </p>
+                                    </p> -->
                                     <p class="card-text">Order Date:
                                         <?php echo @$pendingOrder['OrderDate']; ?>
                                     </p>
                                     <p class="card-text">Status:
                                         <?php echo @$pendingOrder['Status']; ?>
                                     </p>
-                                    <p class="card-text">Product Name:
+                                    <p class="card-text" class="text-justify">Product Name:
                                         <?php echo @$pendingOrder['ProductName']; ?>
+                                    </p>
+                                    <p class="card-text">Description:
+                                        <?php echo @$pendingOrder['Description']; ?>
                                     </p>
                                     <p class="card-text">Quantity:
                                         <?php echo @$pendingOrder['Quantity']; ?>
