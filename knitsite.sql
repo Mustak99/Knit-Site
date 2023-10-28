@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 07:05 AM
+-- Generation Time: Oct 28, 2023 at 07:08 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -217,7 +217,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `cat
 (110, 'Shirt', 'White Colour', '1500.00', 'Zudio', 'Mens', 'uploads/653c86fe2f4ce.jpg', '2023-10-28 03:58:54', 1, 19, 50),
 (111, 'T Shirt', 'Printed', '2000.00', 'Zudio', 'Mens', 'uploads/653c873318906.jpg', '2023-10-28 03:59:47', 1, 19, 50),
 (112, 'Coat', 'Black Colour', '3000.00', 'Zara', 'Womens', 'uploads/653c876788863.jpg', '2023-10-28 04:00:39', 1, 19, 50),
-(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 75),
+(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 70),
 (114, 'One Piece', 'Black Colour', '2000.00', 'Zara', 'Womens', 'uploads/653c87cb9682d.jpg', '2023-10-28 04:02:19', 1, 19, 50),
 (115, 'Top', 'Grey Colour', '2000.00', 'Zudio', 'Womens', 'uploads/653c87fa3cbc2.jpg', '2023-10-28 04:03:06', 1, 19, 50);
 
@@ -261,8 +261,6 @@ INSERT INTO `product_size` (`id`, `product_id`, `size`) VALUES
 (165, 111, 'XXL'),
 (166, 112, 'L'),
 (167, 112, 'XL'),
-(168, 113, 'L'),
-(169, 113, 'XL'),
 (170, 114, 'M'),
 (171, 114, 'L'),
 (172, 114, 'XL'),
@@ -274,7 +272,9 @@ INSERT INTO `product_size` (`id`, `product_id`, `size`) VALUES
 (181, 104, 'S'),
 (182, 104, 'M'),
 (183, 105, 'XS'),
-(184, 105, 'M');
+(184, 105, 'M'),
+(185, 113, 'L'),
+(186, 113, 'XL');
 
 -- --------------------------------------------------------
 
@@ -411,7 +411,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `sellerregistration`
