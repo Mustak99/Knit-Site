@@ -516,4 +516,4 @@ function fetchOutwardstock($con)
 
     return $fetchOutwardstock;
 }
-?> 
+?>
