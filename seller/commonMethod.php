@@ -13,7 +13,7 @@ function totalProduct($con, $sellerId)
     $query = "SELECT count(id) as id FROM products where SID=$sellerId";
     $result = mysqli_query($con, $query);
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc(); 
+        $row = $result->fetch_assoc();
         $id = $row['id'];
         return $id;
     }
@@ -160,12 +160,14 @@ function totalchildren($con, $sellerId)
 
 function fetchPendingOrders($con, $sellerId)
 {
-    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, p.image_path, oi.quantity, oi.total_price
+    $query = "SELECT o.order_id, o.customer_id, c.UserFirstName, o.order_date, o.status, p.name, p.image_path, p.description, oi.quantity, oi.total_price
     FROM orders o
     JOIN order_items oi ON o.order_id = oi.order_id
     JOIN products p ON oi.product_id = p.id
+    JOIN customerregistration c ON o.customer_id = c.UserId
     WHERE o.status = 'Pending' 
     AND p.SID = $sellerId;";
+
 
     $result = $con->query($query);
 
@@ -179,10 +181,12 @@ function fetchPendingOrders($con, $sellerId)
         while ($row = $result->fetch_assoc()) {
             $pendingOrders[] = array(
                 "OrderID" => $row["order_id"],
+                "CustomerName" => $row["UserFirstName"],
                 "CustomerID" => $row["customer_id"],
                 "OrderDate" => $row["order_date"],
                 "Status" => $row["status"],
                 "ProductName" => $row["name"],
+                "Description" => $row["description"],
                 "Quantity" => $row["quantity"],
                 "TotalPrice" => $row["total_price"],
                 "Image" => $row["image_path"]

@@ -78,7 +78,7 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
                         <h5 class="text-muted">Total Quantity</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1 text-primary">
-                                <?php echo @$quantity; ?>
+                                <?php echo @$quantity + $outwardstock; ?>
                             </h1>
                         </div>
                     </div>

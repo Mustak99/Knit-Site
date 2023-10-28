@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2023 at 11:47 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Oct 28, 2023 at 07:08 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_name`, `admin_email`, `admin_login_id`, `admin_password`, `admin_address`) VALUES
-('Mustak', 'Mustak217@gmail.com', 'admin', 'e2857ec944d0f521ff193b5e29578954', 'unn,tirupati nagar ,surat');
+('Mustak', 'Mustak217@gmail.com', 'admin', 'fc2a30cf9f5fe16b87284e3cf5207f37', 'unn,tirupati nagar ,surat');
 
 -- --------------------------------------------------------
 
@@ -56,15 +56,6 @@ CREATE TABLE `cart` (
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
-(6, 13, 98, 1, 2000.00, '2023-10-27 07:03:09'),
-(7, 13, 101, 1, 10.00, '2023-10-27 07:03:10'),
-(8, 13, 102, 1, 10.00, '2023-10-27 07:03:13');
 
 -- --------------------------------------------------------
 
@@ -143,16 +134,20 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`) VALUES
-(1, 15, '2023-01-06 17:14:01', 'Pending'),
-(2, 12, '2023-02-06 18:23:39', 'Pending'),
-(3, 15, '2023-03-06 21:18:21', 'Pending'),
-(4, 15, '2023-04-07 15:14:27', 'Pending'),
-(5, 15, '2023-05-20 16:53:04', 'Pending'),
-(6, 14, '2023-06-20 16:53:27', 'Pending'),
-(7, 12, '2023-07-20 16:53:44', 'Pending'),
-(8, 10, '2023-08-20 16:53:57', 'Pending'),
-(9, 15, '2023-09-20 16:58:35', 'Pending'),
-(10, 15, '2023-10-20 16:58:47', 'Pending');
+(1, 13, '2023-10-15 04:09:52', 'Pending'),
+(2, 15, '2023-10-16 04:16:25', 'Pending'),
+(3, 8, '2023-10-17 04:18:02', 'Pending'),
+(4, 9, '2023-10-18 04:18:16', 'Pending'),
+(5, 10, '2023-10-19 04:18:29', 'Reject'),
+(6, 11, '2023-10-20 04:18:43', 'Pending'),
+(7, 12, '2023-10-21 04:18:52', 'Dispatch'),
+(8, 13, '2023-10-22 04:19:02', 'Pending'),
+(9, 14, '2023-10-23 04:19:20', 'Reject'),
+(10, 15, '2023-10-24 04:19:51', 'Dispatch'),
+(11, 15, '2023-10-25 04:20:04', 'Dispatch'),
+(12, 12, '2023-10-26 04:20:17', 'Pending'),
+(13, 15, '2023-10-27 04:20:30', 'Dispatch'),
+(14, 15, '2023-10-28 04:20:40', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -173,16 +168,20 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `total_price`) VALUES
-(1, 1, 98, 1, 2000.00),
-(2, 2, 98, 1, 2000.00),
-(3, 3, 97, 5, 1000.00),
-(4, 4, 101, 5, 2000.00),
-(5, 5, 96, 1, 500.00),
-(6, 6, 97, 1, 3000.00),
-(7, 7, 98, 1, 500.00),
-(8, 8, 101, 1, 2000.00),
-(9, 9, 96, 1, 5000.00),
-(10, 10, 96, 1, 4000.00);
+(1, 1, 104, 1, '1000.00'),
+(2, 2, 105, 1, '500.00'),
+(3, 3, 106, 2, '1000.00'),
+(4, 4, 107, 1, '1500.00'),
+(5, 5, 108, 2, '4000.00'),
+(6, 6, 109, 1, '3000.00'),
+(7, 7, 110, 1, '1500.00'),
+(8, 8, 111, 1, '2000.00'),
+(9, 9, 112, 1, '3000.00'),
+(10, 10, 113, 2, '3000.00'),
+(11, 11, 114, 1, '2000.00'),
+(12, 12, 115, 1, '2000.00'),
+(13, 14, 107, 1, '1500.00'),
+(14, 13, 113, 1, '1500.00');
 
 -- --------------------------------------------------------
 
@@ -209,12 +208,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `category`, `image_path`, `add_date`, `status`, `SID`, `quantity`) VALUES
-(96, 'Shirt', 'White', 2000.00, 'Zara', 'Mens', 'uploads/65203501701ae.jpg', '2023-10-06 16:25:37', 1, 19, 10),
-(97, 'Top', 'Nice', 1500.00, 'Zudio', 'Womens', 'uploads/652035299ddbb.jpg', '2023-10-06 16:26:17', 1, 19, 5),
-(98, 'Jacket', 'Blue', 2000.00, 'Jade Blue', 'Childrens', 'uploads/65203553c63c2.jpg', '2023-10-06 16:26:59', 1, 19, 17),
-(101, 'rthb', 'rgbt', 10.00, 'rtg', 'Mens', 'uploads/6521768658e4a.jpg', '2023-10-07 15:17:26', 1, 13, 10),
-(102, 'vdvx', 'dbb', 10.00, 'dbv', 'Mens', 'uploads/653299a3eb421.jpg', '2023-10-20 15:15:47', 1, 19, 10),
-(103, 'ygdvf', 'ngh', 10.00, 'fdb', 'Mens', 'uploads/65329be319817.jpg', '2023-10-20 15:25:23', 1, 19, 10);
+(104, 'T Shirt', 'White Colour', '1000.00', 'Zara', 'Womens', 'uploads/653c85bf94891.jpg', '2023-10-28 03:53:35', 1, 19, 100),
+(105, 'T Shirt', 'Blue Colour', '500.00', 'Zudio', 'Childrens', 'uploads/653c85fa9c477.jpg', '2023-10-28 03:54:34', 1, 19, 50),
+(106, 'Top', 'Printed', '500.00', 'Zudio', 'Childrens', 'uploads/653c8623c2676.jpg', '2023-10-28 03:55:15', 1, 19, 50),
+(107, 'Jacket', 'Blue Colour', '1500.00', 'Zara', 'Childrens', 'uploads/653c86695b32f.jpg', '2023-10-28 03:56:25', 1, 19, 100),
+(108, 'Suit', 'Black Colour', '2000.00', 'Woodland', 'Mens', 'uploads/653c86aab6b1f.jpg', '2023-10-28 03:57:30', 1, 19, 100),
+(109, 'Jacket', 'Blue Black Colour', '3000.00', 'Zara', 'Mens', 'uploads/653c86d8e86f4.jpg', '2023-10-28 03:58:16', 1, 19, 75),
+(110, 'Shirt', 'White Colour', '1500.00', 'Zudio', 'Mens', 'uploads/653c86fe2f4ce.jpg', '2023-10-28 03:58:54', 1, 19, 50),
+(111, 'T Shirt', 'Printed', '2000.00', 'Zudio', 'Mens', 'uploads/653c873318906.jpg', '2023-10-28 03:59:47', 1, 19, 50),
+(112, 'Coat', 'Black Colour', '3000.00', 'Zara', 'Womens', 'uploads/653c876788863.jpg', '2023-10-28 04:00:39', 1, 19, 50),
+(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 70),
+(114, 'One Piece', 'Black Colour', '2000.00', 'Zara', 'Womens', 'uploads/653c87cb9682d.jpg', '2023-10-28 04:02:19', 1, 19, 50),
+(115, 'Top', 'Grey Colour', '2000.00', 'Zudio', 'Womens', 'uploads/653c87fa3cbc2.jpg', '2023-10-28 04:03:06', 1, 19, 50);
 
 --
 -- Triggers `products`
@@ -243,16 +248,33 @@ CREATE TABLE `product_size` (
 --
 
 INSERT INTO `product_size` (`id`, `product_id`, `size`) VALUES
-(96, 96, 'XS'),
-(97, 96, 'M'),
-(98, 96, 'L'),
-(109, 101, 'M'),
-(129, 102, 'XS'),
-(130, 97, 'XL'),
-(137, 98, 'XXL'),
-(138, 103, 'XS'),
-(139, 103, 'M'),
-(140, 103, 'XL');
+(153, 107, 'XS'),
+(154, 107, 'S'),
+(155, 107, 'M'),
+(158, 109, 'L'),
+(159, 109, 'XL'),
+(160, 110, 'M'),
+(161, 110, 'L'),
+(162, 110, 'XL'),
+(163, 110, 'XXL'),
+(164, 111, 'L'),
+(165, 111, 'XXL'),
+(166, 112, 'L'),
+(167, 112, 'XL'),
+(170, 114, 'M'),
+(171, 114, 'L'),
+(172, 114, 'XL'),
+(173, 115, 'XL'),
+(174, 115, 'XXL'),
+(175, 108, 'L'),
+(176, 108, 'XL'),
+(180, 106, 'M'),
+(181, 104, 'S'),
+(182, 104, 'M'),
+(183, 105, 'XS'),
+(184, 105, 'M'),
+(185, 113, 'L'),
+(186, 113, 'XL');
 
 -- --------------------------------------------------------
 
@@ -359,7 +381,7 @@ ALTER TABLE `sellerregistration`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `customerregistration`
@@ -371,25 +393,25 @@ ALTER TABLE `customerregistration`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `sellerregistration`

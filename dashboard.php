@@ -138,7 +138,7 @@ if ($result->num_rows > 0) {
             <?php
                if(!empty($row))
                foreach($row as $rows)
-               
+                
               { 
             ?>
             <tr>
