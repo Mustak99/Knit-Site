@@ -47,6 +47,7 @@
             <a href="dashboard.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="view_sellers.php" class="nav-item nav-link"><i class='fa fa-user'></i>View Sellers</a>
             <a href="view_customers.php" class="nav-item nav-link"><i class='fa fa-user'></i>View Customers</a>
+            <a href="view_products.php" class="nav-item nav-link"><i class='fa fa-user'></i>View Products</a>
             <a href="../login/logout.php" class="nav-item nav-link"><i class="fa fa-power-off"></i>Logout</a>
 
         </div>
