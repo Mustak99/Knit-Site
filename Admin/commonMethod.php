@@ -237,7 +237,6 @@ function fetchCustomers($con)
 
         while ($row = $result->fetch_assoc()) {
             $customer = array(
-                'UserId' => $row["UserId"],
                 'UserFirstName' => $row["UserFirstName"],
                 'UserMiddleName' => $row["UserMiddleName"],
                 'UserLastName' => $row["UserLastName"],
@@ -254,7 +253,7 @@ function fetchCustomers($con)
             $customers[] = $customer;
         }
 
-        $stmt->close(); // Close the prepared statement
+        $stmt->close();
     }
 
     return $customers;
@@ -274,7 +273,6 @@ function fetchSellers($con)
 
         while ($row = $result->fetch_assoc()) {
             $seller = array(
-                'SellerId' => $row["SellerId"],
                 'SellerFirstName' => $row["SellerFirstName"],
                 'SellerMiddleName' => $row["SellerMiddleName"],
                 'SellerLastName' => $row["SellerLastName"],
@@ -297,3 +295,5 @@ function fetchSellers($con)
         return $sellers;
     }
 }
+
+?>

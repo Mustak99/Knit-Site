@@ -1,7 +1,7 @@
 <?php
 include_once("commonMethod.php");
-$customer = totalcustomer(connection());
-$seller = totalseller(connection());
+$totalcustomer = totalcustomer(connection());
+$totalseller = totalseller(connection());
 $revenue = totalrevenue(connection());
 $janrevenue = janrevenue(connection());
 $febrevenue = febrevenue(connection());
@@ -15,8 +15,8 @@ $seprevenue = seprevenue(connection());
 $octrevenue = octrevenue(connection());
 $novrevenue = novrevenue(connection());
 $decrevenue = decrevenue(connection());
-$customers = fetchCustomers(connection());
-$sellers = fetchCustomers(connection());
+$fetchcustomers = fetchCustomers(connection());
+$fetchsellers = fetchSellers(connection());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,7 +140,7 @@ $sellers = fetchCustomers(connection());
                             <div class="card-body">
                                 <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                                 <h4 class="font-weight-normal mb-3">Customers</h4>
-                                <h2 class="mb-5"><?php echo @$customer ?></h2>
+                                <h2 class="mb-5"><?php echo @$totalcustomer ?></h2>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ $sellers = fetchCustomers(connection());
                             <div class="card-body">
                                 <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                                 <h4 class="font-weight-normal mb-3">Sellers</h4>
-                                <h2 class="mb-5"><?php echo @$seller ?></h2>
+                                <h2 class="mb-5"><?php echo @$totalseller ?></h2>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@ $sellers = fetchCustomers(connection());
                     <div class="col-md-5 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Traffic Sources</h4>
+                                <h4 class="card-title">Cureent Active Users</h4>
                                 <canvas id="pie-chart"></canvas>
                                 <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
 
@@ -195,7 +195,7 @@ $sellers = fetchCustomers(connection());
                                     <table class="table">
                                         <thead class="bg-light">
                                             <tr class="border-0">
-                                                <th class="border-0">User ID</th>
+
                                                 <th class="border-0">First Name</th>
                                                 <th class="border-0">Middle Name</th>
                                                 <th class="border-0">Last Name</th>
@@ -210,12 +210,9 @@ $sellers = fetchCustomers(connection());
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($customers)) : ?>
-                                                <?php foreach ($customers as $customer) : ?>
+                                            <?php if (!empty($fetchcustomers)) : ?>
+                                                <?php foreach ($fetchcustomers as $customer) : ?>
                                                     <tr>
-                                                        <td>
-                                                            <?php echo @$customer['UserId']; ?>
-                                                        </td>
                                                         <td>
                                                             <?php echo @$customer['UserFirstName']; ?>
                                                         </td>
@@ -269,12 +266,11 @@ $sellers = fetchCustomers(connection());
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Customers</h4>
+                                <h4 class="card-title">Sellers</h4>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="bg-light">
                                             <tr class="border-0">
-                                                <th class="border-0">Seller ID</th>
                                                 <th class="border-0">First Name</th>
                                                 <th class="border-0">Middle Name</th>
                                                 <th class="border-0">Last Name</th>
@@ -290,10 +286,9 @@ $sellers = fetchCustomers(connection());
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($sellers)) : ?>
-                                                <?php foreach ($sellers as $seller) : ?>
+                                            <?php if (!empty($fetchsellers)) : ?>
+                                                <?php foreach ($fetchsellers as $seller) : ?>
                                                     <tr>
-                                                        <td><?php echo @$seller['SellerId']; ?></td>
                                                         <td><?php echo @$seller['SellerFirstName']; ?></td>
                                                         <td><?php echo @$seller['SellerMiddleName']; ?></td>
                                                         <td><?php echo @$seller['SellerLastName']; ?></td>
@@ -367,7 +362,7 @@ $sellers = fetchCustomers(connection());
     var pieData = {
         labels: ['Seller', 'Customer'],
         datasets: [{
-            data: [<?php echo @$seller ?>, <?php echo @$customer ?>],
+            data: [<?php echo @$totalseller ?>, <?php echo @$totalcustomer ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.6)', // Color for Seller
                 'rgba(54, 162, 235, 0.6)' // Color for Customer
