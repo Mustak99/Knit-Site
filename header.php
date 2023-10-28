@@ -46,8 +46,8 @@
          </div>
          <div class="col-lg-3 col-6 text-right">
              <a href="" class="btn border">
-                 <i class="fas fa-heart text-primary"></i>
-                 <span class="badge">0</span>
+                 
+                 <span class="badge"></span>
              </a>
              <a  class="btn border" id="cart-btn" href="<?php if(isset($search)){echo'../cart/cart.php';} elseif(isset($cart)){echo'../cart/cart.php';}elseif(isset($order)){echo'../cart/cart.php';} else{echo 'cart/cart.php';} ?>";>
                  <i class="fas fa-shopping-cart text-primary"></i>

@@ -41,7 +41,7 @@ include_once '../header.php';
                 echo '</div>';
                 echo '<div class="card-footer">';
                 echo '<div class="d-flex justify-content-between bg-light border">';
-                echo '<a href="../cart/viewProduct.php" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>';
+                echo '<a href="../cart/viewProduct.php?product_id=' . $row['id'] .'" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>';
                 echo '<a href="../cart/insertIntoCart.php?product_id=' . $row['id'] . '&price=' . $row['price'] . '" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>';
                 echo '</div>';
                 echo '</div>';

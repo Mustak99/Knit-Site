@@ -5,9 +5,9 @@ include_once '../head.php' ?>
 <html lang="en">
 
 <body>
-  <?php include_once '../header.php';
+<?php include_once '../header.php';
 
-  ?>
+?>
       <script>
     $(document).ready(function () {
         // Listen for changes in quantity input fields
@@ -103,7 +103,7 @@ include_once '../head.php' ?>
                             echo "<input type='number' min='1' class='form-control form-control-sm bg-secondary text-center' name='quantity' value='" . $row['quantity'] . "' id='quantity_" . $row['id'] . "' data-price='" . $row['price'] . "'>";
                             echo "</div>";
                             echo "</td>";
-                            echo "<td class='align-middle total'>" . ($row['price'] * $row['quantity']) . "</td>";
+                            echo "<td class='align-middle total'>" . number_format(($row['price'] * $row['quantity']),2) . "</td>";
                             echo "<td class='align-middle'><a class='btn btn-sm btn-primary' href='delete_product.php?productId=".$row['id']."'><i class='fa fa-times'></i></a></td>";
                             echo "</tr>";
                         }
@@ -154,17 +154,17 @@ $total = $subTotal + $shippingCost;
     <div class="card-body">
         <div class="d-flex justify-content-between mb-3 pt-1">
             <h6 class="font-weight-medium">Subtotal</h6>
-            <h6 class="font-weight-medium" id="subtotal"><?php echo $subTotal ;?></h6>
+            <h6 class="font-weight-medium" id="subtotal"><?php echo number_format( $subTotal,2) ;?></h6>
         </div>
         <div class="d-flex justify-content-between">
             <h6 class="font-weight-medium">Shipping</h6>
-            <h6 class="font-weight-medium"><?php echo $shippingCost; ?></h6>
+            <h6 class="font-weight-medium"><?php echo number_format($shippingCost,2); ?></h6>
         </div>
     </div>
     <div class="card-footer border-secondary bg-transparent">
         <div class="d-flex justify-content-between mt-2">
             <h5 class="font-weight-bold">Total</h5>
-            <h5 class="font-weight-bold" id="total"><?php echo $total; ?></h5>
+            <h5 class="font-weight-bold" id="total"><?php echo number_format( $total,2); ?></h5>
         </div>
         <button  id="rzp-button1" class="btn btn-block btn-primary my-3 py-3 rzp-button1">Proceed To Checkout</button>
     </div>
