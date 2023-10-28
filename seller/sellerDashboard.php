@@ -14,12 +14,13 @@ $completeordercount = fetchDispatchedOrdersCount(connection(), $sellerId);
 $rejectordercount = fetchRejectedOrdersCount(connection(), $sellerId);
 $outwardstock = fetchOutwardstock(connection(), $sellerId);
 $completeOrders = fetchCompleteOrders(connection(), $sellerId);
+$products = fetchProductsWithSizes(connection(), $sellerId);
 ?>
 
 <!doctype html>
 <html lang="en">
 
-<head> 
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -139,7 +140,7 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
         <!-- total sale  -->
         <div class="col-xl-4 col-lg-12 col-md-4 col-sm-12 col-12">
             <div class="card">
-                <h5 class="card-header">Total Sale</h5>
+                <h5 class="card-header">Order Status</h5>
                 <div class="card-body">
                     <canvas id="total-sale-pie" width="300" height="255"></canvas>
 
@@ -166,7 +167,7 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
                     <h4 class="card-header">Sold Products Details</h4>
                 </center>
                 <div class="card-body p-0">
-                    <div class="table-responsive" style="max-height: 426px; overflow-y: scroll;">
+                    <div class="table-responsive" style="max-height: 300px; overflow-y: scroll;">
                         <table class="table">
                             <thead class="bg-light">
                                 <tr class="border-0">
@@ -214,16 +215,80 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
 
             </div>
         </div>
-        
+
         <!-- ============================================================== -->
         <!-- end top selling products  -->
+
+    </div>
+
+    <br> <br>
+
+    <div class="row">
         <!-- ============================================================== -->
+        <!-- top selling products  -->
         <!-- ============================================================== -->
-        <!-- revenue locations  -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <center>
+                    <h4 class="card-header">Products Details</h4>
+                </center>
+                <div class="card-body p-0">
+                    <div class="table-responsive" style="max-height: 300px; overflow-y: scroll;">
+                        <table class="table">
+                            <thead class="bg-light">
+                                <tr class="border-0">
+                                    <th class="border-0">Name</th>
+                                    <th class="border-0">Brand</th>
+                                    <th class="border-0">Description</th>
+                                    <th class="border-0">Price</th>
+                                    <th class="border-0">Category</th>
+                                    <th class="border-0">Size</th>
+                                    <th class="border-0">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (empty($completeOrders) || (is_array($completeOrders) && empty($completeOrders[0]))): ?>
+                                    <tr>
+                                        <td colspan="7">No products found.</td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php foreach ($products as $product): ?>
+                                        <tr>
+                                            <td>
+                                                <?php echo @$product['name']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['brand_name']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['description']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['price']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['category']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['sizes']; ?>
+                                            </td>
+                                            <td>
+                                                <?php echo @$product['quantity']; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- ============================================================== -->
-        <!-- <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card"></div>
-        </div> -->
+        <!-- end top selling products  -->
+
     </div>
 
     </div>
@@ -412,12 +477,18 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
                             'rgba(255, 99, 132, 0.7)',
                             'rgba(54, 162, 235, 0.7)',
                             'rgba(255, 206, 86, 0.7)',
-                            // 'rgba(75, 192, 192, 0.7)',
-                            // 'rgba(153, 102, 255, 0.7)'
-                        ]
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                        borderWidth: 2
                     }
                 ]
             };
+
+
 
             var ctx = document.getElementById('total-sale-pie').getContext('2d');
 
