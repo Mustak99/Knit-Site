@@ -14,10 +14,10 @@ include 'includes/db.php';
                             <thead>
                                 <tr class="text-dark">
                                     <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Image</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">description</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">Brand Name</th>
                                     <th scope="col">Delete</th>
                                     <th scope="col">Edit</th>
                                 </tr>
@@ -32,17 +32,19 @@ include 'includes/db.php';
 
                                 while ($row_pro = mysqli_fetch_array($run_pro)) {
 
-                                    $pro_id = $row_pro['product_id'];
+                                    $pro_id = $row_pro['id'];
+                                    $pro_name = $row_pro['name'];
+                                  
 
-                                    $pro_title = $row_pro['product_title'];
+                                    $pro_title = $row_pro['description'];
 
-                                    $pro_image = $row_pro['product_img1'];
+                                    // $pro_image = $row_pro[''];
 
-                                    $pro_price = $row_pro['product_price'];
+                                    $pro_price = $row_pro['price'];
 
                                     //$pro_keywords = $row_pro['product_keywords'];
 
-                                    $pro_date = $row_pro['date'];
+                                    $pro_brandname= $row_pro['brand_name'];
 
                                     $i++;
                                     ?>
@@ -50,16 +52,19 @@ include 'includes/db.php';
                                     <tr>
 
                                         <td><?php echo $i; ?></td>
+                                        <td><?php echo $pro_name  ; ?></td> 
 
                                         <td><?php echo $pro_title; ?></td>
+                                        
+                                        
 
-                                        <td><img src="/newkidsland/includes/images/product/<?php echo $pro_image; ?>" width="60" height="60"></td>
+                                        <!-- <td><img src="/newkidsland/includes/images/product/<?php echo $pro_image; ?>" width="60" height="60"></td> -->
 
                                         <td>₹ <?php echo $pro_price; ?></td>
 
                                         <!--<td> <?php //echo $pro_keywords;  ?> </td>-->
 
-                                        <td><?php echo $pro_date; ?></td>
+                                        <td><?php echo $pro_brandname; ?></td>
 
                                         <td>
 

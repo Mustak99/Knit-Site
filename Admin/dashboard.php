@@ -83,41 +83,9 @@ $fetchsellers = fetchSellers(connection());
             </div>
             <div class="navbar-nav w-100">
                 <a href="dashboard.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-
-
                 <a href="view_sellers.php" class="nav-item nav-link"><i class='fa fa-user'></i>View Sellers</a>
                 <a href="view_customers.php" class="nav-item nav-link"><i class='fa fa-user'></i>View Customers</a>
-                <a href="view_deliveryboy.php" class="nav-item nav-link"><i class='fa fa-user'></i>View Delivery Boy</a>
-                <a href="view_products.php" class="nav-item nav-link"><i class='fas fa-tasks'></i>View Products</a>
-                <a href="view_orders.php" class="nav-item nav-link"><i class='fas fa-tasks'></i>View Orders</a>
-                <a href="view_payments.php" class="nav-item nav-link"><i class="fa fa-credit-card"></i>View Payments</a>
-                <a href="viewReports.php" class="nav-item nav-link"><i class="fa fa-file"></i>View Reports</a>
-
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-list"></i>Category</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                        <a href="insert_category.php" class="dropdown-item">Insert Category</a>
-                        <a href="view_category.php" class="dropdown-item">View Category</a>
-                    </div>
-                </div>
-
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-tags"></i>Coupons</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                        <a href="insert_coupon.php" class="dropdown-item">Insert Coupons</a>
-                        <a href="view_coupon.php" class="dropdown-item">View Coupons</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Delivery boy Salary</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                        <a href="insert_salary.php" class="dropdown-item">Insert Salary</a>
-                        <a href="view_salary.php" class="dropdown-item">View Salary</a>
-                    </div>
-                </div>
-                <a href="user_profile.php" class="nav-item nav-link"><i class="far fa-edit"></i>Edit Profile</a>
                 <a href="../login/logout.php" class="nav-item nav-link"><i class="fa fa-power-off"></i>Logout</a>
-
             </div>
         </nav>
     </div>
