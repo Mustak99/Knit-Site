@@ -10,9 +10,9 @@
                 <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
                     <div class="navbar-nav w-100 overflow-hidden" style="height: 123px">
                         <div class="nav-item dropdown" id="list" >
-                        <a href="<?php if ($order) { echo'../Category/mens.php';}else{echo './Category/mens.php';} ?>" class="nav-item nav-link">Men's Dresses</a>
-                        <a href="<?php if ($order) { echo'../Category/womens.php';}else{echo './Category/womens.php';} ?>" class="nav-item nav-link">Women's Dresses</a>
-                        <a href="<?php if ($order) { echo'../Category/childrens.php';}else{echo './Category/childrens.php';} ?>" class="nav-item nav-link">Children's Dresses</a>
+                        <a href="<?php if (isset($order)) { echo'../Category/mens.php';}else{echo './Category/mens.php';} ?>" class="nav-item nav-link">Men's Dresses</a>
+                        <a href="<?php if (isset($order)) { echo'../Category/womens.php';}else{echo './Category/womens.php';} ?>" class="nav-item nav-link">Women's Dresses</a>
+                        <a href="<?php if (isset($order)) { echo'../Category/childrens.php';}else{echo './Category/childrens.php';} ?>" class="nav-item nav-link">Children's Dresses</a>
                     </div>
                 </nav>
             </div>
@@ -30,7 +30,7 @@
                             <a  href="cart/cart.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["CustomerUserID"])||isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Cart</a>
                             <a  href="dashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
                             <a  href="seller/sellerDashboard.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">Dashboard</a>
-                            <a  href="customer/order.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["CustomerUserID"])||isset($_SESSION["SellerUserID"])) { echo "block";} else { echo "none";}?>">order</a>
+                            <a  href="customer/order.php"class="nav-item nav-link" style="display: <?php if (isset($_SESSION["CustomerUserID"])) { echo "block";} else { echo "none";}?>">order</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                           

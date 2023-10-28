@@ -169,7 +169,7 @@ $total = $subTotal + $shippingCost;
         <button  id="rzp-button1" class="btn btn-block btn-primary my-3 py-3 rzp-button1">Proceed To Checkout</button>
     </div>
 </div>
-
+            </div>
     
 
     <!-- Back to Top -->
@@ -247,5 +247,9 @@ $total = $subTotal + $shippingCost;
     e.preventDefault();
   }
 </script>
+<?php
+include '../footer.php';
+?>
 </html>
+
 <!--5267 3181 8797 5449-->
