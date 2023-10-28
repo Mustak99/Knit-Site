@@ -49,7 +49,7 @@
                  <i class="fas fa-heart text-primary"></i>
                  <span class="badge">0</span>
              </a>
-             <a  class="btn border" id="cart-btn" href="<?php if(isset($search)){echo'../cart/cart.php';} elseif(isset($cart)){echo'../cart/cart.php';} else{echo 'cart/cart.php';} ?>";>
+             <a  class="btn border" id="cart-btn" href="<?php if(isset($search)){echo'../cart/cart.php';} elseif(isset($cart)){echo'../cart/cart.php';}elseif(isset($order)){echo'../cart/cart.php';} else{echo 'cart/cart.php';} ?>";>
                  <i class="fas fa-shopping-cart text-primary"></i>
                  <span class="badge"  id="cart-badge">0</span>
                  <div id="cart-content"></div>
@@ -75,7 +75,7 @@
          var selectedProduct;
 
          $("#search").autocomplete({
-             source: "<?php if(isset($search)){echo'suggestions.php';} elseif(isset($cart)){echo'../search/suggestions.php';} else{echo 'search/suggestions.php';} ?>",
+             source: "<?php if(isset($search)){echo'suggestions.php';} elseif(isset($cart)){echo'../search/suggestions.php';}elseif(isset($order)){echo'../search/suggestions.php';} else{echo 'search/suggestions.php';} ?>",
              select: function(event, ui) {
                  selectedProduct = ui.item.value;
                  getProductDetails(selectedProduct);
@@ -91,7 +91,7 @@
          });
 
          function getProductDetails(productName) {
-             window.location.href = "<?php if(isset($search)){echo'search.php?name=';} elseif(isset($cart)){echo'../search/search.php?name=';}  else{echo'search/search.php?name=';} ?>" + productName;
+             window.location.href = "<?php if(isset($search)){echo'search.php?name=';} elseif(isset($cart)){echo'../search/search.php?name=';}elseif(isset($order)){echo'../search/search.php?name=';}  else{echo'search/search.php?name=';} ?>" + productName;
          }
      });
  </script>
@@ -99,7 +99,7 @@
  <script>
      function fetchCartData() {
          $.ajax({
-             url: "<?php if(isset($search)){echo'../cart/fetch_cart.php';} elseif(isset($cart)){echo'../cart/fetch_cart.php';} else{echo 'cart/fetch_cart.php';} ?>",
+             url: "<?php if(isset($search)){echo'../cart/fetch_cart.php';} elseif(isset($cart)){echo'../cart/fetch_cart.php';}elseif(isset($order)){echo'../cart/fetch_cart.php';} else{echo 'cart/fetch_cart.php';} ?>",
              type: "GET",
              success: function(data) {
                  $("#cart-badge").html(data);
