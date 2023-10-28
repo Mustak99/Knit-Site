@@ -66,17 +66,20 @@ if (mysqli_num_rows($result) > 0) {
                                     ?>
                                 </div>
                                 <div class="col-lg-12">
-                                    <h6>Quantity :</h6>
-                                    <input type="number" class="form-control text-center w-100" value="1">
+                                    <div class="row">
+                                        <div class="col-4`"><h6>Quantity :</h6></div>
+                                    <div class="col-4">
+                                    <input type="number" class="text-center w-100" value="1">
+                                    </div>
+                                    </div>
                                 </div>
                                 <div class="col-lg-12 mt-3">
                                     <div class="row">
                                         <div class="col-lg-6 pb-2">
-                                        <a href="../cart/insertIntoCart.php?product_id=<?php echo $product['id'] ?>&price=<?php echo $product['price'] ?>" class="btn btn-danger w-100">Add To Cart</a>
 
                                         </div>
                                         <div class="col-lg-6">
-                                            <a href="#" class="btn btn-success w-100">Shop Now</a>
+                                           <a href="../cart/insertIntoCart.php?product_id=<?php echo $product['id'] ?>&price=<?php echo $product['price'] ?>" class="btn btn-danger w-100">Add To Cart</a>
                                         </div>
                                     </div>
                                 </div>
