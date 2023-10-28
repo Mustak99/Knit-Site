@@ -214,10 +214,7 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
 
             </div>
         </div>
-
-        <?php print_r($currentweek); ?> <br>
-        <?php print_r($previousweek); ?>
-
+        
         <!-- ============================================================== -->
         <!-- end top selling products  -->
         <!-- ============================================================== -->
@@ -425,7 +422,7 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
             var ctx = document.getElementById('total-sale-pie').getContext('2d');
 
             var pieChart = new Chart(ctx, {
-                type: 'pie',
+                type: 'doughnut',
                 data: pieChartData,
                 options: {
                     legend: {
