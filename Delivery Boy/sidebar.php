@@ -88,8 +88,8 @@
                 <span class="align-middle">Knit Site</span>
             </a>
 
-            <?php 
-            
+            <?php
+
             $conn = new mysqli('localhost', 'root', '', 'knitsite');
 
             if ($conn->connect_error) {
@@ -103,8 +103,7 @@
 
             if (isset($_SESSION["user_id"])) {
                 $user_id = trim($_SESSION["user_id"]);
-            }
-            else {
+            } else {
                 die;
             }
 
@@ -119,37 +118,38 @@
                 $result->free();
                 $stmt->close();
             }
-            
+
             $conn->close();
-            
+
             if ($log_status == 1) {
                 $check_status = "checked";
-            }    
-            else {
+            } else {
                 $change_state = 1;
             }
-            
+
             ?>
             <!-- Toggle switch in the middle -->
             <div id="toggle-switch-cont" class="d-flex justify-content-between py-0">
                 <div class="p-4 text-white py-0">
-                    <p class="pt-4"><?php 
-                    if ($log_status == 1) {
-                        echo "Online";
-                    }
-                    else {
-                        echo "Offline";
-                    }
-                    
-                    ?></p>
+                    <p class="pt-4">
+                        <?php
+                        if ($log_status == 1) {
+                            echo "Online";
+                        } else {
+                            echo "Offline";
+                        }
+
+                        ?>
+                    </p>
                 </div>
                 <div class="toggle-switch p-2 py-0">
                     <label class="switch">
-                        <input type="checkbox" id="update-status-toogle" value="1" <?php echo $check_status; ?> onchange="changeStatus(<?php echo $change_state; ?>);">
+                        <input type="checkbox" id="update-status-toogle" value="1" <?php echo $check_status; ?>
+                            onchange="changeStatus(<?php echo $change_state; ?>);">
                         <span class="slider"></span>
                     </label>
                 </div>
-            </div>    
+            </div>
             <!-- End of toggle switch -->
             <ul class="sidebar-nav">
                 <li class="sidebar-header">
@@ -166,6 +166,13 @@
                     <a class="sidebar-link" href="order.php">
                         <i class="align-middle" data-feather="shopping-bag"></i> <span
                             class="align-middle">Orders</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="completeOrder.php">
+                        <i class="align-middle" data-feather="check-circle"></i> <span
+                            class="align-middle">Complete Orders</span>
                     </a>
                 </li>
 
@@ -193,7 +200,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         function changeStatus(loginStatus) {
-    
+
             // Send an AJAX request to update login_status
             $.ajax({
                 type: "POST",

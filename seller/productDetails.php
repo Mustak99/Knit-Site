@@ -24,7 +24,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
             var closeButton = document.getElementById("closeButton");
 
             confirmButton.onclick = function () {
-                window.location.href = "deleteProduct.php?id=" + productId; // Redirect to deleteProduct.php
+                window.location.href = "deleteProduct.php?id=" + productId;
             };
 
             cancelButton.onclick = function () {

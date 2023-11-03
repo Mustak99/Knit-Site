@@ -12,7 +12,7 @@ include_once '../header.php';
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
                 id="navbar-vertical">
-                <div class="navbar-nav w-100 overflow-hidden" style="height: 300px">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 350px">
                     <div class="nav-item dropdown">
                         <a href="sellerProfile.php" class="nav-item nav-link">profile</a>
                         <a href="productDetails.php" class="nav-item nav-link">Product Details</a>
@@ -21,8 +21,9 @@ include_once '../header.php';
                             <a href="" class="nav-link dropdown-toggle" id="show-orders">Orders</a>
                             <div class="dropdown-menu mx-3" id="dropdown-1" style="border: 0;">
                                 <a href="pendingOrder.php" class="nav-item nav-link">Pending Orders</a>
-                                <a href="dispatchOrder.php" class="nav-item nav-link">Complete Orders</a>
-                                <a href="rejectOrder.php" class="nav-item nav-link">Rejected Orders</a>
+                                <a href="dispatchOrder.php" class="nav-item nav-link">Dispatch Orders</a>
+                                <a href="completeOrder.php" class="nav-item nav-link">Complete Orders</a>
+                                <a href="rejectOrder.php" class="nav-item nav-link">Reject Orders</a>
                             </div>
                         </div>
                     </div>

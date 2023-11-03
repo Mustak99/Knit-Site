@@ -19,8 +19,7 @@ $orderCount = count($pendingOrders);
         }
 
         function assignOrder(orderId) {
-            // Add your assign order logic here
-            // You can also add a confirmation dialog if needed
+            window.location.href = "assignDeliveryBoy.php?id=" + orderId;
         }
 
         function confirmDispatch(orderId) {
@@ -97,6 +96,11 @@ $orderCount = count($pendingOrders);
             </div>
         <?php endif; ?>
     </div>
+    <?php
+    if (isset($_GET['assignment']) && $_GET['assignment'] === 'success') {
+        echo "<script>alert('Order assigned successfully');</script>";
+    }
+    ?>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 

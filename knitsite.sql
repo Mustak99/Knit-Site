@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2023 at 07:08 AM
+-- Generation Time: Nov 03, 2023 at 02:39 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -113,8 +113,60 @@ INSERT INTO `customerregistration` (`UserId`, `UserFirstName`, `UserMiddleName`,
 (11, 'Firoza', 'Hanif', 'Shaikh', '9098347573', 'firoza12@gmail.com', 'firoza_12', 'e2857ec944d0f521ff193b5e29578954', '12,unn,surat', 294210, 'F', '2023-03-22 04:41:59', '1'),
 (12, 'Mustak', 'H', 'Shaikh', '9510611840', 'mustakshaikh217@gmail.com', 'Mustak_13', 'ec0df3dfb087fd0696075eba6fd24f5e', 'Unn', 394210, 'M', '2023-03-25 12:50:54', '1'),
 (13, 'Mustak', 'H', 'Shaikh', '6355052382', 'm1ustakshaikh217@gmail.com', 'bca21_122', '0ec7fd2434da652505ba10d9a7faba2c', '', 394210, 'M', '2023-04-12 04:24:03', '1'),
-(14, 'Yagnesh', 'M', 'kapdiya', '9510611804', 'yagnies@217gmail.com', 'bca21_112', 'bf310423f16aa8b1f5a0d2b4fdfaaaf0', 'Unn,surat', 394210, 'M', '2023-08-20 06:56:53', '1'),
+(14, 'Yagnesh', 'M', 'kapdiya', '9510611804', 'yagnesh@217gmail.com', 'bca21_112', 'bf310423f16aa8b1f5a0d2b4fdfaaaf0', 'Unn,surat', 394210, 'M', '2023-08-20 06:56:53', '1'),
 (15, 'Harshil', 'A', 'Modawala', '9313353158', 'hmodawala@gmail.com', 'harshil1611', 'fc2a30cf9f5fe16b87284e3cf5207f37', 'Nanpura/Surat,India-', 395001, 'M', '2023-08-22 05:30:02', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_boys`
+--
+
+CREATE TABLE `delivery_boys` (
+  `id` int(11) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `street_address` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `zip_code` varchar(10) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `gender` enum('Male','Female','Other') NOT NULL,
+  `license_number` varchar(20) NOT NULL,
+  `issuing_state` varchar(255) NOT NULL,
+  `expiration_date` date NOT NULL,
+  `vehicle_type` varchar(20) NOT NULL,
+  `password` char(32) DEFAULT NULL,
+  `login_status` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_boys`
+--
+
+INSERT INTO `delivery_boys` (`id`, `full_name`, `phone_number`, `email`, `street_address`, `city`, `state`, `zip_code`, `date_of_birth`, `gender`, `license_number`, `issuing_state`, `expiration_date`, `vehicle_type`, `password`, `login_status`) VALUES
+(5, 'Harshil', '9876543210', 'f@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-15', 'Male', '655151', 'Gujarat', '2030-06-10', 'Motorcycle', '28eade5f3fc1e899a88884ec135f3351', 1),
+(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_boy_order`
+--
+
+CREATE TABLE `delivery_boy_order` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `delivery_boy_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_boy_order`
+--
+
+INSERT INTO `delivery_boy_order` (`id`, `order_id`, `delivery_boy_id`) VALUES
+(1, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -126,28 +178,29 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(20) NOT NULL
+  `status` varchar(20) NOT NULL,
+  `reject_reason` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`) VALUES
-(1, 13, '2023-10-15 04:09:52', 'Pending'),
-(2, 15, '2023-10-16 04:16:25', 'Pending'),
-(3, 8, '2023-10-17 04:18:02', 'Pending'),
-(4, 9, '2023-10-18 04:18:16', 'Pending'),
-(5, 10, '2023-10-19 04:18:29', 'Reject'),
-(6, 11, '2023-10-20 04:18:43', 'Pending'),
-(7, 12, '2023-10-21 04:18:52', 'Dispatch'),
-(8, 13, '2023-10-22 04:19:02', 'Pending'),
-(9, 14, '2023-10-23 04:19:20', 'Reject'),
-(10, 15, '2023-10-24 04:19:51', 'Dispatch'),
-(11, 15, '2023-10-25 04:20:04', 'Dispatch'),
-(12, 12, '2023-10-26 04:20:17', 'Pending'),
-(13, 15, '2023-10-27 04:20:30', 'Dispatch'),
-(14, 15, '2023-10-28 04:20:40', 'Pending');
+INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`, `reject_reason`) VALUES
+(1, 13, '2023-10-15 04:09:52', 'Dispatch', NULL),
+(2, 15, '2023-10-16 04:16:25', 'Dispatch', NULL),
+(3, 8, '2023-10-17 04:18:02', 'Dispatch', NULL),
+(4, 9, '2023-10-18 04:18:16', 'Dispatch', NULL),
+(5, 10, '2023-10-19 04:18:29', 'Pending', NULL),
+(6, 11, '2023-10-20 04:18:43', 'Dispatch', NULL),
+(7, 12, '2023-10-21 04:18:52', 'Reject', 'Not Available.'),
+(8, 13, '2023-10-22 04:19:02', 'Dispatch', NULL),
+(9, 14, '2023-10-23 04:19:20', 'Dispatch', NULL),
+(10, 15, '2023-10-24 04:19:51', 'Dispatch', NULL),
+(11, 15, '2023-10-25 04:20:04', 'Dispatch', NULL),
+(12, 12, '2023-10-26 04:20:17', 'Dispatch', NULL),
+(13, 15, '2023-10-27 04:20:30', 'Reject', 'Product not available'),
+(14, 15, '2023-10-28 04:20:40', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -180,8 +233,8 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 (10, 10, 113, 2, '3000.00'),
 (11, 11, 114, 1, '2000.00'),
 (12, 12, 115, 1, '2000.00'),
-(13, 14, 107, 1, '1500.00'),
-(14, 13, 113, 1, '1500.00');
+(13, 13, 107, 1, '1500.00'),
+(14, 14, 113, 1, '1500.00');
 
 -- --------------------------------------------------------
 
@@ -208,18 +261,18 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `category`, `image_path`, `add_date`, `status`, `SID`, `quantity`) VALUES
-(104, 'T Shirt', 'White Colour', '1000.00', 'Zara', 'Womens', 'uploads/653c85bf94891.jpg', '2023-10-28 03:53:35', 1, 19, 100),
-(105, 'T Shirt', 'Blue Colour', '500.00', 'Zudio', 'Childrens', 'uploads/653c85fa9c477.jpg', '2023-10-28 03:54:34', 1, 19, 50),
-(106, 'Top', 'Printed', '500.00', 'Zudio', 'Childrens', 'uploads/653c8623c2676.jpg', '2023-10-28 03:55:15', 1, 19, 50),
-(107, 'Jacket', 'Blue Colour', '1500.00', 'Zara', 'Childrens', 'uploads/653c86695b32f.jpg', '2023-10-28 03:56:25', 1, 19, 100),
+(104, 'T Shirt', 'White Colour', '1000.00', 'Zara', 'Womens', 'uploads/653c85bf94891.jpg', '2023-10-28 03:53:35', 1, 19, 99),
+(105, 'T Shirt', 'Blue Colour', '500.00', 'Zudio', 'Childrens', 'uploads/653c85fa9c477.jpg', '2023-10-28 03:54:34', 1, 19, 48),
+(106, 'Top', 'Printed', '500.00', 'Zudio', 'Childrens', 'uploads/653c8623c2676.jpg', '2023-10-28 03:55:15', 1, 19, 48),
+(107, 'Jacket', 'Blue Colour', '1500.00', 'Zara', 'Childrens', 'uploads/653c86695b32f.jpg', '2023-10-28 03:56:25', 1, 19, 95),
 (108, 'Suit', 'Black Colour', '2000.00', 'Woodland', 'Mens', 'uploads/653c86aab6b1f.jpg', '2023-10-28 03:57:30', 1, 19, 100),
-(109, 'Jacket', 'Blue Black Colour', '3000.00', 'Zara', 'Mens', 'uploads/653c86d8e86f4.jpg', '2023-10-28 03:58:16', 1, 19, 75),
+(109, 'Jacket', 'Blue Black Colour', '3000.00', 'Zara', 'Mens', 'uploads/653c86d8e86f4.jpg', '2023-10-28 03:58:16', 1, 19, 74),
 (110, 'Shirt', 'White Colour', '1500.00', 'Zudio', 'Mens', 'uploads/653c86fe2f4ce.jpg', '2023-10-28 03:58:54', 1, 19, 50),
-(111, 'T Shirt', 'Printed', '2000.00', 'Zudio', 'Mens', 'uploads/653c873318906.jpg', '2023-10-28 03:59:47', 1, 19, 50),
-(112, 'Coat', 'Black Colour', '3000.00', 'Zara', 'Womens', 'uploads/653c876788863.jpg', '2023-10-28 04:00:39', 1, 19, 50),
-(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 70),
-(114, 'One Piece', 'Black Colour', '2000.00', 'Zara', 'Womens', 'uploads/653c87cb9682d.jpg', '2023-10-28 04:02:19', 1, 19, 50),
-(115, 'Top', 'Grey Colour', '2000.00', 'Zudio', 'Womens', 'uploads/653c87fa3cbc2.jpg', '2023-10-28 04:03:06', 1, 19, 50);
+(111, 'T Shirt', 'Printed', '2000.00', 'Zudio', 'Mens', 'uploads/653c873318906.jpg', '2023-10-28 03:59:47', 1, 19, 49),
+(112, 'Coat', 'Black Colour', '3000.00', 'Zara', 'Womens', 'uploads/653c876788863.jpg', '2023-10-28 04:00:39', 1, 19, 49),
+(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 28),
+(114, 'One Piece', 'Black Colour', '2000.00', 'Zara', 'Womens', 'uploads/653c87cb9682d.jpg', '2023-10-28 04:02:19', 1, 19, 47),
+(115, 'Top', 'Grey Colour', '2000.00', 'Zudio', 'Womens', 'uploads/653c87fa3cbc2.jpg', '2023-10-28 04:03:06', 1, 19, 49);
 
 --
 -- Triggers `products`
@@ -275,6 +328,28 @@ INSERT INTO `product_size` (`id`, `product_id`, `size`) VALUES
 (184, 105, 'M'),
 (185, 113, 'L'),
 (186, 113, 'XL');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refunds`
+--
+
+CREATE TABLE `refunds` (
+  `refund_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `refund_amount` decimal(10,2) NOT NULL,
+  `refund_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `refunds`
+--
+
+INSERT INTO `refunds` (`refund_id`, `order_id`, `customer_id`, `refund_amount`, `refund_date`) VALUES
+(1, 5, 10, '4000.00', '2023-10-31 19:09:50'),
+(2, 14, 15, '3000.00', '2023-10-31 19:12:33');
 
 -- --------------------------------------------------------
 
@@ -337,6 +412,20 @@ ALTER TABLE `customerregistration`
   ADD UNIQUE KEY `UserName` (`UserName`);
 
 --
+-- Indexes for table `delivery_boys`
+--
+ALTER TABLE `delivery_boys`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `delivery_boy_order`
+--
+ALTER TABLE `delivery_boy_order`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `delivery_boy_id` (`delivery_boy_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -366,6 +455,14 @@ ALTER TABLE `product_size`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `refunds`
+--
+ALTER TABLE `refunds`
+  ADD PRIMARY KEY (`refund_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
 -- Indexes for table `sellerregistration`
 --
 ALTER TABLE `sellerregistration`
@@ -390,10 +487,22 @@ ALTER TABLE `customerregistration`
   MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `delivery_boys`
+--
+ALTER TABLE `delivery_boys`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `delivery_boy_order`
+--
+ALTER TABLE `delivery_boy_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `order_items`
@@ -414,6 +523,12 @@ ALTER TABLE `product_size`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
+-- AUTO_INCREMENT for table `refunds`
+--
+ALTER TABLE `refunds`
+  MODIFY `refund_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `sellerregistration`
 --
 ALTER TABLE `sellerregistration`
@@ -422,6 +537,13 @@ ALTER TABLE `sellerregistration`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `delivery_boy_order`
+--
+ALTER TABLE `delivery_boy_order`
+  ADD CONSTRAINT `delivery_boy_order_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `delivery_boy_order_ibfk_2` FOREIGN KEY (`delivery_boy_id`) REFERENCES `delivery_boys` (`id`);
 
 --
 -- Constraints for table `orders`
@@ -447,6 +569,13 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_size`
   ADD CONSTRAINT `product_size_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Constraints for table `refunds`
+--
+ALTER TABLE `refunds`
+  ADD CONSTRAINT `refunds_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `refunds_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customerregistration` (`UserId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

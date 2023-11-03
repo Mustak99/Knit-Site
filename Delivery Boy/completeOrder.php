@@ -1,7 +1,7 @@
 <?php
 include_once("commonMethod.php");
 $name = getFullNameByUserId(connection(), $user_id);
-$userOrders = getUserOrder(connection(), $user_id);
+$completeOrders = getCompleteOrder(connection(), $user_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,16 +24,6 @@ $userOrders = getUserOrder(connection(), $user_id);
 
     <link href="css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <script>
-        function confirmComplete(orderId) {
-            var confirmation = confirm("Are you sure you want to complete this order?");
-            if (confirmation) {
-                // If the user confirms, redirect to the completeOrderProcess.php with the order ID
-                window.location.href = "completeOrderProcess.php?id=" + orderId;
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -44,10 +34,10 @@ $userOrders = getUserOrder(connection(), $user_id);
             <?php include 'head.php'; ?>
 
             <main class="content">
-                <?php if (empty($userOrders)): ?>
-                    <p>No orders are found.</p>
+                <?php if (empty($completeOrders)): ?>
+                    <p>No complete orders are found.</p>
                 <?php else: ?>
-                    <h1>User Orders</h1>
+                    <h1>Complete Orders</h1>
                     <table class="table">
                         <tr>
                             <th>Customer Name</th>
@@ -57,31 +47,25 @@ $userOrders = getUserOrder(connection(), $user_id);
                             <th>Product Price</th>
                             <th>Quantity</th>
                         </tr>
-                        <?php foreach ($userOrders as $order): ?>
+                        <?php foreach ($completeOrders as $completeorder): ?>
                             <tr>
                                 <td>
-                                    <?php echo $order['customer_name']; ?>
+                                    <?php echo $completeorder['customer_name']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $order['product_name']; ?>
+                                    <?php echo $completeorder['product_name']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $order['product_description']; ?>
+                                    <?php echo $completeorder['product_description']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $order['order_date']; ?>
+                                    <?php echo $completeorder['order_date']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $order['product_price']; ?>
+                                    <?php echo $completeorder['product_price']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $order['quantity']; ?>
-                                </td>
-                                <td>
-                                    <a class="edit-link" style="text-decoration:none;" href="javascript:void(0);"
-                                        onclick="confirmComplete(<?php echo $order['order_id']; ?>);">
-                                        <img src="./img/complete.png" alt="Complete" width="35" height="35">
-                                    </a>
+                                    <?php echo $completeorder['quantity']; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
