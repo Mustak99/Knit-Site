@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 05:58 PM
+-- Generation Time: Nov 03, 2023 at 06:53 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -146,8 +146,8 @@ CREATE TABLE `delivery_boys` (
 --
 
 INSERT INTO `delivery_boys` (`id`, `full_name`, `phone_number`, `email`, `street_address`, `city`, `state`, `zip_code`, `date_of_birth`, `gender`, `license_number`, `issuing_state`, `expiration_date`, `vehicle_type`, `password`, `login_status`) VALUES
-(5, 'Harshil', '9876543210', 'f@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-15', 'Male', '655151', 'Gujarat', '2030-06-10', 'Motorcycle', '28eade5f3fc1e899a88884ec135f3351', 1),
-(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 1);
+(5, 'Harshil', '9876543210', 'f@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-15', 'Male', '655151', 'Gujarat', '2030-06-10', 'Motorcycle', '28eade5f3fc1e899a88884ec135f3351', 0),
+(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 0);
 
 -- --------------------------------------------------------
 
@@ -158,11 +158,19 @@ INSERT INTO `delivery_boys` (`id`, `full_name`, `phone_number`, `email`, `street
 CREATE TABLE `delivery_boy_finances` (
   `id` int(11) NOT NULL,
   `delivery_boy_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
   `earning_amount` decimal(10,2) DEFAULT NULL,
   `floating_cash` decimal(10,2) DEFAULT NULL,
   `last_transaction_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_boy_finances`
+--
+
+INSERT INTO `delivery_boy_finances` (`id`, `delivery_boy_id`, `order_id`, `earning_amount`, `floating_cash`, `last_transaction_date`) VALUES
+(1, 5, 5, '30.00', '30.00', '2023-11-03 17:48:10'),
+(2, 5, 14, '30.00', '30.00', '2023-11-03 17:48:49');
 
 -- --------------------------------------------------------
 
@@ -181,7 +189,8 @@ CREATE TABLE `delivery_boy_order` (
 --
 
 INSERT INTO `delivery_boy_order` (`id`, `order_id`, `delivery_boy_id`) VALUES
-(1, 5, 5);
+(1, 5, 5),
+(8, 14, 5);
 
 -- --------------------------------------------------------
 
@@ -206,7 +215,7 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`, `reject
 (2, 15, '2023-10-16 04:16:25', 'Dispatch', NULL),
 (3, 8, '2023-10-17 04:18:02', 'Dispatch', NULL),
 (4, 9, '2023-10-18 04:18:16', 'Dispatch', NULL),
-(5, 10, '2023-10-19 04:18:29', 'Complete', NULL),
+(5, 10, '2023-10-19 04:18:29', 'Pending', NULL),
 (6, 11, '2023-10-20 04:18:43', 'Dispatch', NULL),
 (7, 12, '2023-10-21 04:18:52', 'Reject', 'Not Available.'),
 (8, 13, '2023-10-22 04:19:02', 'Dispatch', NULL),
@@ -519,13 +528,13 @@ ALTER TABLE `delivery_boys`
 -- AUTO_INCREMENT for table `delivery_boy_finances`
 --
 ALTER TABLE `delivery_boy_finances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `delivery_boy_order`
 --
 ALTER TABLE `delivery_boy_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -571,8 +580,8 @@ ALTER TABLE `sellerregistration`
 -- Constraints for table `delivery_boy_finances`
 --
 ALTER TABLE `delivery_boy_finances`
-  ADD CONSTRAINT `delivery_boy_finances_ibfk_1` FOREIGN KEY (`delivery_boy_id`) REFERENCES `delivery_boy_order` (`id`),
-  ADD CONSTRAINT `delivery_boy_finances_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `delivery_boy_order` (`order_id`);
+  ADD CONSTRAINT `delivery_boy_finances_ibfk_1` FOREIGN KEY (`delivery_boy_id`) REFERENCES `delivery_boys` (`id`),
+  ADD CONSTRAINT `delivery_boy_finances_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
 
 --
 -- Constraints for table `delivery_boy_order`
