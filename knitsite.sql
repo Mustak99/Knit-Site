@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 02:39 PM
+-- Generation Time: Nov 03, 2023 at 05:58 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -152,6 +152,21 @@ INSERT INTO `delivery_boys` (`id`, `full_name`, `phone_number`, `email`, `street
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `delivery_boy_finances`
+--
+
+CREATE TABLE `delivery_boy_finances` (
+  `id` int(11) NOT NULL,
+  `delivery_boy_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `earning_amount` decimal(10,2) DEFAULT NULL,
+  `floating_cash` decimal(10,2) DEFAULT NULL,
+  `last_transaction_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `delivery_boy_order`
 --
 
@@ -191,7 +206,7 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`, `reject
 (2, 15, '2023-10-16 04:16:25', 'Dispatch', NULL),
 (3, 8, '2023-10-17 04:18:02', 'Dispatch', NULL),
 (4, 9, '2023-10-18 04:18:16', 'Dispatch', NULL),
-(5, 10, '2023-10-19 04:18:29', 'Pending', NULL),
+(5, 10, '2023-10-19 04:18:29', 'Complete', NULL),
 (6, 11, '2023-10-20 04:18:43', 'Dispatch', NULL),
 (7, 12, '2023-10-21 04:18:52', 'Reject', 'Not Available.'),
 (8, 13, '2023-10-22 04:19:02', 'Dispatch', NULL),
@@ -418,6 +433,14 @@ ALTER TABLE `delivery_boys`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `delivery_boy_finances`
+--
+ALTER TABLE `delivery_boy_finances`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `delivery_boy_id` (`delivery_boy_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- Indexes for table `delivery_boy_order`
 --
 ALTER TABLE `delivery_boy_order`
@@ -493,10 +516,16 @@ ALTER TABLE `delivery_boys`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `delivery_boy_finances`
+--
+ALTER TABLE `delivery_boy_finances`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `delivery_boy_order`
 --
 ALTER TABLE `delivery_boy_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -537,6 +566,13 @@ ALTER TABLE `sellerregistration`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `delivery_boy_finances`
+--
+ALTER TABLE `delivery_boy_finances`
+  ADD CONSTRAINT `delivery_boy_finances_ibfk_1` FOREIGN KEY (`delivery_boy_id`) REFERENCES `delivery_boy_order` (`id`),
+  ADD CONSTRAINT `delivery_boy_finances_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `delivery_boy_order` (`order_id`);
 
 --
 -- Constraints for table `delivery_boy_order`
