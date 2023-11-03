@@ -247,7 +247,7 @@ function fetchCompleteOrders($con, $sellerId)
 function fetchRejectOrders($con, $sellerId)
 {
     // Query to retrieve pending orders with product names
-    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, oi.quantity, oi.total_price
+    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, o.reject_reason, p.name, oi.quantity, oi.total_price
               FROM orders o
               JOIN order_items oi ON o.order_id = oi.order_id
               JOIN products p ON oi.product_id = p.id
@@ -269,6 +269,7 @@ function fetchRejectOrders($con, $sellerId)
                 "CustomerID" => $row["customer_id"],
                 "OrderDate" => $row["order_date"],
                 "Status" => $row["status"],
+                "RejectReason" => $row["reject_reason"],
                 "ProductName" => $row["name"],
                 "Quantity" => $row["quantity"],
                 "TotalPrice" => $row["total_price"]
@@ -283,7 +284,7 @@ function fetchRejectOrders($con, $sellerId)
 
 // fetch customer email
 
-function fetchCustomerEmailForOrders($con, $sellerId)
+function fetchCustomerEmailForOrders($con, $orderId)
 {
     // Query to retrieve customer email for orders
     $query = "SELECT cr.EmailAddress AS customer_email

@@ -23,6 +23,7 @@ $rejectOrders = fetchRejectOrders(connection(), $sellerId);
                     <th>Product Name</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Reason</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +54,9 @@ $rejectOrders = fetchRejectOrders(connection(), $sellerId);
                             </td>
                             <td>
                                 <?php echo @$rejectOrder['TotalPrice']; ?>
+                            </td>
+                            <td>
+                                <?php echo @$rejectOrder['RejectReason']; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
