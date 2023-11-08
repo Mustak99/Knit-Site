@@ -228,6 +228,8 @@
         <span id="vehicle_type_error" style="color: red;"></span><br>
 
         <input type="submit" name="submit" value="Submit">
+
+        <p>Already have an account? <a href="login.php">Login</a></p>
     </form>
 </body>
 

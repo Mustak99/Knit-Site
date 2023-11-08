@@ -1,6 +1,7 @@
 <?php
 include_once("commonMethod.php");
 $name = getFullNameByUserId(connection(), @$user_id);
+$currentDay = getCurrentDayEarnings(connection(), @$user_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@ $name = getFullNameByUserId(connection(), @$user_id);
 		<?php include 'sidebar.php'; ?>
 
 		<div class="main">
-		<?php include 'head.php'; ?>
+			<?php include 'head.php'; ?>
 
 			<main class="content">
 				<div class="container-fluid p-0">
@@ -46,10 +47,13 @@ $name = getFullNameByUserId(connection(), @$user_id);
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Current Week</h5>
+														<h5 class="card-title">Current Day</h5>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
+												<h1 class="mt-1 mb-3">
+													<?php echo ($currentDay == 0) ? '0' : $currentDay; ?>
+												</h1>
+
 												<div class="mb-0">
 													<span class="text-danger"> <i
 															class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
@@ -78,7 +82,7 @@ $name = getFullNameByUserId(connection(), @$user_id);
 											<div class="card-body">
 												<div class="row">
 													<div class="col mt-0">
-														<h5 class="card-title">Previous Week</h5>
+														<h5 class="card-title">Current Week</h5>
 													</div>
 												</div>
 												<h1 class="mt-1 mb-3">$21.300</h1>

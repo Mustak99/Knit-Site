@@ -14,7 +14,6 @@ $con = connection();
 function getFullNameByUserId($con, $user_id)
 {
     $name = '';
-    // Use a prepared statement to prevent SQL injection
     $sql = "SELECT full_name FROM delivery_boys WHERE id = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("i", $user_id);
@@ -118,5 +117,34 @@ function getCompleteOrder($con, $user_id)
 
     return $completeOrders;
 }
+
+
+// fetch current day earnings
+function getCurrentDayEarnings($con, $user_id)
+{
+    // Get the current date in the format 'YYYY-MM-DD'
+    $currentDate = date("Y-m-d");
+
+    // Construct the SQL query to sum the earnings for the current day
+    $sql = "SELECT SUM(earning_amount) AS total_earnings FROM delivery_boy_finances
+            WHERE delivery_boy_id = ? AND DATE(last_transaction_date) = ?";
+
+    // Prepare and execute the query
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ss", $user_id, $currentDate);
+    $stmt->execute();
+
+    // Fetch the result
+    $result = $stmt->get_result();
+
+    // Check if there are results
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['total_earnings'];
+    } else {
+        return 0;
+    }
+}
+
 
 ?>
