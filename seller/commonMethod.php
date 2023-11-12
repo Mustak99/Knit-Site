@@ -202,7 +202,7 @@ function fetchPendingOrders($con, $sellerId)
 
 // fetch complete order
 
-function fetchCompleteOrders($con, $sellerId)
+function fetchDispatchOrders($con, $sellerId)
 {
     // Query to retrieve complete orders with customer names and product categories
     $query = "SELECT o.order_id, cr.UserFirstName AS customer_name, o.order_date, o.status, p.name AS product_name, p.category, oi.quantity, oi.total_price
@@ -211,6 +211,48 @@ function fetchCompleteOrders($con, $sellerId)
               JOIN products p ON oi.product_id = p.id
               JOIN customerregistration cr ON o.customer_id = cr.UserID
               WHERE o.status = 'Dispatch' 
+              AND p.SID = $sellerId";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $dispatchOrders = array();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $dispatchOrders[] = array(
+                "OrderID" => $row["order_id"],
+                "CustomerName" => $row["customer_name"],
+                "OrderDate" => $row["order_date"],
+                "Status" => $row["status"],
+                "ProductName" => $row["product_name"],
+                "Category" => $row["category"],
+                "Quantity" => $row["quantity"],
+                "TotalPrice" => $row["total_price"]
+            );
+        }
+    }
+
+    $con->close();
+
+    return $dispatchOrders;
+}
+
+
+// fetch complete order
+
+function fetchCompleteOrders($con, $sellerId)
+{
+    // Query to retrieve complete orders with customer names and product categories
+    $query = "SELECT o.order_id, cr.UserFirstName AS customer_name, o.order_date, o.status, p.name AS product_name, p.category, oi.quantity, oi.total_price
+              FROM orders o
+              JOIN order_items oi ON o.order_id = oi.order_id
+              JOIN products p ON oi.product_id = p.id
+              JOIN customerregistration cr ON o.customer_id = cr.UserID
+              WHERE o.status = 'Complete' 
               AND p.SID = $sellerId";
 
     $result = $con->query($query);
@@ -247,7 +289,7 @@ function fetchCompleteOrders($con, $sellerId)
 function fetchRejectOrders($con, $sellerId)
 {
     // Query to retrieve pending orders with product names
-    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, p.name, oi.quantity, oi.total_price
+    $query = "SELECT o.order_id, o.customer_id, o.order_date, o.status, o.reject_reason, p.name, oi.quantity, oi.total_price
               FROM orders o
               JOIN order_items oi ON o.order_id = oi.order_id
               JOIN products p ON oi.product_id = p.id
@@ -269,6 +311,7 @@ function fetchRejectOrders($con, $sellerId)
                 "CustomerID" => $row["customer_id"],
                 "OrderDate" => $row["order_date"],
                 "Status" => $row["status"],
+                "RejectReason" => $row["reject_reason"],
                 "ProductName" => $row["name"],
                 "Quantity" => $row["quantity"],
                 "TotalPrice" => $row["total_price"]
@@ -283,7 +326,7 @@ function fetchRejectOrders($con, $sellerId)
 
 // fetch customer email
 
-function fetchCustomerEmailForOrders($con, $sellerId)
+function fetchCustomerEmailForOrders($con, $orderId)
 {
     // Query to retrieve customer email for orders
     $query = "SELECT cr.EmailAddress AS customer_email
@@ -516,4 +559,37 @@ function fetchOutwardstock($con)
 
     return $fetchOutwardstock;
 }
-?> 
+
+// fetch delivery boy
+
+function fetchDeliveryBoy($con, $sellerId)
+{
+    // Query to retrieve delivery boy details
+    $query = "SELECT id,full_name, phone_number, gender, vehicle_type FROM delivery_boys WHERE login_status = 1";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $deliveryBoys = array();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $deliveryBoys[] = array(
+                'id' => $row['id'],
+                'full_name' => $row['full_name'],
+                'phone_number' => $row['phone_number'],
+                'gender' => $row['gender'],
+                'vehicle_type' => $row['vehicle_type']
+            );
+        }
+    }
+
+    $con->close();
+
+    return $deliveryBoys;
+}
+
+?>

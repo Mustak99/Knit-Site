@@ -13,8 +13,9 @@ class OrderStatusNotification
     public $password;
     public $receiver;
     public $orderStatus;
+    public $reason; // Added reason property
 
-    public function __construct($receiver, $orderStatus)
+    public function __construct($receiver, $orderStatus, $reason = '')
     {
         $this->sender = "knitsiteb7@gmail.com";
         $this->password = "cluzaejgwaocjujl";
@@ -22,6 +23,7 @@ class OrderStatusNotification
         $this->smtpHost = "smtp.gmail.com";
         $this->smtpPort = 587;
         $this->orderStatus = $orderStatus;
+        $this->reason = $reason; // Initialize the reason property
     }
 
     public function sendOrderStatusNotification()
@@ -51,6 +53,8 @@ class OrderStatusNotification
 
     public function getHTMLMessage()
     {
+        $reasonText = $this->reason ? "Rejection Reason: {$this->reason}" : '';
+
         $htmlMessage = <<<MSG
         <!DOCTYPE html>
         <html>
@@ -81,6 +85,7 @@ class OrderStatusNotification
             <p>
             Order Status: {$this->orderStatus}
             </p>
+            <p>{$reasonText}</p>
             <div class="status-container">
                 <h2 style="color: #007bff;">{$this->orderStatus}</h2>
             </div>

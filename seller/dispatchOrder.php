@@ -1,13 +1,15 @@
 <?php include_once 'sellerHeader.php'; ?>
+
 <?php
 include_once("commonMethod.php");
-$completeOrders = fetchCompleteOrders(connection(), $sellerId);
+$dispatchOrders = fetchDispatchOrders(connection(), $sellerId);
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Complete Orders</title>
+    <title>Dispatch Orders</title>
 </head>
 
 <body>
@@ -21,38 +23,38 @@ $completeOrders = fetchCompleteOrders(connection(), $sellerId);
                     <th>Product Name</th>
                     <th>Price</th>
                     <th>Order Date</th>
-                    <th>Catehory</th>
+                    <th>Category</th>
                     <th>Quantity</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if (empty($completeOrders) || (is_array($completeOrders) && empty($completeOrders[0]))): ?>
+                <?php if (empty($dispatchOrders) || (is_array($dispatchOrders) && empty($dispatchOrders[0]))): ?>
                     <tr>
-                        <td colspan="7">No complete orders found.</td>
+                        <td colspan="7">No dispatch orders found.</td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($completeOrders as $completeOrder): ?>
+                    <?php foreach ($dispatchOrders as $dispatchOrder): ?>
                         <tr>
-                        <td>
-                                <?php echo @$completeOrder['OrderID']; ?>
+                            <td>
+                                <?php echo $dispatchOrder['OrderID']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['CustomerName']; ?>
+                                <?php echo $dispatchOrder['CustomerName']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['ProductName']; ?>
+                                <?php echo $dispatchOrder['ProductName']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['TotalPrice']; ?>
+                                <?php echo $dispatchOrder['TotalPrice']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['OrderDate']; ?>
+                                <?php echo $dispatchOrder['OrderDate']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['Category']; ?>
+                                <?php echo $dispatchOrder['Category']; ?>
                             </td>
                             <td>
-                                <?php echo @$completeOrder['Quantity']; ?>
+                                <?php echo $dispatchOrder['Quantity']; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

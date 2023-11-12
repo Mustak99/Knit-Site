@@ -9,6 +9,33 @@ $orderCount = count($pendingOrders);
 
 <head>
     <title>Pending Orders</title>
+
+    <script>
+        function rejectOrder(orderId) {
+            var rejectReason = prompt("Please provide a reason for rejecting this order:");
+            if (rejectReason) {
+                window.location.href = "sendEmail.php?id=" + orderId + "&status=Reject&reason=" + rejectReason;
+            }
+        }
+
+        function assignOrder(orderId) {
+            window.location.href = "assignDeliveryBoy.php?id=" + orderId;
+        }
+
+        function confirmDispatch(orderId) {
+            if (confirm("Are you sure you want to dispatch this order?")) {
+                // If the user confirms, redirect to the sendEmail.php page
+                window.location.href = "sendEmail.php?id=" + orderId + "&status=Dispatch";
+            }
+        }
+    </script>
+
+    <style>
+        .center-image {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,9 +57,6 @@ $orderCount = count($pendingOrders);
                                             <?php echo @$pendingOrder['CustomerName']; ?>
                                         </h5>
                                     </div>
-                                    <!-- <p class="card-text">Customer ID:
-                                        <?php echo @$pendingOrder['CustomerID']; ?>
-                                    </p> -->
                                     <p class="card-text">Order Date:
                                         <?php echo @$pendingOrder['OrderDate']; ?>
                                     </p>
@@ -51,13 +75,18 @@ $orderCount = count($pendingOrders);
                                     <p class="card-text">Price:
                                         <?php echo @$pendingOrder['TotalPrice']; ?>
                                     </p>
-                                    <div class="card-actions">
-                                        <img src="./uploads/dispatch.png" alt="Dispatch" width="40" height="40"
-                                            onclick="location.href='sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Dispatch';"
-                                            style="cursor: pointer;">
+                                    <div class="card-actions center-image">
                                         <img src="./uploads/reject.png" alt="Reject" width="40" height="40" align="right"
-                                            onclick="location.href='sendEmail.php?id=<?php echo $pendingOrder['OrderID']; ?>&status=Reject';"
-                                            style="cursor: pointer;">
+                                            onclick="rejectOrder('<?php echo $pendingOrder['OrderID']; ?>');"
+                                            style="cursor: pointer;" title="Reject this order">
+
+                                        <img src="./uploads/assign-delivery-boy.png" alt="Assign Order" width="40" height="40"
+                                            align="center" onclick="assignOrder('<?php echo $pendingOrder['OrderID']; ?>');"
+                                            style="cursor: pointer;" title="Assign delivery boy">
+
+                                        <img src="./uploads/dispatch.png" alt="Dispatch" width="40" height="40" align="left"
+                                            onclick="confirmDispatch('<?php echo $pendingOrder['OrderID']; ?>');"
+                                            style="cursor: pointer;" title="Dispatch this order">
                                     </div>
                                 </div>
                             </div>
@@ -67,6 +96,11 @@ $orderCount = count($pendingOrders);
             </div>
         <?php endif; ?>
     </div>
+    <?php
+    if (isset($_GET['assignment']) && $_GET['assignment'] === 'success') {
+        echo "<script>alert('Order assigned successfully');</script>";
+    }
+    ?>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
