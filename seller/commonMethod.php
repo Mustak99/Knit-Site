@@ -166,7 +166,9 @@ function fetchPendingOrders($con, $sellerId)
     JOIN products p ON oi.product_id = p.id
     JOIN customerregistration c ON o.customer_id = c.UserId
     WHERE o.status = 'Pending' 
-    AND p.SID = $sellerId;";
+    AND p.SID = $sellerId
+    ORDER BY o.order_date DESC;";  // Order by the 'order_date' column in descending order
+
 
 
     $result = $con->query($query);

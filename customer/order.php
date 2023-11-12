@@ -22,7 +22,9 @@ $query = "SELECT o.order_id, o.order_date, o.status, oi.product_id, p.name AS pr
           FROM orders o
           JOIN order_items oi ON o.order_id = oi.order_id
           JOIN products p ON oi.product_id = p.id
-          WHERE o.customer_id = $customer_id";
+          WHERE o.customer_id = $customer_id
+          ORDER BY o.order_date DESC";
+
 
 $result = $conn->query($query);
 echo '        <div class="row">';
