@@ -22,13 +22,25 @@ if (isset($_GET['id'])) {
             $insertQuery = "INSERT INTO delivery_boy_finances (delivery_boy_id, order_id, earning_amount, floating_cash) VALUES (?, ?, ?, ?)";
             $insertStmt = $con->prepare($insertQuery);
 
-            $earning_amount = 30; // You need to specify the actual earning amount
-            $floating_cash = 30; // You need to specify the actual floating cash
-
+            $earning_amount = 30;
+            $floating_cash = 30;
             $insertStmt->bind_param("iidd", $delivery_boy_id, $order_id, $earning_amount, $floating_cash);
 
             if ($insertStmt->execute()) {
                 // Finance record inserted successfully
+
+                // Update the status in the delivery_boy_order table
+                $updateOrderQuery = "UPDATE delivery_boy_order SET status = 'done' WHERE order_id = ?";
+                $updateOrderStmt = $con->prepare($updateOrderQuery);
+                $updateOrderStmt->bind_param("i", $order_id);
+
+                if ($updateOrderStmt->execute()) {
+                    // Order status in delivery_boy_order table updated successfully
+                } else {
+                    // Handle the update error for delivery_boy_order table
+                    echo "Failed to update delivery_boy_order status.";
+                }
+
             } else {
                 // Handle the insert error
                 echo "Failed to insert finance record.";
@@ -36,11 +48,12 @@ if (isset($_GET['id'])) {
 
             $stmt->close();
             $insertStmt->close();
+            $updateOrderStmt->close();
             $con->close();
             header("Location: order.php");
             exit();
         } else {
-            // Handle the update error
+            // Handle the update error for orders table
             $stmt->close();
             $con->close();
             echo "Failed to update order status.";
