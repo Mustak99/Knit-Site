@@ -2,6 +2,12 @@
 include_once("commonMethod.php");
 $name = getFullNameByUserId(connection(), @$user_id);
 $currentDay = getCurrentDayEarnings(connection(), @$user_id);
+$currentWeek = getCurrentWeekEarnings(connection(), @$user_id);
+$earningsByDay = getCurrentWeekEarningsDayWise(connection(), $user_id);
+$earningsByMonth = getCurrentYearEarningsMonthWise(connection(), $user_id);
+$orders = getUserOrderWithStatus(connection(), $user_id);
+$doneStatus = countDoneOrders(connection(), $user_id);
+$inProgressStatus = countInProgressOrders(connection(), $user_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +74,7 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 														<h5 class="card-title">Floating Cash</h5>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
+												<h1 class="mt-1 mb-3">0</h1>
 												<div class="mb-0">
 													<span class="text-success"> <i
 															class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
@@ -85,7 +91,9 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 														<h5 class="card-title">Current Week</h5>
 													</div>
 												</div>
-												<h1 class="mt-1 mb-3">$21.300</h1>
+												<h1 class="mt-1 mb-3">
+													<?php echo ($currentWeek == 0) ? '0' : $currentWeek; ?>
+												</h1>
 												<div class="mb-0">
 													<span class="text-success"> <i
 															class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
@@ -117,7 +125,7 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Recent Movement</h5>
+									<h5 class="card-title mb-0">Current Week Earnings</h5>
 								</div>
 								<div class="card-body py-3">
 									<div class="chart chart-sm">
@@ -132,7 +140,7 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Browser Usage</h5>
+									<h5 class="card-title mb-0">Order Status</h5>
 								</div>
 								<div class="card-body d-flex">
 									<div class="align-self-center w-100">
@@ -145,17 +153,14 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 										<table class="table mb-0">
 											<tbody>
 												<tr>
-													<td>Chrome</td>
-													<td class="text-end">4306</td>
+													<td>Complete</td>
+													<td class="text-end"><?php echo $doneStatus; ?></td>
 												</tr>
 												<tr>
-													<td>Firefox</td>
-													<td class="text-end">3801</td>
+													<td>In-Progress</td>
+													<td class="text-end"><?php echo $inProgressStatus; ?></td>
 												</tr>
-												<tr>
-													<td>IE</td>
-													<td class="text-end">1689</td>
-												</tr>
+												
 											</tbody>
 										</table>
 									</div>
@@ -195,84 +200,68 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 							<div class="card flex-fill">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Projects</h5>
+									<h5 class="card-title mb-0">Orders Details</h5>
 								</div>
-								<table class="table table-hover my-0">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th class="d-none d-xl-table-cell">Start Date</th>
-											<th class="d-none d-xl-table-cell">End Date</th>
-											<th>Status</th>
-											<th class="d-none d-md-table-cell">Assignee</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-danger">Cancelled</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Christina Mason</td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2023</td>
-											<td class="d-none d-xl-table-cell">31/06/2023</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-									</tbody>
-								</table>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>Customer Name</th>
+													<th>Product Name</th>
+													<th>Product Description</th>
+													<th>Product Price</th>
+													<th>Address</th>
+													<th>Status</th>
+													<th>Quantity</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach ($orders as $order): ?>
+													<tr>
+														<td>
+															<?php echo $order['customer_name']; ?>
+														</td>
+														<td>
+															<?php echo $order['product_name']; ?>
+														</td>
+														<td>
+															<?php echo $order['product_description']; ?>
+														</td>
+														<td>
+															<?php echo $order['product_price']; ?>
+														</td>
+														<td>
+															<?php echo $order['address']; ?>
+														</td>
+														<td>
+															<?php if ($order['status'] == 'done'): ?>
+																<span class="badge bg-success">
+																	Complete
+																</span>
+															<?php else: ?>
+																<span class="badge bg-warning">
+																	In-Progress
+																</span>
+															<?php endif; ?>
+														</td>
+														<td>
+															<?php echo $order['quantity']; ?>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
 							<div class="card flex-fill w-100">
 								<div class="card-header">
 
-									<h5 class="card-title mb-0">Monthly Sales</h5>
+									<h5 class="card-title mb-0">Monthly Earnings</h5>
 								</div>
 								<div class="card-body d-flex w-100">
 									<div class="align-self-center chart chart-lg">
@@ -287,34 +276,7 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 			</main>
 
 			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/"
-									target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted"
-									href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin
-										Template</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-end">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+
 			</footer>
 		</div>
 	</div>
@@ -327,30 +289,22 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
 			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
 			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+
+			// Extract labels and data from PHP array
+			var labels = <?php echo json_encode(array_keys($earningsByDay)); ?>;
+			var data = <?php echo json_encode(array_values($earningsByDay)); ?>;
+
 			// Line chart
 			new Chart(document.getElementById("chartjs-dashboard-line"), {
 				type: "line",
 				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					labels: labels,
 					datasets: [{
-						label: "Sales ($)",
+						label: "Earnings (₹)",
 						fill: true,
 						backgroundColor: gradient,
 						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
+						data: data
 					}]
 				},
 				options: {
@@ -397,9 +351,9 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 			new Chart(document.getElementById("chartjs-dashboard-pie"), {
 				type: "pie",
 				data: {
-					labels: ["Chrome", "Firefox", "IE"],
+					labels: ["Done", "In-Progress"],
 					datasets: [{
-						data: [4306, 3801, 1689],
+						data: [<?php echo $doneStatus; ?>,<?php echo $inProgressStatus; ?>],
 						backgroundColor: [
 							window.theme.primary,
 							window.theme.warning,
@@ -421,18 +375,22 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {
+			// Extract labels and data from PHP array
+			var labels = Object.keys(<?php echo json_encode($earningsByMonth); ?>);
+			var data = Object.values(<?php echo json_encode($earningsByMonth); ?>);
+
 			// Bar chart
 			new Chart(document.getElementById("chartjs-dashboard-bar"), {
 				type: "bar",
 				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					labels: labels,
 					datasets: [{
 						label: "This year",
 						backgroundColor: window.theme.primary,
 						borderColor: window.theme.primary,
 						hoverBackgroundColor: window.theme.primary,
 						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+						data: data,
 						barPercentage: .75,
 						categoryPercentage: .5
 					}]
@@ -462,6 +420,7 @@ $currentDay = getCurrentDayEarnings(connection(), @$user_id);
 				}
 			});
 		});
+
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {

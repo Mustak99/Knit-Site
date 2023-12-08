@@ -43,6 +43,7 @@ $completeOrders = getCompleteOrder(connection(), $user_id);
                             <th>Customer Name</th>
                             <th>Product Name</th>
                             <th>Product Description</th>
+                            <th>Address</th>
                             <th>Order Date</th>
                             <th>Product Price</th>
                             <th>Quantity</th>
@@ -57,6 +58,9 @@ $completeOrders = getCompleteOrder(connection(), $user_id);
                                 </td>
                                 <td>
                                     <?php echo $completeorder['product_description']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $completeorder['address']; ?>
                                 </td>
                                 <td>
                                     <?php echo $completeorder['order_date']; ?>

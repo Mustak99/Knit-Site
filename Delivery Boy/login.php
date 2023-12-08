@@ -66,7 +66,7 @@
         }
         ?> <br>
         <input type="submit" name="login" value="Login" class="btn--radius-2">
-
+        <p>Don't have an account ? <a href="registration.php">Sign up</a></p>
 
     </form>
 </body>

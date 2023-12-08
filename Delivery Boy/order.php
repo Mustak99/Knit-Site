@@ -53,7 +53,7 @@ $userOrders = getUserOrder(connection(), $user_id);
                             <th>Customer Name</th>
                             <th>Product Name</th>
                             <th>Product Description</th>
-                            <th>Order Date</th>
+                            <th>Address</th>
                             <th>Product Price</th>
                             <th>Quantity</th>
                         </tr>
@@ -69,7 +69,7 @@ $userOrders = getUserOrder(connection(), $user_id);
                                     <?php echo $order['product_description']; ?>
                                 </td>
                                 <td>
-                                    <?php echo $order['order_date']; ?>
+                                    <?php echo $order['address']; ?>
                                 </td>
                                 <td>
                                     <?php echo $order['product_price']; ?>
