@@ -488,8 +488,8 @@ function fetchPendingOrdersCount($con, $sellerId)
 }
 
 
-// fetch pending order count
-function fetchDispatchedOrdersCount($con, $sellerId)
+// fetch dispatch order count
+function fetchDispatchOrdersCount($con, $sellerId)
 {
     $query = "SELECT COUNT(*) as dispatched_order_count
               FROM orders o
@@ -505,15 +505,40 @@ function fetchDispatchedOrdersCount($con, $sellerId)
     }
 
     $row = $result->fetch_assoc();
-    $dispatchedOrderCount = $row["dispatched_order_count"];
+    $dispatchOrderCount = $row["dispatched_order_count"];
 
     $con->close();
 
-    return $dispatchedOrderCount;
+    return $dispatchOrderCount;
 }
 
 
-// fetch pending order count
+// fetch complete order count
+function fetchCompleteOrdersCount($con, $sellerId)
+{
+    $query = "SELECT COUNT(*) as dispatched_order_count
+              FROM orders o
+              JOIN order_items oi ON o.order_id = oi.order_id
+              JOIN products p ON oi.product_id = p.id
+              WHERE o.status = 'Complete' 
+              AND p.SID = $sellerId;";
+
+    $result = $con->query($query);
+
+    if ($result === false) {
+        die("Error in SQL query: " . $con->error);
+    }
+
+    $row = $result->fetch_assoc();
+    $completeOrderCount = $row["dispatched_order_count"];
+
+    $con->close();
+
+    return $completeOrderCount;
+}
+
+
+// fetch reject order count
 
 function fetchRejectedOrdersCount($con, $sellerId)
 {
