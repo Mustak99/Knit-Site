@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 08:51 PM
+-- Generation Time: Dec 08, 2023 at 08:07 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -56,14 +56,6 @@ CREATE TABLE `cart` (
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
-(12, 13, 104, 1, '1000.00', '2023-11-29 07:52:00'),
-(14, 13, 105, 1, '500.00', '2023-11-29 07:53:09');
 
 -- --------------------------------------------------------
 
@@ -122,7 +114,7 @@ INSERT INTO `customerregistration` (`UserId`, `UserFirstName`, `UserMiddleName`,
 (12, 'Mustak', 'H', 'Shaikh', '9510611840', 'mustakshaikh217@gmail.com', 'Mustak_13', 'ec0df3dfb087fd0696075eba6fd24f5e', 'Unn', 394210, 'M', '2023-03-25 12:50:54', '1'),
 (13, 'Mustak', 'H', 'Shaikh', '6355052382', 'm1ustakshaikh217@gmail.com', 'bca21_122', '0ec7fd2434da652505ba10d9a7faba2c', '', 394210, 'M', '2023-04-12 04:24:03', '1'),
 (14, 'Yagnesh', 'M', 'kapdiya', '9510611804', 'yagnesh@217gmail.com', 'bca21_112', 'bf310423f16aa8b1f5a0d2b4fdfaaaf0', 'Unn,surat', 394210, 'M', '2023-08-20 06:56:53', '1'),
-(15, 'Harshil', 'A', 'Modawala', '9313353158', 'hmodawala@gmail.com', 'harshil1611', 'fc2a30cf9f5fe16b87284e3cf5207f37', 'Nanpura/Surat,India-', 395001, 'M', '2023-08-22 05:30:02', '1');
+(15, 'Harshil', 'A', 'Modawala', '9313353158', 'hmodawala@gmail.com', 'harshil1611', 'b96339d5463a9a822340e317c749da51', 'Nanpura/Surat,India-', 395001, 'M', '2023-08-22 05:30:02', '1');
 
 -- --------------------------------------------------------
 
@@ -154,8 +146,8 @@ CREATE TABLE `delivery_boys` (
 --
 
 INSERT INTO `delivery_boys` (`id`, `full_name`, `phone_number`, `email`, `street_address`, `city`, `state`, `zip_code`, `date_of_birth`, `gender`, `license_number`, `issuing_state`, `expiration_date`, `vehicle_type`, `password`, `login_status`) VALUES
-(5, 'Harshil', '9876543210', 'f@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-15', 'Male', '655151', 'Gujarat', '2030-06-10', 'Motorcycle', '28eade5f3fc1e899a88884ec135f3351', 0),
-(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 1);
+(5, 'Harshil', '9876543210', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565458', 'Gujarat', '2030-06-10', 'Motorcycle', '28eade5f3fc1e899a88884ec135f3351', 0),
+(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 0);
 
 -- --------------------------------------------------------
 
@@ -177,15 +169,16 @@ CREATE TABLE `delivery_boy_finances` (
 --
 
 INSERT INTO `delivery_boy_finances` (`id`, `delivery_boy_id`, `order_id`, `earning_amount`, `floating_cash`, `last_transaction_date`) VALUES
-(1, 5, 5, '30.00', '30.00', '2023-12-03 17:48:10'),
-(2, 5, 14, '30.00', '30.00', '2023-12-10 17:48:49'),
-(3, 5, 5, '30.00', '30.00', '2023-12-07 18:07:51'),
+(1, 5, 5, '30.00', '30.00', '2023-12-04 17:48:10'),
+(2, 5, 14, '30.00', '30.00', '2023-12-05 17:48:49'),
+(3, 5, 5, '30.00', '30.00', '2023-12-06 18:07:51'),
 (4, 5, 14, '30.00', '30.00', '2023-12-07 18:07:54'),
-(5, 5, 3, '30.00', '30.00', '2023-12-07 18:10:34'),
-(6, 6, 1, '30.00', '30.00', '2023-12-07 18:35:52'),
-(7, 5, 5, '30.00', '30.00', '2023-12-07 18:49:25'),
-(8, 5, 3, '30.00', '30.00', '2023-12-07 18:49:37'),
-(9, 5, 14, '30.00', '30.00', '2023-12-07 19:42:30');
+(5, 5, 3, '30.00', '30.00', '2023-12-08 18:10:34'),
+(6, 6, 1, '30.00', '30.00', '2023-12-08 18:35:52'),
+(7, 5, 5, '30.00', '30.00', '2023-12-09 18:49:25'),
+(8, 5, 3, '30.00', '30.00', '2023-12-05 18:49:37'),
+(9, 5, 14, '30.00', '30.00', '2023-12-07 19:42:30'),
+(10, 5, 16, '30.00', '30.00', '2023-12-08 17:43:19');
 
 -- --------------------------------------------------------
 
@@ -208,7 +201,7 @@ INSERT INTO `delivery_boy_order` (`id`, `order_id`, `delivery_boy_id`, `status`)
 (1, 5, 5, 'done'),
 (8, 14, 5, 'in-progress'),
 (9, 3, 5, 'done'),
-(10, 1, 6, 'in-progress');
+(11, 16, 5, 'done');
 
 -- --------------------------------------------------------
 
@@ -229,20 +222,21 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`, `reject_reason`) VALUES
-(1, 13, '2023-10-15 04:09:52', 'Complete', NULL),
-(2, 15, '2023-10-16 04:16:25', 'Dispatch', NULL),
-(3, 8, '2023-10-17 04:18:02', 'Complete', NULL),
-(4, 9, '2023-10-18 04:18:16', 'Dispatch', NULL),
-(5, 10, '2023-10-19 04:18:29', 'Complete', NULL),
-(6, 11, '2023-10-20 04:18:43', 'Dispatch', NULL),
-(7, 12, '2023-10-21 04:18:52', 'Reject', 'Not Available.'),
-(8, 13, '2023-12-02 04:19:02', 'Dispatch', NULL),
-(9, 14, '2023-12-06 04:19:20', 'Dispatch', NULL),
-(10, 15, '2023-10-24 04:19:51', 'Dispatch', NULL),
-(11, 15, '2023-10-25 04:20:04', 'Dispatch', NULL),
-(12, 12, '2023-10-26 04:20:17', 'Dispatch', NULL),
-(13, 15, '2023-10-27 04:20:30', 'Reject', 'Product not available'),
-(14, 15, '2023-10-28 04:20:40', 'Dispatch', NULL);
+(1, 13, '2023-11-26 04:09:52', 'Complete', NULL),
+(2, 15, '2023-11-27 04:16:25', 'Pending', NULL),
+(3, 8, '2023-11-28 04:18:02', 'Complete', NULL),
+(4, 9, '2023-11-29 04:18:16', 'Dispatch', NULL),
+(5, 10, '2023-11-30 04:18:29', 'Complete', NULL),
+(6, 11, '2023-12-01 04:18:43', 'Pending', NULL),
+(7, 12, '2023-12-02 04:18:52', 'Reject', 'Not Available.'),
+(8, 13, '2023-12-03 04:19:02', 'Pending', NULL),
+(9, 14, '2023-12-04 04:19:20', 'Pending', NULL),
+(10, 15, '2023-12-05 04:19:51', 'Dispatch', NULL),
+(11, 15, '2023-12-06 04:20:04', 'Dispatch', NULL),
+(12, 12, '2023-12-07 04:20:17', 'Dispatch', NULL),
+(13, 15, '2023-12-08 04:20:30', 'Reject', 'Product not available'),
+(14, 15, '2023-12-09 04:20:40', 'Dispatch', NULL),
+(16, 13, '2023-12-08 17:40:35', 'Complete', NULL);
 
 -- --------------------------------------------------------
 
@@ -276,7 +270,8 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 (11, 11, 114, 1, '2000.00'),
 (12, 12, 115, 1, '2000.00'),
 (13, 13, 107, 1, '1500.00'),
-(14, 14, 113, 1, '1500.00');
+(14, 14, 113, 1, '1500.00'),
+(15, 16, 116, 1, '1111.00');
 
 -- --------------------------------------------------------
 
@@ -306,13 +301,13 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `brand_name`, `cat
 (104, 'T Shirt', 'White Colour', '1000.00', 'Zara', 'Womens', 'uploads/653c85bf94891.jpg', '2023-10-28 03:53:35', 1, 19, 99),
 (105, 'T Shirt', 'Blue Colour', '500.00', 'Zudio', 'Childrens', 'uploads/653c85fa9c477.jpg', '2023-10-28 03:54:34', 1, 19, 48),
 (106, 'Top', 'Printed', '500.00', 'Zudio', 'Childrens', 'uploads/653c8623c2676.jpg', '2023-10-28 03:55:15', 1, 19, 48),
-(107, 'Jacket', 'Blue Colour', '1500.00', 'Zara', 'Childrens', 'uploads/653c86695b32f.jpg', '2023-10-28 03:56:25', 1, 19, 95),
+(107, 'Jacket', 'Blue Colour', '1500.00', 'Zara', 'Childrens', 'uploads/653c86695b32f.jpg', '2023-10-28 03:56:25', 1, 19, 94),
 (108, 'Suit', 'Black Colour', '2000.00', 'Woodland', 'Mens', 'uploads/653c86aab6b1f.jpg', '2023-10-28 03:57:30', 1, 19, 100),
 (109, 'Jacket', 'Blue Black Colour', '3000.00', 'Zara', 'Mens', 'uploads/653c86d8e86f4.jpg', '2023-10-28 03:58:16', 1, 19, 74),
 (110, 'Shirt', 'White Colour', '1500.00', 'Zudio', 'Mens', 'uploads/653c86fe2f4ce.jpg', '2023-10-28 03:58:54', 1, 19, 50),
 (111, 'T Shirt', 'Printed', '2000.00', 'Zudio', 'Mens', 'uploads/653c873318906.jpg', '2023-10-28 03:59:47', 1, 19, 49),
 (112, 'Coat', 'Black Colour', '3000.00', 'Zara', 'Womens', 'uploads/653c876788863.jpg', '2023-10-28 04:00:39', 1, 19, 49),
-(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 28),
+(113, 'Top', 'White Colour', '1500.00', 'Zudio', 'Womens', 'uploads/653c878b5f15d.jpg', '2023-10-28 04:01:15', 1, 19, 26),
 (114, 'One Piece', 'Black Colour', '2000.00', 'Zara', 'Womens', 'uploads/653c87cb9682d.jpg', '2023-10-28 04:02:19', 1, 19, 47),
 (115, 'Top', 'Grey Colour', '2000.00', 'Zudio', 'Womens', 'uploads/653c87fa3cbc2.jpg', '2023-10-28 04:03:06', 1, 19, 49);
 
@@ -391,7 +386,8 @@ CREATE TABLE `refunds` (
 
 INSERT INTO `refunds` (`refund_id`, `order_id`, `customer_id`, `refund_amount`, `refund_date`) VALUES
 (1, 5, 10, '4000.00', '2023-10-31 19:09:50'),
-(2, 14, 15, '3000.00', '2023-10-31 19:12:33');
+(2, 14, 15, '3000.00', '2023-10-31 19:12:33'),
+(3, 2, 15, '500.00', '2023-12-08 17:47:24');
 
 -- --------------------------------------------------------
 
@@ -527,7 +523,7 @@ ALTER TABLE `sellerregistration`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `customerregistration`
@@ -539,49 +535,49 @@ ALTER TABLE `customerregistration`
 -- AUTO_INCREMENT for table `delivery_boys`
 --
 ALTER TABLE `delivery_boys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `delivery_boy_finances`
 --
 ALTER TABLE `delivery_boy_finances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `delivery_boy_order`
 --
 ALTER TABLE `delivery_boy_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `refunds`
 --
 ALTER TABLE `refunds`
-  MODIFY `refund_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `refund_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sellerregistration`
