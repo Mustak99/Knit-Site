@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2023 at 06:53 PM
+-- Generation Time: Dec 07, 2023 at 08:51 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -56,6 +56,14 @@ CREATE TABLE `cart` (
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
+(12, 13, 104, 1, '1000.00', '2023-11-29 07:52:00'),
+(14, 13, 105, 1, '500.00', '2023-11-29 07:53:09');
 
 -- --------------------------------------------------------
 
@@ -147,7 +155,7 @@ CREATE TABLE `delivery_boys` (
 
 INSERT INTO `delivery_boys` (`id`, `full_name`, `phone_number`, `email`, `street_address`, `city`, `state`, `zip_code`, `date_of_birth`, `gender`, `license_number`, `issuing_state`, `expiration_date`, `vehicle_type`, `password`, `login_status`) VALUES
 (5, 'Harshil', '9876543210', 'f@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-15', 'Male', '655151', 'Gujarat', '2030-06-10', 'Motorcycle', '28eade5f3fc1e899a88884ec135f3351', 0),
-(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 0);
+(6, 'Vasnsh', '9876543211', 'h@gmail.com', 'Nanpura', 'Surat', 'Gujarat', '395001', '2003-11-16', 'Male', '565451', 'Gujarat', '2030-06-10', 'Car', '28eade5f3fc1e899a88884ec135f3351', 1);
 
 -- --------------------------------------------------------
 
@@ -169,8 +177,15 @@ CREATE TABLE `delivery_boy_finances` (
 --
 
 INSERT INTO `delivery_boy_finances` (`id`, `delivery_boy_id`, `order_id`, `earning_amount`, `floating_cash`, `last_transaction_date`) VALUES
-(1, 5, 5, '30.00', '30.00', '2023-11-03 17:48:10'),
-(2, 5, 14, '30.00', '30.00', '2023-11-03 17:48:49');
+(1, 5, 5, '30.00', '30.00', '2023-12-03 17:48:10'),
+(2, 5, 14, '30.00', '30.00', '2023-12-10 17:48:49'),
+(3, 5, 5, '30.00', '30.00', '2023-12-07 18:07:51'),
+(4, 5, 14, '30.00', '30.00', '2023-12-07 18:07:54'),
+(5, 5, 3, '30.00', '30.00', '2023-12-07 18:10:34'),
+(6, 6, 1, '30.00', '30.00', '2023-12-07 18:35:52'),
+(7, 5, 5, '30.00', '30.00', '2023-12-07 18:49:25'),
+(8, 5, 3, '30.00', '30.00', '2023-12-07 18:49:37'),
+(9, 5, 14, '30.00', '30.00', '2023-12-07 19:42:30');
 
 -- --------------------------------------------------------
 
@@ -181,16 +196,19 @@ INSERT INTO `delivery_boy_finances` (`id`, `delivery_boy_id`, `order_id`, `earni
 CREATE TABLE `delivery_boy_order` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `delivery_boy_id` int(11) NOT NULL
+  `delivery_boy_id` int(11) NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'in-progress'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `delivery_boy_order`
 --
 
-INSERT INTO `delivery_boy_order` (`id`, `order_id`, `delivery_boy_id`) VALUES
-(1, 5, 5),
-(8, 14, 5);
+INSERT INTO `delivery_boy_order` (`id`, `order_id`, `delivery_boy_id`, `status`) VALUES
+(1, 5, 5, 'done'),
+(8, 14, 5, 'in-progress'),
+(9, 3, 5, 'done'),
+(10, 1, 6, 'in-progress');
 
 -- --------------------------------------------------------
 
@@ -211,20 +229,20 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `status`, `reject_reason`) VALUES
-(1, 13, '2023-10-15 04:09:52', 'Dispatch', NULL),
+(1, 13, '2023-10-15 04:09:52', 'Complete', NULL),
 (2, 15, '2023-10-16 04:16:25', 'Dispatch', NULL),
-(3, 8, '2023-10-17 04:18:02', 'Dispatch', NULL),
+(3, 8, '2023-10-17 04:18:02', 'Complete', NULL),
 (4, 9, '2023-10-18 04:18:16', 'Dispatch', NULL),
-(5, 10, '2023-10-19 04:18:29', 'Pending', NULL),
+(5, 10, '2023-10-19 04:18:29', 'Complete', NULL),
 (6, 11, '2023-10-20 04:18:43', 'Dispatch', NULL),
 (7, 12, '2023-10-21 04:18:52', 'Reject', 'Not Available.'),
-(8, 13, '2023-10-22 04:19:02', 'Dispatch', NULL),
-(9, 14, '2023-10-23 04:19:20', 'Dispatch', NULL),
+(8, 13, '2023-12-02 04:19:02', 'Dispatch', NULL),
+(9, 14, '2023-12-06 04:19:20', 'Dispatch', NULL),
 (10, 15, '2023-10-24 04:19:51', 'Dispatch', NULL),
 (11, 15, '2023-10-25 04:20:04', 'Dispatch', NULL),
 (12, 12, '2023-10-26 04:20:17', 'Dispatch', NULL),
 (13, 15, '2023-10-27 04:20:30', 'Reject', 'Product not available'),
-(14, 15, '2023-10-28 04:20:40', 'Pending', NULL);
+(14, 15, '2023-10-28 04:20:40', 'Dispatch', NULL);
 
 -- --------------------------------------------------------
 
@@ -403,7 +421,6 @@ CREATE TABLE `sellerregistration` (
 --
 
 INSERT INTO `sellerregistration` (`SellerId`, `SellerFirstName`, `SellerMiddleName`, `SellerLastName`, `MobileNumber`, `EmailAddress`, `UserName`, `Password`, `BusinessLocation`, `Pincode`, `BusinessType`, `CreationDate`, `status`, `businessdoc`) VALUES
-(8, 'Shamim', 'H', 'Shaikh', '992423822', 'Shaimim12@gmail.com', 'Shamim_12', 'e2857ec944d0f521ff193b5e29578954', 'katargam', 394210, 'electronic', '2023-02-16 07:10:06', '1', NULL),
 (9, 'Yagnesh', 'A', 'Kapadiya', '9923234366', 'Yagnesh122@gmail.com', 'yagnesh_122', 'd9d009c4f775599ef8537b6f3de9049c', 'surat', 394210, 'electronic', '2023-02-16 07:12:05', '1', NULL),
 (10, 'Mustak', 'H', 'Shaikh', '9924266822', 'mustak211@gmail.com', 'mustak_11', 'ce610c56cd594483c6bf332fec13f32a', 'unnsurat', 394210, 'electronic', '2023-03-05 08:21:18', '1', NULL),
 (11, 'Harshil', 'H', 'Modawala', '9242663222', 'harshil2111@gmail.com', 'harshil_12', '1705c8c440e7b429e4d7336bcf7dee90', 'unnsurat', 394210, 'footwear', '2023-03-21 06:30:03', '1', NULL),
@@ -510,7 +527,7 @@ ALTER TABLE `sellerregistration`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `customerregistration`
@@ -528,13 +545,13 @@ ALTER TABLE `delivery_boys`
 -- AUTO_INCREMENT for table `delivery_boy_finances`
 --
 ALTER TABLE `delivery_boy_finances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `delivery_boy_order`
 --
 ALTER TABLE `delivery_boy_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `orders`

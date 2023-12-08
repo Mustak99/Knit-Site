@@ -7,8 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_SESSION["user_id"])) {
         $user_id = trim($_SESSION["user_id"]);
-    }
-    else {
+    } else {
         die;
     }
 
@@ -21,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Modify the update query to set login_status to 1 when the toggle is on
     $sql = "UPDATE delivery_boys SET login_status = ? WHERE id = ?";
     if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("ii", $loginStatus,$user_id);
+        $stmt->bind_param("ii", $loginStatus, $user_id);
         $stmt->execute();
         $stmt->close();
     }
-    
-   
+
+
     if ($loginStatus == 0) {
         echo '<div class="p-4 text-white py-0">
         <p class="pt-4">Offline</p>

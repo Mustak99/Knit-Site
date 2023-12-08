@@ -247,7 +247,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($completeOrders) || (is_array($completeOrders) && empty($completeOrders[0]))): ?>
+                                <?php if (empty($products) || (is_array($products) && empty($products[0]))): ?>
                                     <tr>
                                         <td colspan="7">No products found.</td>
                                     </tr>
