@@ -154,13 +154,17 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 											<tbody>
 												<tr>
 													<td>Complete</td>
-													<td class="text-end"><?php echo $doneStatus; ?></td>
+													<td class="text-end">
+														<?php echo $doneStatus; ?>
+													</td>
 												</tr>
 												<tr>
 													<td>In-Progress</td>
-													<td class="text-end"><?php echo $inProgressStatus; ?></td>
+													<td class="text-end">
+														<?php echo $inProgressStatus; ?>
+													</td>
 												</tr>
-												
+
 											</tbody>
 										</table>
 									</div>
@@ -353,7 +357,7 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 				data: {
 					labels: ["Done", "In-Progress"],
 					datasets: [{
-						data: [<?php echo $doneStatus; ?>,<?php echo $inProgressStatus; ?>],
+						data: [<?php echo $doneStatus; ?>, <?php echo $inProgressStatus; ?>],
 						backgroundColor: [
 							window.theme.primary,
 							window.theme.warning,
@@ -491,13 +495,11 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {
-			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
-			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
 			document.getElementById("datetimepicker-dashboard").flatpickr({
 				inline: true,
 				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
 				nextArrow: "<span title=\"Next month\">&raquo;</span>",
-				defaultDate: defaultDate
+				defaultDate: "today"
 			});
 		});
 	</script>

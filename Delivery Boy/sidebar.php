@@ -156,7 +156,7 @@
                     Pages
                 </li>
 
-                <li class="sidebar-item active">
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="dashboard.php">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                     </a>
@@ -171,8 +171,8 @@
 
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="completeOrder.php">
-                        <i class="align-middle" data-feather="check-circle"></i> <span
-                            class="align-middle">Complete Orders</span>
+                        <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Complete
+                            Orders</span>
                     </a>
                 </li>
 
