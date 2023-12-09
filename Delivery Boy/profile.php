@@ -1,7 +1,32 @@
 <?php
 include_once("commonMethod.php");
-$name = getFullNameByUserId(connection(), @$user_id);
+
+if (isset($_SESSION["user_id"])) {
+	$user_id = $_SESSION["user_id"];
+} else {
+	// Redirect to login page if user is not logged in
+	header("Location: login.php");
+	exit();
+}
+
+$name = getFullNameByUserId(connection(), $user_id);
+
+// Fetch user data from the database
+$userData = getUserData(connection(), $user_id);
+
+function getUserData($connection, $user_id)
+{
+	$query = "SELECT * FROM `delivery_boys` WHERE `id` = $user_id";
+	$result = mysqli_query($connection, $query);
+
+	if ($result && mysqli_num_rows($result) > 0) {
+		return mysqli_fetch_assoc($result);
+	}
+
+	return null;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,20 +34,100 @@ $name = getFullNameByUserId(connection(), @$user_id);
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="AdminKit">
-	<meta name="keywords"
-		content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<meta name="description" content="Update Profile Form">
+	<meta name="author" content="Your Name">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
-
-	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-profile.html" />
-
-	<title>Profile | AdminKit Demo</title>
-
-	<link href="css/app.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+	<title>Update Profile</title>
+
+	<style>
+		/* body {
+			font-family: 'Inter', sans-serif;
+			background-color: #f8f9fa;
+		} */
+
+		/* .wrapper {
+			display: flex;
+		} */
+
+		/* .sidebar {
+			width: 250px;
+			background-color: #343a40;
+			color: #ffffff;
+			padding: 20px;
+		} */
+
+		/* .main {
+			flex: 1;
+			padding: 20px;
+		} */
+
+		/* .content {
+			background-color: #ffffff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		} */
+
+		/* h3 {
+			color: #007bff;
+		} */
+
+		input[type="text"],
+		input[type="date"],
+		select {
+			width: 100%;
+			padding: 10px;
+			margin: 5px 0;
+			border: 1px solid #ced4da;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type="radio"] {
+			margin-right: 5px;
+		}
+
+		input[type="submit"] {
+			background-color: #007bff;
+			color: #ffffff;
+			padding: 10px 15px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #0056b3;
+		}
+
+		/* span {
+			display: block;
+			margin-top: 5px;
+		} */
+
+		span.error {
+			color: red;
+		}
+	</style>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// Check if the URL contains the 'update' parameter
+			const urlParams = new URLSearchParams(window.location.search);
+			const updateStatus = urlParams.get('update');
+
+			// Display a dialog based on the 'update' parameter
+			if (updateStatus === 'success') {
+				alert('Profile updated successfully!');
+			} else if (updateStatus === 'error') {
+				alert('Failed to update profile. Please try again.');
+			}
+		});
+	</script>
 </head>
 
 <body>
@@ -32,249 +137,84 @@ $name = getFullNameByUserId(connection(), @$user_id);
 			<?php include 'head.php'; ?>
 
 			<main class="content">
-				<div class="container-fluid p-0">
+				<form name="updateProfileProcess.php" method="post" action="updateProfileProcess.php"
+					onsubmit="return validateForm()">
+					<h3>Personal Information:</h3>
+					Full Name: <input type="text" name="full_name" onfocus="clearError('full_name')"
+						value="<?= $userData['full_name'] ?>"><br>
+					<span id="full_name_error" style="color: red;"></span><br>
 
-					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle">Profile</h1>
-						<a class="badge bg-dark text-white ms-2" href="upgrade-to-pro.html">
-							Get more page examples
-						</a>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-xl-3">
-							<div class="card mb-3">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Profile Details</h5>
-								</div>
-								<div class="card-body text-center">
-									<img src="img/avatars/avatar-4.jpg" alt="Christina Mason"
-										class="img-fluid rounded-circle mb-2" width="128" height="128" />
-									<h5 class="card-title mb-0">Christina Mason</h5>
-									<div class="text-muted mb-2">Lead Developer</div>
+					<h3>Contact Information:</h3>
+					Phone Number: <input type="text" name="phone_number" onfocus="clearError('phone_number')"
+						value="<?= $userData['phone_number'] ?>"><br>
+					<span id="phone_number_error" style="color: red;"></span><br>
 
-									<div>
-										<a class="btn btn-primary btn-sm" href="#">Follow</a>
-										<a class="btn btn-primary btn-sm" href="#"><span
-												data-feather="message-square"></span> Message</a>
-									</div>
-								</div>
-								<hr class="my-0" />
-								<div class="card-body">
-									<h5 class="h6 card-title">Skills</h5>
-									<a href="#" class="badge bg-primary me-1 my-1">HTML</a>
-									<a href="#" class="badge bg-primary me-1 my-1">JavaScript</a>
-									<a href="#" class="badge bg-primary me-1 my-1">Sass</a>
-									<a href="#" class="badge bg-primary me-1 my-1">Angular</a>
-									<a href="#" class="badge bg-primary me-1 my-1">Vue</a>
-									<a href="#" class="badge bg-primary me-1 my-1">React</a>
-									<a href="#" class="badge bg-primary me-1 my-1">Redux</a>
-									<a href="#" class="badge bg-primary me-1 my-1">UI</a>
-									<a href="#" class="badge bg-primary me-1 my-1">UX</a>
-								</div>
-								<hr class="my-0" />
-								<div class="card-body">
-									<h5 class="h6 card-title">About</h5>
-									<ul class="list-unstyled mb-0">
-										<li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span> Lives
-											in <a href="#">San Francisco, SA</a></li>
+					Email Address: <input type="text" name="email" onfocus="clearError('email')"
+						value="<?= $userData['email'] ?>"><br>
+					<span id="email_error" style="color: red;"></span><br>
 
-										<li class="mb-1"><span data-feather="briefcase" class="feather-sm me-1"></span>
-											Works at <a href="#">GitHub</a></li>
-										<li class="mb-1"><span data-feather="map-pin" class="feather-sm me-1"></span>
-											From <a href="#">Boston</a></li>
-									</ul>
-								</div>
-								<hr class="my-0" />
-								<div class="card-body">
-									<h5 class="h6 card-title">Elsewhere</h5>
-									<ul class="list-unstyled mb-0">
-										<li class="mb-1"><a href="#">staciehall.co</a></li>
-										<li class="mb-1"><a href="#">Twitter</a></li>
-										<li class="mb-1"><a href="#">Facebook</a></li>
-										<li class="mb-1"><a href="#">Instagram</a></li>
-										<li class="mb-1"><a href="#">LinkedIn</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+					<h3>Address:</h3>
+					Street Address: <input type="text" name="street_address" onfocus="clearError('street_address')"
+						value="<?= $userData['street_address'] ?>"><br>
+					<span id="street_address_error" style="color: red;"></span><br>
 
-						<div class="col-md-8 col-xl-9">
-							<div class="card">
-								<div class="card-header">
+					City: <input type="text" name="city" onfocus="clearError('city')"
+						value="<?= $userData['city'] ?>"><br>
+					<span id="city_error" style="color: red;"></span><br>
 
-									<h5 class="card-title mb-0">Activities</h5>
-								</div>
-								<div class="card-body h-100">
+					State: <input type="text" name="state" onfocus="clearError('state')"
+						value="<?= $userData['state'] ?>"><br>
+					<span id="state_error" style="color: red;"></span><br>
 
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar-5.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="Vanessa Tucker">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">5m ago</small>
-											<strong>Vanessa Tucker</strong> started following <strong>Christina
-												Mason</strong><br />
-											<small class="text-muted">Today 7:51 pm</small><br />
+					ZIP Code: <input type="text" name="zip_code" onfocus="clearError('zip_code')"
+						value="<?= $userData['zip_code'] ?>"><br>
+					<span id="zip_code_error" style="color: red;"></span><br>
 
-										</div>
-									</div>
+					<h3>Date of Birth:</h3>
+					<input type="date" name="date_of_birth" onfocus="clearError('date_of_birth')"
+						value="<?= $userData['date_of_birth'] ?>"><br>
+					<span id="date_of_birth_error" style="color: red;"></span><br>
 
-									<hr />
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="Charles Hall">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">30m ago</small>
-											<strong>Charles Hall</strong> posted something on <strong>Christina
-												Mason</strong>'s timeline<br />
-											<small class="text-muted">Today 7:21 pm</small>
+					<h3>Gender:</h3>
+					<input type="radio" name="gender" value="Male" <?= $userData['gender'] === 'Male' ? 'checked' : '' ?>>
+					Male
+					<input type="radio" name="gender" value="Female" <?= $userData['gender'] === 'Female' ? 'checked' : '' ?>> Female
+					<input type="radio" name="gender" value="Other" <?= $userData['gender'] === 'Other' ? 'checked' : '' ?>> Other<br><br>
 
-											<div class="border text-sm text-muted p-2 mt-1">
-												Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem
-												quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam
-												nunc, blandit vel, luctus
-												pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt
-												tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis
-												ante.
-											</div>
+					<h3>Driver's License Information:</h3>
+					Driver's License Number: <input type="text" name="license_number"
+						onfocus="clearError('license_number')" value="<?= $userData['license_number'] ?>"><br>
+					<span id="license_number_error" style="color: red;"></span><br>
 
-											<a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm"
-													data-feather="heart"></i> Like</a>
-										</div>
-									</div>
+					Issuing State: <input type="text" name="issuing_state" onfocus="clearError('issuing_state')"
+						value="<?= $userData['issuing_state'] ?>"><br>
+					<span id="issuing_state_error" style="color: red;"></span><br>
 
-									<hr />
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar-4.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="Christina Mason">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">1h ago</small>
-											<strong>Christina Mason</strong> posted a new blog<br />
+					Expiration Date: <input type="date" name="expiration_date" onfocus="clearError('expiration_date')"
+						value="<?= $userData['expiration_date'] ?>"><br>
+					<span id="expiration_date_error" style="color: red;"></span><br>
 
-											<small class="text-muted">Today 6:35 pm</small>
-										</div>
-									</div>
+					<h3>Vehicle Information:</h3>
+					Vehicle Type:
+					<select name="vehicle_type" onfocus="clearError('vehicle_type')">
+						<option value="">Select</option>
+						<option value="Car" <?= $userData['vehicle_type'] === 'Car' ? 'selected' : '' ?>>Car</option>
+						<option value="Motorcycle" <?= $userData['vehicle_type'] === 'Motorcycle' ? 'selected' : '' ?>>
+							Motorcycle</option>
+						<option value="Bicycle" <?= $userData['vehicle_type'] === 'Bicycle' ? 'selected' : '' ?>>Bicycle
+						</option>
+						<option value="Other" <?= $userData['vehicle_type'] === 'Other' ? 'selected' : '' ?>>Other</option>
+					</select><br>
+					<span id="vehicle_type_error" style="color: red;"></span><br>
 
-									<hr />
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar-2.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="William Harris">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">3h ago</small>
-											<strong>William Harris</strong> posted two photos on <strong>Christina
-												Mason</strong>'s timeline<br />
-											<small class="text-muted">Today 5:12 pm</small>
-
-											<div class="row g-0 mt-1">
-												<div class="col-6 col-md-4 col-lg-4 col-xl-3">
-													<img src="img/photos/unsplash-1.jpg" class="img-fluid pe-2"
-														alt="Unsplash">
-												</div>
-												<div class="col-6 col-md-4 col-lg-4 col-xl-3">
-													<img src="img/photos/unsplash-2.jpg" class="img-fluid pe-2"
-														alt="Unsplash">
-												</div>
-											</div>
-
-											<a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm"
-													data-feather="heart"></i> Like</a>
-										</div>
-									</div>
-
-									<hr />
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar-2.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="William Harris">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">1d ago</small>
-											<strong>William Harris</strong> started following <strong>Christina
-												Mason</strong><br />
-											<small class="text-muted">Yesterday 3:12 pm</small>
-
-											<div class="d-flex align-items-start mt-1">
-												<a class="pe-3" href="#">
-													<img src="img/avatars/avatar-4.jpg" width="36" height="36"
-														class="rounded-circle me-2" alt="Christina Mason">
-												</a>
-												<div class="flex-grow-1">
-													<div class="border text-sm text-muted p-2 mt-1">
-														Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id,
-														lorem. Maecenas nec odio et ante tincidunt tempus.
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<hr />
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar-4.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="Christina Mason">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">1d ago</small>
-											<strong>Christina Mason</strong> posted a new blog<br />
-											<small class="text-muted">Yesterday 2:43 pm</small>
-										</div>
-									</div>
-
-									<hr />
-									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar.jpg" width="36" height="36"
-											class="rounded-circle me-2" alt="Charles Hall">
-										<div class="flex-grow-1">
-											<small class="float-end text-navy">1d ago</small>
-											<strong>Charles Hall</strong> started following <strong>Christina
-												Mason</strong><br />
-											<small class="text-muted">Yesterdag 1:51 pm</small>
-										</div>
-									</div>
-
-									<hr />
-									<div class="d-grid">
-										<a href="#" class="btn btn-primary">Load more</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
+					<input type="submit" name="submit" value="Update Profile">
+				</form>
 			</main>
 
 			<footer class="footer">
-				<div class="container-fluid">
-					<div class="row text-muted">
-						<div class="col-6 text-start">
-							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/"
-									target="_blank"><strong>AdminKit</strong></a> - <a class="text-muted"
-									href="https://adminkit.io/" target="_blank"><strong>Bootstrap Admin
-										Template</strong></a> &copy;
-							</p>
-						</div>
-						<div class="col-6 text-end">
-							<ul class="list-inline">
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
-								</li>
-								<li class="list-inline-item">
-									<a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</footer>
 		</div>
 	</div>
-
-	<script src="js/app.js"></script>
-
 </body>
 
 </html>

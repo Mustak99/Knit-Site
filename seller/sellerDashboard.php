@@ -10,7 +10,8 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
 $currentweek = fetchCurrentWeekRevenue(connection(), $sellerId);
 $previousweek = fetchPreviousWeekRevenue(connection(), $sellerId);
 $pendingordercount = fetchPendingOrdersCount(connection(), $sellerId);
-$completeordercount = fetchDispatchedOrdersCount(connection(), $sellerId);
+$dispatchordercount = fetchDispatchOrdersCount(connection(), $sellerId);
+$completeordercount = fetchCompleteOrdersCount(connection(), $sellerId);
 $rejectordercount = fetchRejectedOrdersCount(connection(), $sellerId);
 $outwardstock = fetchOutwardstock(connection(), $sellerId);
 $completeOrders = fetchCompleteOrders(connection(), $sellerId);
@@ -168,7 +169,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                 </center>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 300px; overflow-y: scroll;">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead class="bg-light">
                                 <tr class="border-0">
                                     <th class="border-0">Customer Name</th>
@@ -234,7 +235,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                 </center>
                 <div class="card-body p-0">
                     <div class="table-responsive" style="max-height: 300px; overflow-y: scroll;">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead class="bg-light">
                                 <tr class="border-0">
                                     <th class="border-0">Name</th>
@@ -469,26 +470,35 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
         $(document).ready(function () {
             // Get your data for the pie chart (e.g., total sales for different categories)
             var pieChartData = {
-                labels: ["Pending Order", "Complete Order", "Reject Order"],
+                labels: ["Pending Order", "Dispatch Order", "Complete Order", "Reject Order"],
                 datasets: [
                     {
-                        data: [<?php echo @$pendingordercount; ?>, <?php echo @$completeordercount; ?>, <?php echo @$rejectordercount; ?>], // Replace with your actual data
+                        data: [
+                            <?php echo @$pendingordercount; ?>,
+                            <?php echo $dispatchordercount; ?>,
+                            <?php echo @$completeordercount; ?>,
+                            <?php echo @$rejectordercount; ?>
+                        ], // Replace with your actual data
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.7)',
                             'rgba(54, 162, 235, 0.7)',
                             'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)', // Add more colors as needed
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)'
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)', // Corresponding border colors
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 2
                     }
                 ]
             };
-
-
 
             var ctx = document.getElementById('total-sale-pie').getContext('2d');
 
@@ -508,6 +518,7 @@ $products = fetchProductsWithSizes(connection(), $sellerId);
                 }
             });
         });
+
     </script>
 
 
