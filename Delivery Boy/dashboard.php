@@ -62,7 +62,7 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 
 												<div class="mb-0">
 													<span class="text-danger"> <i
-															class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
+															class="mdi mdi-arrow-bottom-right"></i>  </span>
 													<span class="text-muted">Since last week</span>
 												</div>
 											</div>
@@ -77,7 +77,7 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 												<h1 class="mt-1 mb-3">0</h1>
 												<div class="mb-0">
 													<span class="text-success"> <i
-															class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
+															class="mdi mdi-arrow-bottom-right"></i> </span>
 													<span class="text-muted">Since last week</span>
 												</div>
 											</div>
@@ -96,7 +96,7 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 												</h1>
 												<div class="mb-0">
 													<span class="text-success"> <i
-															class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+															class="mdi mdi-arrow-bottom-right"></i>  </span>
 													<span class="text-muted">Since last week</span>
 												</div>
 											</div>
@@ -111,7 +111,7 @@ $inProgressStatus = countInProgressOrders(connection(), $user_id);
 												<h1 class="mt-1 mb-3">64</h1>
 												<div class="mb-0">
 													<span class="text-danger"> <i
-															class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
+															class="mdi mdi-arrow-bottom-right"></i>  </span>
 													<span class="text-muted">Since last week</span>
 												</div>
 											</div>
