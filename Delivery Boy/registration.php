@@ -3,6 +3,7 @@
 
 <head>
     <title>Delivery Boy Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -19,6 +20,10 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .input-group {
@@ -39,6 +44,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
+            margin-top: 5px;
         }
 
         select {
@@ -65,6 +71,12 @@
             padding: 10px 20px;
             border-radius: 3px;
             cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
         }
     </style>
     <script>
@@ -93,60 +105,117 @@
             var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,12}$/;
 
             if (fullName === "") {
-                errors.push({ field: "full_name", message: "Full Name is required" });
+                errors.push({
+                    field: "full_name",
+                    message: "Full Name is required"
+                });
             }
             if (phoneNumber === "") {
-                errors.push({ field: "phone_number", message: "Phone Number is required" });
+                errors.push({
+                    field: "phone_number",
+                    message: "Phone Number is required"
+                });
             } else if (!phoneNumber.match(phonePattern)) {
-                errors.push({ field: "phone_number", message: "Please enter a valid phone number" });
+                errors.push({
+                    field: "phone_number",
+                    message: "Please enter a valid phone number"
+                });
             }
             if (email === "") {
-                errors.push({ field: "email", message: "Email is required" });
+                errors.push({
+                    field: "email",
+                    message: "Email is required"
+                });
             } else if (!email.match(emailPattern)) {
-                errors.push({ field: "email", message: "Please enter a valid email address" });
+                errors.push({
+                    field: "email",
+                    message: "Please enter a valid email address"
+                });
             }
             if (password === "") {
-                errors.push({ field: "password", message: "Password is required" });
+                errors.push({
+                    field: "password",
+                    message: "Password is required"
+                });
             } else if (!password.match(passwordPattern)) {
-                errors.push({ field: "password", message: "Password must be 8-12 characters and include at least one uppercase letter, one lowercase letter, one digit, and one special character" });
+                errors.push({
+                    field: "password",
+                    message: "Password must be 8-12 characters and include at least one uppercase letter, one lowercase letter, one digit, and one special character"
+                });
             }
             if (confirmPassword === "") {
-                errors.push({ field: "confirm_password", message: "Confirm Password is required" });
+                errors.push({
+                    field: "confirm_password",
+                    message: "Confirm Password is required"
+                });
             } else if (password !== confirmPassword) {
-                errors.push({ field: "confirm_password", message: "Passwords do not match" });
+                errors.push({
+                    field: "confirm_password",
+                    message: "Passwords do not match"
+                });
             }
             if (streetAddress === "") {
-                errors.push({ field: "street_address", message: "Street Address is required" });
+                errors.push({
+                    field: "street_address",
+                    message: "Street Address is required"
+                });
             }
             if (city === "") {
-                errors.push({ field: "city", message: "City is required" });
+                errors.push({
+                    field: "city",
+                    message: "City is required"
+                });
             }
             if (state === "") {
-                errors.push({ field: "state", message: "State is required" });
+                errors.push({
+                    field: "state",
+                    message: "State is required"
+                });
             }
             if (zipCode === "") {
-                errors.push({ field: "zip_code", message: "ZIP Code is required" });
+                errors.push({
+                    field: "zip_code",
+                    message: "ZIP Code is required"
+                });
             }
             if (dateOfBirth === "") {
-                errors.push({ field: "date_of_birth", message: "Date of Birth is required" });
+                errors.push({
+                    field: "date_of_birth",
+                    message: "Date of Birth is required"
+                });
             } else if (!dateOfBirth.match(datePattern)) {
-                errors.push({ field: "date_of_birth", message: "Please enter a valid date of birth (YYYY-MM-DD)" });
+                errors.push({
+                    field: "date_of_birth",
+                    message: "Please enter a valid date of birth (YYYY-MM-DD)"
+                });
             }
             if (licenseNumber === "") {
-                errors.push({ field: "license_number", message: "Driver's License Number is required" });
+                errors.push({
+                    field: "license_number",
+                    message: "Driver's License Number is required"
+                });
             }
             if (issuingState === "") {
-                errors.push({ field: "issuing_state", message: "Issuing State is required" });
+                errors.push({
+                    field: "issuing_state",
+                    message: "Issuing State is required"
+                });
             }
             if (expirationDate === "") {
-                errors.push({ field: "expiration_date", message: "Expiration Date is required" });
+                errors.push({
+                    field: "expiration_date",
+                    message: "Expiration Date is required"
+                });
             }
             if (vehicleType === "") {
-                errors.push({ field: "vehicle_type", message: "Vehicle Type is required" });
+                errors.push({
+                    field: "vehicle_type",
+                    message: "Vehicle Type is required"
+                });
             }
 
             // Display errors
-            errors.forEach(function (error) {
+            errors.forEach(function(error) {
                 document.getElementById(error.field + "_error").innerHTML = error.message;
             });
 
@@ -166,71 +235,73 @@
 </head>
 
 <body>
-    <h2>Delivery Boy Registration Form</h2>
-    <form name="registrationForm" method="post" action="registrationProcess.php" onsubmit="return validateForm()">
-        <h3>Personal Information:</h3>
-        Full Name: <input type="text" name="full_name" onfocus="clearError('full_name')"><br>
-        <span id="full_name_error" style="color: red;"></span><br>
+    <div class="container">
+        <h2>Delivery Boy Registration Form</h2>
+        <form name="registrationForm" method="post" action="registrationProcess.php" onsubmit="return validateForm()">
+            <h3>Personal Information:</h3>
+            Full Name: <input type="text" name="full_name" onfocus="clearError('full_name')"><br>
+            <span id="full_name_error" style="color: red;"></span><br>
 
-        <h3>Contact Information:</h3>
-        Phone Number: <input type="text" name="phone_number" onfocus="clearError('phone_number')"><br>
-        <span id="phone_number_error" style="color: red;"></span><br>
-        <?php
-        if (isset($_GET["error"])) {
-            echo '<p style="color: red;">Mobile number already exixts</p>';
-        }
-        ?>
-        Email Address: <input type="text" name="email" onfocus="clearError('email')"><br>
-        <span id="email_error" style="color: red;"></span><br>
+            <h3>Contact Information:</h3>
+            Phone Number: <input type="text" name="phone_number" onfocus="clearError('phone_number')"><br>
+            <span id="phone_number_error" style="color: red;"></span><br>
+            <?php
+            if (isset($_GET["error"])) {
+                echo '<p style="color: red;">Mobile number already exixts</p>';
+            }
+            ?>
+            Email Address: <input type="text" name="email" onfocus="clearError('email')"><br>
+            <span id="email_error" style="color: red;"></span><br>
 
-        <h3>Password Information:</h3>
-        Password: <input type="password" name="password" onfocus="clearError('password')"><br>
-        <span id="password_error" style="color: red;"></span><br>
-        Confirm Password: <input type="password" name="confirm_password" onfocus="clearError('confirm_password')"><br>
-        <span id="confirm_password_error" style="color: red;"></span><br>
+            <h3>Password Information:</h3>
+            Password: <input type="password" name="password" onfocus="clearError('password')"><br>
+            <span id="password_error" style="color: red;"></span><br>
+            Confirm Password: <input type="password" name="confirm_password" onfocus="clearError('confirm_password')"><br>
+            <span id="confirm_password_error" style="color: red;"></span><br>
 
-        <h3>Address:</h3>
-        Street Address: <input type="text" name="street_address" onfocus="clearError('street_address')"><br>
-        <span id="street_address_error" style="color: red;"></span><br>
-        City: <input type="text" name="city" onfocus="clearError('city')"><br>
-        <span id="city_error" style="color: red;"></span><br>
-        State: <input type="text" name="state" onfocus="clearError('state')"><br>
-        <span id="state_error" style="color: red;"></span><br>
-        ZIP Code: <input type="text" name="zip_code" onfocus="clearError('zip_code')"><br>
-        <span id="zip_code_error" style="color: red;"></span><br>
+            <h3>Address:</h3>
+            Street Address: <input type="text" name="street_address" onfocus="clearError('street_address')"><br>
+            <span id="street_address_error" style="color: red;"></span><br>
+            City: <input type="text" name="city" onfocus="clearError('city')"><br>
+            <span id="city_error" style="color: red;"></span><br>
+            State: <input type="text" name="state" onfocus="clearError('state')"><br>
+            <span id="state_error" style="color: red;"></span><br>
+            ZIP Code: <input type="text" name="zip_code" onfocus="clearError('zip_code')"><br>
+            <span id="zip_code_error" style="color: red;"></span><br>
 
-        <h3>Date of Birth:</h3>
-        <input type="date" name="date_of_birth" onfocus="clearError('date_of_birth')"><br>
-        <span id="date_of_birth_error" style="color: red;"></span><br>
+            <h3>Date of Birth:</h3>
+            <input type="date" name="date_of_birth" onfocus="clearError('date_of_birth')"><br>
+            <span id="date_of_birth_error" style="color: red;"></span><br>
 
-        <h3>Gender:</h3>
-        <input type="radio" name="gender" value="Male" checked> Male
-        <input type="radio" name="gender" value="Female"> Female
-        <input type="radio" name="gender" value="Other"> Other<br><br>
+            <h3>Gender:</h3>
+            <input type="radio" name="gender" value="Male" checked> Male
+            <input type="radio" name="gender" value="Female"> Female
+            <input type="radio" name="gender" value="Other"> Other<br><br>
 
-        <h3>Driver's License Information:</h3>
-        Driver's License Number: <input type="text" name="license_number" onfocus="clearError('license_number')"><br>
-        <span id="license_number_error" style="color: red;"></span><br>
-        Issuing State: <input type="text" name="issuing_state" onfocus="clearError('issuing_state')"><br>
-        <span id="issuing_state_error" style="color: red;"></span><br>
-        Expiration Date: <input type="date" name="expiration_date" onfocus="clearError('expiration_date')"><br>
-        <span id="expiration_date_error" style="color: red;"></span><br>
+            <h3>Driver's License Information:</h3>
+            Driver's License Number: <input type="text" name="license_number" onfocus="clearError('license_number')"><br>
+            <span id="license_number_error" style="color: red;"></span><br>
+            Issuing State: <input type="text" name="issuing_state" onfocus="clearError('issuing_state')"><br>
+            <span id="issuing_state_error" style="color: red;"></span><br>
+            Expiration Date: <input type="date" name="expiration_date" onfocus="clearError('expiration_date')"><br>
+            <span id="expiration_date_error" style="color: red;"></span><br>
 
-        <h3>Vehicle Information:</h3>
-        Vehicle Type:
-        <select name="vehicle_type" onfocus="clearError('vehicle_type')">
-            <option value="">Select</option>
-            <option value="Car">Car</option>
-            <option value="Motorcycle">Motorcycle</option>
-            <option value="Bicycle">Bicycle</option>
-            <option value="Other">Other</option>
-        </select><br>
-        <span id="vehicle_type_error" style="color: red;"></span><br>
-
-        <input type="submit" name="submit" value="Submit">
-
-        <p>Already have an account? <a href="login.php">Login</a></p>
-    </form>
+            <h3>Vehicle Information:</h3>
+            Vehicle Type:
+            <select name="vehicle_type" onfocus="clearError('vehicle_type')">
+                <option value="">Select</option>
+                <option value="Car">Car</option>
+                <option value="Motorcycle">Motorcycle</option>
+                <option value="Bicycle">Bicycle</option>
+                <option value="Other">Other</option>
+            </select><br>
+            <span id="vehicle_type_error" style="color: red;"></span><br>
+            <div style="display:flex;justify-content:center;">
+                <input type="submit" name="submit" value="Submit" style="background-color:lightseagreen;color:white;border-radius:10px;border:0;padding:4px;">
+            </div>
+            <p>Already have an account? <a href="login.php">Login</a></p>
+        </form>
+    </div>
 </body>
 
 </html>

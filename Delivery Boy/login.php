@@ -3,6 +3,7 @@
 
 <head>
     <title>User Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -19,10 +20,11 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .input-group {
-            margin: 10px 0;
+            margin-top: 20px;
+            max-width: 500px;
+            margin-top: 115px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         label {
@@ -36,6 +38,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 3px;
+            margin-top: 5px;
         }
 
         .btn--radius-2 {
@@ -45,6 +48,7 @@
             padding: 10px 20px;
             border-radius: 3px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         .error-message {
@@ -55,9 +59,8 @@
 </head>
 
 <body>
-    <h2>User Login</h2>
     <form name="loginForm" method="post" action="loginProcess.php">
-        <h3>Login Information:</h3>
+        <h3>Delivery Boy Login:</h3><br>
         Mobile Number: <input type="text" name="phone_number" required><br><br>
         Password: <input type="password" name="password" required><br>
         <?php
