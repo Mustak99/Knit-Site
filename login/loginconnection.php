@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
         $_SESSION["LoginUserName"] = $username;
         $_SESSION["CustomerUserID"] = $row2["UserId"];
         $_SESSION["name"] = $row2["UserFirstName"];
-        header("Location: ../HomePage.php");
+        header("Location: ../index.php");
     } elseif ($count3 == 1) {
         if (isset($_POST["remember"])) {
             setcookie("rememberCookie", $username, time() + 60 * 60 * 24);
@@ -75,7 +75,7 @@ if (isset($_POST['submit'])) {
         $_SESSION["LoginUserName"] = $username;
         $_SESSION["SellerUserID"] = $row3["SellerId"];
         $_SESSION["name"] = $row3["SellerFirstName"];
-        header("Location: ../HomePage.php");
+        header("Location: ../index.php");
     } else {
         setcookie("loginerror", "Invalid Username or password !", time() + 1);
 

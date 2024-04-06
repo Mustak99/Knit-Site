@@ -19,7 +19,7 @@
     "ui kit",
     "web"
   ],
-  "homepage": "https://adminkit.io/",
+  "index": "https://adminkit.io/",
   "bugs": {
     "url": "https://github.com/adminkit/adminkit/issues"
   },

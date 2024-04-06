@@ -88,7 +88,7 @@ if (count($result) > 0) {
                             </div>
                             <?php
                                 if (isset($_SESSION["LoginUserName"])) {
-                                    include 'HomePageLogin.php';
+                                    include 'indexLogin.php';
                                 }
                             ?>
                         </div>
