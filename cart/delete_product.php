@@ -1,10 +1,10 @@
 <?php
-
+  include '../database.php';
   if (isset($_GET["productId"])) {
     $productId = $_GET["productId"];
 
     // Replace this with your database connection code
-    $conn = new mysqli("localhost", "root", "", "knitsite");
+    $conn = connection();
 
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);

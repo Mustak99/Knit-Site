@@ -1,6 +1,6 @@
 <?php 
 include 'includes/sidebar.php';
-include 'includes/db.php';
+include '../database.php';
 ?>
 <script>
 		function isFname(evt) 

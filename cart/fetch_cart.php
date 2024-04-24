@@ -1,8 +1,9 @@
 <?php
+include '../database.php';
 session_start();
-@ $cid = $_SESSION["CustomerUserID"];
+@$cid = $_SESSION["CustomerUserID"];
 
-$conn = new mysqli("localhost", "root", "", "knitsite");
+$conn = connection();
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -21,4 +22,3 @@ $cartCount = $row['cart_count'];
 $conn->close();
 
 echo '<span class="badge">' . $cartCount . '</span>';
-?>

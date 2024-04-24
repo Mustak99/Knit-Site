@@ -1,5 +1,5 @@
 <?php
-include 'includes/db.php';
+include '../database.php';
 
 if(isset($_GET['delete_customers'])){
     $delete_id = $_GET['delete_customers'];

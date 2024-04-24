@@ -1,4 +1,5 @@
 <?php
+include '../database.php';
 session_start();
 if (isset($_SESSION["SellerUserID"])) {
     $customer_id = $_SESSION["SellerUserID"];
@@ -6,7 +7,7 @@ if (isset($_SESSION["SellerUserID"])) {
     $customer_id = $_SESSION["CustomerUserID"];
 }
 
-$conn = new mysqli("localhost", "root", "", "knitsite");
+$conn = connection();
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

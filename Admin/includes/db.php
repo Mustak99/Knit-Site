@@ -8,7 +8,5 @@
 
     $con = new mysqli($servername, $username, $password, $dbname) or die('not success');
     // Check connection
-    if(!$con){
-        die('Database connection error : ' .mysql_error());
-    }
+    
 ?>
