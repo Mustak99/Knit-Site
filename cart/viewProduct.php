@@ -6,11 +6,11 @@ include_once '../head.php' ?>
 
 <body>
     <?php include_once '../header.php';
-
+    include '../database.php';
     ?>
     <?php
     // Create a connection to the database
-    $conn = new mysqli("localhost", "root", "", "knitsite");
+    $conn =connection();
 
     // Check the connection
     if (!$conn) {

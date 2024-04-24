@@ -1,5 +1,5 @@
 <?php
-include 'includes/db.php';
+include '../database.php';
 include 'includes/sidebar.php';
 ?>
 

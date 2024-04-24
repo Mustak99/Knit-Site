@@ -172,7 +172,7 @@
                                 <div class="p-t-15">
                                   <a href="../login/login.php" style="text-decoration: none;">Already have an account?</a>
                                        
-                                    <a href="../HomePage.php" style="padding-left:150px;text-decoration:none">Home</a>
+                                    <a href="../index.php" style="padding-left:150px;text-decoration:none">Home</a>
                                 </div>
                                 
                             </div>

@@ -1,8 +1,9 @@
 <?php
+require 'database.php';
 $cid = $_GET['cid'] ?? null;
 $sid = $_GET['sid'] ?? null;
 
-$conn = new mysqli("localhost", "root", "", "knitsite");
+$conn =connection();
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -19,7 +20,6 @@ $stmt1 = $conn->prepare($sql1);
 $stmt1->bind_param("i", $sid);
 $stmt1->execute();
 $stmt1->close();
-
-$conn->close();
+closeConnection($connection);
 header('Location: dashboard.php');
 ?>

@@ -116,7 +116,7 @@ session_start();
         <div class="d-flex justify-connectiontent-center align-items-center flex-column mt-3">
 
             <div class="form-connectiontrols pt-2 pb-5">
-                <a href="HomePage.php" class="btn btn-danger">Back</a>
+                <a href="index.php" class="btn btn-danger">Back</a>
                 <button type="button" id="updateBtn" class="btn btn-primary">Update</button>
                 <button type="submit" id="saveBtn" class="btn btn-success" style="display: none;">Save</button>
                 <button type="button" id="cancelBtn" class="btn btn-seconnectiondary"

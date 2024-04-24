@@ -40,7 +40,7 @@ include_once '../header.php';
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="../HomePage.php" class="nav-item nav-link active">Home</a>
+                        <a href="../index.php" class="nav-item nav-link active">Home</a>
                         <a href="cart.php" class="nav-item nav-link" style="display: <?php if (isset($_SESSION["adminName"])) {
                             echo "none";
                         } else {

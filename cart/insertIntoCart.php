@@ -1,5 +1,6 @@
 <?php
 session_start();
+include '../database.php';
 
 if (isset($_GET['product_id'])) {
     $product_id = $_GET['product_id'];
@@ -14,7 +15,7 @@ if (isset($_GET['product_id'])) {
     }
      
 
-    $conn = new mysqli("localhost", "root", "", "knitsite");
+    $conn = connection();
     if ($conn->connect_error) {
         die("Database connection failed: " . $conn->connect_error);
     }

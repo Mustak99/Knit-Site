@@ -1,7 +1,5 @@
-
-
 <?php
-include 'includes/db.php';
+
 if(isset($_GET['delete_sellers'])){
 
 $delete_id = $_GET['delete_sellers'];

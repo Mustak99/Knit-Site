@@ -86,7 +86,7 @@
                             </form>
                             <!--<p class="text-center">Don't have an account? <a data-toggle="tab" href="#">Sign Up</a></p>-->
 
-                            <p class="text-center"><a href="../HomePage.php">Back</a></p>
+                            <p class="text-center"><a href="../index.php">Back</a></p>
 
                         </div>
                     </div>

@@ -1,11 +1,12 @@
 <?php
+include '../database.php';
 
 // Get data from the AJAX request
 $productId = $_POST['productId'];
 $newQuantity = $_POST['newQuantity'];
 
 // Create a database connection
-$conn = new mysqli("localhost","root","","knitsite");
+$conn = connection();
 
 // Check if the connection was successful
 if ($conn->connect_error) {
